@@ -1,0 +1,995 @@
+@SPK@include("partials/mainhead.html")
+
+</head>
+
+<body>
+
+    @SPK@include("partials/switcher.html")
+    @SPK@include("partials/loader.html")
+
+    <div class="page">
+        @SPK@include("partials/header.html")
+        @SPK@include("partials/sidebar.html")
+
+        <!-- Start::app-content -->
+        <div class="main-content app-content">
+            <div class="container-fluid">
+
+                @SPK@include("partials/page-header.html", {"title": "Crypto Dashboard", "subtitle": 'Dashboard'})
+
+                <!-- Start::row-1 -->
+                <div class="row">
+                    <div class="col-xxl-3 col-sm-6">
+                        <div class="card mg-b-20">
+                            <div class="card-body">
+                                <div class="d-flex mb-3">
+                                    <div class="d-flex">
+                                        <div class="avatar avatar-sm avatar-rounded bg-primary  me-2">
+                                            <i class="ti ti-currency-bitcoin fs-18"></i>
+                                        </div>
+                                        <p class="mb-0  mt-1 fw-semibold">Bitcoin</p>
+                                    </div>
+                                    <div class="ms-auto">
+                                        <p class="mt-1 tx-12 mb-0 text-success"><i class="ion-arrow-up-c me-1"></i>+0.25%</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex mt-2 mb-1">
+                                    <div>
+                                        <p class=" mb-0">BTC / USD</p>
+                                        <h3 class="mb-1">$135</h3>
+                                    </div>
+                                    <div class="ms-auto text-end">
+                                        <p class=" mb-0">$0.04</p>
+                                        <p class=" mb-0 text-muted"><span class="text-muted">Vol:</span>(+2.33%)</p>
+                                    </div>
+                                </div>
+                                <div class="progress progress-xs mb-2" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                    <div class="progress-bar bg-primary" style="width: 55%">
+                                    </div>
+                                </div>
+                                <small class="mb-0 text-muted">Monthly<span class="float-end text-muted">70%</span></small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-3 col-sm-6">
+                        <div class="card mg-b-20">
+                            <div class="card-body">
+                                <div class="d-flex mb-3">
+                                    <div class="d-flex">
+                                        <div class="avatar avatar-sm avatar-rounded bg-danger  me-2">
+                                            <i class="ti ti-currency-ethereum fs-18"></i>
+                                        </div>
+                                        <p class="mb-0  mt-1 fw-semibold">Ethereum</p>
+                                    </div>
+                                    <div class="ms-auto">
+                                        <p class="mt-1 tx-12 mb-0 text-success"><i class="ion-arrow-up-c me-1"></i>+0.25%</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex mt-2 mb-1">
+                                    <div>
+                                        <p class=" mb-0">ETH / USD</p>
+                                        <h3 class="mb-1">$147</h3>
+                                    </div>
+                                    <div class="ms-auto text-end">
+                                        <p class=" mb-0">$0.05</p>
+                                        <p class=" mb-0 text-muted"><span class="text-muted">Vol:</span>(+2.33%)</p>
+                                    </div>
+                                </div>
+                                <div class="progress progress-xs mb-2" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                    <div class="progress-bar bg-danger" style="width: 50%">
+                                    </div>
+                                </div>
+                                <small class="mb-0 text-muted">Monthly<span class="float-end text-muted">50%</span></small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-3 col-sm-6">
+                        <div class="card mg-b-20">
+                            <div class="card-body">
+                                <div class="d-flex mb-3">
+                                    <div class="d-flex">
+                                        <div class="avatar avatar-sm avatar-rounded bg-info  me-2">
+                                            <i class="ti ti-currency-litecoin fs-18"></i>
+                                        </div>
+                                        <p class="mb-0  mt-1 fw-semibold">Litecoin</p>
+                                    </div>
+                                    <div class="ms-auto">
+                                        <p class="mt-1 tx-12 mb-0 text-success"><i class="ion-arrow-up-c me-1"></i>+0.25%</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex mt-2 mb-1">
+                                    <div>
+                                        <p class=" mb-0">LTC / USD</p>
+                                        <h3 class="mb-1">$325</h3>
+                                    </div>
+                                    <div class="ms-auto text-end">
+                                        <p class=" mb-0">$0.05</p>
+                                        <p class=" mb-0 text-muted"><span class="text-muted">Vol:</span>(+0.32%)</p>
+                                    </div>
+                                </div>
+                                <div class="progress progress-xs mb-2" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                    <div class="progress-bar bg-info" style="width: 60%">
+                                    </div>
+                                </div>
+                                <small class="mb-0 text-muted">Monthly<span class="float-end text-muted">60%</span></small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-3 col-sm-6">
+                        <div class="card mg-b-20">
+                            <div class="card-body">
+                                <div class="d-flex mb-3">
+                                    <div class="d-flex">
+                                        <div class="avatar avatar-sm avatar-rounded bg-secondary  me-2">
+                                            <i class="ti ti-currency-ripple fs-18"></i>
+                                        </div>
+                                        <p class="mb-0  mt-1 fw-semibold">Ripple</p>
+                                    </div>
+                                    <div class="ms-auto">
+                                        <p class="mt-1 tx-12 mb-0 text-success"><i class="ion-arrow-up-c me-1"></i>+0.25%</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex mt-2 mb-1">
+                                    <div>
+                                        <p class=" mb-0">XRP / USD</p>
+                                        <h3 class="mb-1">$225</h3>
+                                    </div>
+                                    <div class="ms-auto text-end">
+                                        <p class=" mb-0">$0.05</p>
+                                        <p class=" mb-0 text-muted"><span class="text-muted">Vol:</span>(+0.52%)</p>
+                                    </div>
+                                </div>
+                                <div class="progress progress-xs mb-2" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                    <div class="progress-bar bg-secondary" style="width: 68%">
+                                    </div>
+                                </div>
+                                <small class="mb-0 text-muted">Monthly<span class="float-end text-muted">68%</span></small>
+                            </div>
+                        </div>
+                    </div>
+				</div>
+                <!--End::row-1 -->
+
+                 <!-- Start::row-2 -->
+                 <div class="row">
+                    <div class="col-xxl-8">
+                        <div class="card custom-card overflow-hidden">
+                            <div class="card-header flex-between">
+                                <h6 class="card-title">Transaction Overview</h6>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="px-4 py-3 flex-wrap border-top-dashed border-bottom-dashed d-flex justify-content-between">
+                                    <div class="me-1 min-w-fit-content">
+                                        <div class="input-group mb-1 crypto-buy-sell">
+                                            <input type="text" class="form-control crypto-buy-sell-input flex-none" aria-label="crypto buy select" placeholder="Select Currency">
+                                            <select class="form-control" data-trigger name="choices-single-default" id="choices-single-default">
+                                                <option value="">BTC</option>
+                                                <option value="Choice 1">ETH</option>
+                                                <option value="Choice 2">XRP</option>
+                                                <option value="Choice 3">DASH</option>
+                                                <option value="Choice 4">NEO</option>
+                                                <option value="Choice 5">LTC</option>
+                                                <option value="Choice 6">BSD</option>
+                                            </select>
+                                        </div>
+                                        <span class="text-lg fw-semibold ">$18,589.00</span>
+                                        <span class="ms-2 badge bg-success rounded-pill">+12.6%</span>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="d-flex flex-wrap ">
+                                            <div class="me-4">
+                                                <span class=" text-muted fs-12">Last Price</span>
+                                                <p class="mb-0 text-sm  fw-semibold">$12,577.58</p>
+                                            </div>
+                                            <div class="me-4">
+                                                <span class=" text-muted fs-12">24h Volume</span>
+                                                <p class="mb-0 text-sm  fw-semibold">85.45BTC</p>
+                                            </div>
+                                            <div class="me-4">
+                                                <span class=" text-muted fs-12">Open</span>
+                                                <p class="mb-0 text-sm  fw-semibold">42,397.89</p>
+                                            </div>
+                                            <div class="me-4">
+                                                <span class=" text-muted fs-12">High</span>
+                                                <p class="mb-0 text-sm  fw-semibold">99,373.38</p>
+                                            </div>
+                                            <div class="me-0">
+                                                <span class=" text-muted fs-12">Close</span>
+                                                <p class="mb-0 text-sm  fw-semibold">85,158.74</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="marketCap" class="p-4 pt-0"></div>
+                            </div>
+                        </div>
+                    </div>
+					<div class="col-xxl-4 col-md-6">
+                        <div class="card custom-card overflow-hidden">
+                            <div class="card-header flex-between">
+                                <h6 class="card-title">Your Wallet</h6>
+                                <div class="ms-auto">
+                                    <a href="" class="text-dark" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Add New Wallet"><i class="fe fe-plus-circle"></i></a>
+                                </div>
+                            </div>
+							<div class="card-body">
+								<span class="text-muted fs-14 mb-1">Available Balance</span>
+								<h3 class=""><span>$</span> 6,316.88</h3>
+								<div class="mt-3">
+									<div class="row row-sm">
+										<div class="col-6">
+                                            <div class="d-grid ">
+                                                
+                                                <a class="btn btn-secondary flex-1 me-2" href="">Transfer</a>
+                                            </div>
+										</div>
+										<div class="col-6 d-grid ">
+											<a class="btn btn-primary flex-1 me-2" href="">Receive</a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="">
+								<div class="table-responsive">
+									<table class="table mg-b-0">
+										<tbody>
+											<tr>
+												<td class="ps-4">
+													<span class="mb-0 fw-semibold fs-14">BTC Wallet</span>
+												</td>
+												<td>
+													<span>BTC = $4865.23</span>
+												</td>
+												<td>
+													<a class="btn btn-sm bg-secondary-transparent mb-1 " href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Transfer Money"><i class="fe fe-dollar-sign"></i></a>
+													<a class="btn btn-sm  bg-primary-transparent mb-1  " href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Receive Money"><i class="fe fe-credit-card"></i></a>
+												</td>
+											</tr>
+											<tr>
+												<td class="ps-4">
+													<span class="mb-0 fw-semibold fs-14">ETH Wallet</span>
+												</td>
+												<td>
+													<span>ETH = $149.25</span>
+												</td>
+												<td>
+													<a class="btn btn-sm bg-secondary-transparent mb-1 " href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Transfer Money"><i class="fe fe-dollar-sign"></i></a>
+													<a class="btn btn-sm  bg-primary-transparent mb-1  " href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Receive Money"><i class="fe fe-credit-card"></i></a>
+												</td>
+											</tr>
+											<tr>
+												<td class="ps-4">
+													<span class="mb-0 fw-semibold fs-14">BCH Wallet</span>
+												</td>
+												<td>
+													<span>BCH = $290.79</span>
+												</td>
+												<td>
+													<a class="btn btn-sm bg-secondary-transparent mb-1 " href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Transfer Money"><i class="fe fe-dollar-sign"></i></a>
+													<a class="btn btn-sm  bg-primary-transparent mb-1  " href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Receive Money"><i class="fe fe-credit-card"></i></a>
+												</td>
+											</tr>
+											<tr>
+												<td class="ps-4">
+													<span class="mb-0 fw-semibold fs-14">EUR Wallet</span>
+												</td>
+												<td>
+													<span>EUR = $1.14</span>
+												</td>
+												<td>
+													<a class="btn btn-sm bg-secondary-transparent mb-1 " href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Transfer Money"><i class="fe fe-dollar-sign"></i></a>
+													<a class="btn btn-sm  bg-primary-transparent mb-1  " href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Receive Money"><i class="fe fe-credit-card"></i></a>
+												</td>
+											</tr>
+											<tr>
+												<td class="ps-4">
+													<span class="mb-0 fw-semibold fs-14">LTC Wallet</span>
+												</td>
+												<td>
+													<span>LTC = $37.24</span>
+												</td>
+												<td>
+													<a class="btn btn-sm bg-secondary-transparent mb-1 " href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Transfer Money"><i class="fe fe-dollar-sign"></i></a>
+													<a class="btn btn-sm  bg-primary-transparent mb-1  " href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Receive Money"><i class="fe fe-credit-card"></i></a>
+												</td>
+											</tr>
+											<tr>
+												<td class="ps-4">
+													<span class="mb-0 fw-semibold fs-14">BSD Wallet</span>
+												</td>
+												<td>
+													<span>BSD = $86.24</span>
+												</td>
+												<td>
+													<a class="btn btn-sm bg-secondary-transparent mb-1 " href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Transfer Money"><i class="fe fe-dollar-sign"></i></a>
+													<a class="btn btn-sm  bg-primary-transparent mb-1  " href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Receive Money"><i class="fe fe-credit-card"></i></a>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+                    <div class="col-xxl-3 col-md-6 ">
+                        <div class="card custom-card">
+                            <div class="card-header justify-content-between">
+                                <div class="card-title">
+                                    Investment Summary
+                                </div>
+                                <div class="dropdown">
+                                    <a href="javascript:void(0);" class="btn-outline-light btn btn-sm text-muted" data-bs-toggle="dropdown" aria-expanded="false">
+                                        View All<i class="ri-arrow-down-s-line align-middle ms-1 d-inline-block"></i>
+                                    </a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li class="border-bottom"><a class="dropdown-item" href="javascript:void(0);">Today</a></li>
+                                        <li class="border-bottom"><a class="dropdown-item" href="javascript:void(0);">This Week</a></li>
+                                        <li><a class="dropdown-item" href="javascript:void(0);">Last Week</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table table-hover text-nowrap">
+                                        <tbody>
+                                            <tr>
+                                                <td class="ps-4">
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="avatar avatar-rounded avatar-sm p-2 bg-primary me-2">
+                                                            <i class="ti ti-currency-bitcoin fs-18 "></i>
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                                <td>
+													<h6 class="mb-0">BTC/USD</h6>
+													<span class="text-success fs-12"><i class="ti ti-arrow-narrow-up me-1"></i>2.04%</span>
+												</td>
+                                                <td>
+													<h6 class="mb-0">$15,245.00</h6>
+													<span class="text-muted fs-12">340.5 USD</span>
+												</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="ps-4">
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="avatar avatar-rounded avatar-sm p-2 bg-pink me-2">
+                                                            <i class="ti ti-currency-ethereum fs-18 "></i>
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                                <td>
+													<h6 class="mb-0">ETC/USD</h6>
+													<span class="text-success fs-12"><i class="ti ti-arrow-narrow-up me-1"></i>2.04%</span>
+												</td>
+                                                <td>
+													<h6 class="mb-0">$14,245.00</h6>
+													<span class="text-muted fs-12">350.5 USD</span>
+												</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="ps-4">
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="avatar avatar-rounded avatar-sm p-2 bg-secondary me-2">
+                                                            <i class="ti ti-currency-litecoin fs-18 "></i>
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                                <td>
+													<h6 class="mb-0">LTC/USD</h6>
+													<span class="text-danger fs-12"><i class="ti ti-arrow-narrow-down me-1"></i>-0.04%</span>
+												</td>
+                                                <td>
+													<h6 class="mb-0">$9,045.00</h6>
+													<span class="text-muted fs-12">210.0 USD</span>
+												</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="ps-4">
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="avatar avatar-rounded avatar-sm p-2 bg-success me-2">
+                                                            <i class="ti ti-currency-dogecoin fs-18 "></i>
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                                <td>
+													<h6 class="mb-0">DASH/USD</h6>
+													<span class="text-success fs-12"><i class="ti ti-arrow-narrow-up me-1"></i>3.04%</span>
+												</td>
+                                                <td>
+													<h6 class="mb-0">$45,945.00</h6>
+													<span class="text-muted fs-12">140.5 USD</span>
+												</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="ps-4">
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="avatar avatar-rounded avatar-sm p-2 bg-info me-2">
+                                                            <i class="ti ti-currency-ripple fs-18 "></i>
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                                <td>
+													<h6 class="mb-0">XRP/USD</h6>
+													<span class="text-success fs-12"><i class="ti ti-arrow-narrow-up me-1"></i>2.04%</span>
+												</td>
+                                                <td>
+													<h6 class="mb-0">$15,245.00</h6>
+													<span class="text-muted fs-12">340.5 USD</span>
+												</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="border-bottom-0 ps-4">
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="avatar avatar-rounded avatar-sm p-2 bg-danger me-2">
+                                                            <i class="ti ti-currency-euro  fs-18"></i>
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                                <td>
+													<h6 class="mb-0">EURO/USD</h6>
+													<span class="text-danger fs-12"><i class="ti ti-arrow-narrow-down me-1"></i>5.04%</span>
+												</td>
+                                                <td>
+													<h6 class="mb-0">$6,245.00</h6>
+													<span class="text-muted fs-12">150.5 USD</span>
+												</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-3 col-md-6 ">
+                        <div class="card custom-card">
+                            <div class="card-header justify-content-between">
+                                <div class="card-title">
+                                    Latest Transfers 
+                                </div>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table table-hover text-nowrap">
+                                        <tbody>
+                                            <tr>
+                                                <td class="ps-4">
+                                                    <div class="d-flex">
+                                                        <span class="avatar avatar-md">
+                                                            <img src="../assets/images/faces/1.jpg" class="rounded-1" alt="">
+                                                        </span>
+                                                        <div class="flex-1 ms-2">
+                                                            <p class="mb-0 fs-14">Diam Ipsum</p>
+                                                            <a href="javascript:void(0);" class="text-muted fs-12">28 Dec 2022</a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+													<h6 class="mb-0">$15,245.00</h6>
+												</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="ps-4">
+                                                    <div class="d-flex">
+                                                        <span class="avatar avatar-md">
+                                                            <img src="../assets/images/faces/2.jpg" class="rounded-1" alt="">
+                                                        </span>
+                                                        <div class="flex-1 ms-2">
+                                                            <p class="mb-0 fs-14">Kevin Johnston</p>
+                                                            <a href="javascript:void(0);" class="text-muted fs-12">18 Dec 2022</a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+													<h6 class="mb-0">$25,245.00</h6>
+												</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="ps-4">
+                                                    <div class="d-flex">
+                                                        <span class="avatar avatar-md">
+                                                            <img src="../assets/images/faces/3.jpg" class="rounded-1" alt="">
+                                                        </span>
+                                                        <div class="flex-1 ms-2">
+                                                            <p class="mb-0 fs-14">Karen Watson</p>
+                                                            <a href="javascript:void(0);" class="text-muted fs-12">20 Dec 2022</a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+													<h6 class="mb-0">$65,245.00</h6>
+												</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="ps-4">
+                                                    <div class="d-flex">
+                                                        <span class="avatar avatar-md">
+                                                            <img src="../assets/images/faces/4.jpg" class="rounded-1" alt="">
+                                                        </span>
+                                                        <div class="flex-1 ms-2">
+                                                            <p class="mb-0 fs-14">Justin Gray</p>
+                                                            <a href="javascript:void(0);" class="text-muted fs-12">05 Nov 2022</a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+													<h6 class="mb-0">$75,245.00</h6>
+												</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="ps-4">
+                                                    <div class="d-flex">
+                                                        <span class="avatar avatar-md">
+                                                            <img src="../assets/images/faces/5.jpg" class="rounded-1" alt="">
+                                                        </span>
+                                                        <div class="flex-1 ms-2">
+                                                            <p class="mb-0 fs-14">Robert Hamilton</p>
+                                                            <a href="javascript:void(0);" class="text-muted fs-12">25 Nov 2022</a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+													<h6 class="mb-0">$61,045.00</h6>
+												</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="ps-4">
+                                                    <div class="d-flex">
+                                                        <span class="avatar avatar-md">
+                                                            <img src="../assets/images/faces/6.jpg" class="rounded-1" alt="">
+                                                        </span>
+                                                        <div class="flex-1 ms-2">
+                                                            <p class="mb-0 fs-14">Rachel Poole</p>
+                                                            <a href="javascript:void(0);" class="text-muted fs-12">30 Nov 2022</a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+													<h6 class="mb-0">$51,045.00</h6>
+												</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card custom-card">
+                            <div class="card-header justify-content-between">
+                                <div class="card-title">
+                                    Your Assets
+                                </div>
+                                <div class="dropdown">
+                                    <a href="javascript:void(0);" class="btn-outline-light btn btn-sm text-muted" data-bs-toggle="dropdown" aria-expanded="false">
+                                        View All<i class="ri-arrow-down-s-line align-middle ms-1 d-inline-block"></i>
+                                    </a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li class="border-bottom"><a class="dropdown-item" href="javascript:void(0);">Today</a></li>
+                                        <li class="border-bottom"><a class="dropdown-item" href="javascript:void(0);">This Week</a></li>
+                                        <li><a class="dropdown-item" href="javascript:void(0);">Last Week</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table card-table table-vcenter text-nowrap mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Currency</th>
+                                                <th scope="col">Total</th>
+                                                <th scope="col">Holding</th>
+                                                <th scope="col">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="active-tab">
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="lh-1">
+                                                            <span class="avatar avatar-md avatar-rounded me-2 p-2 bg-light">
+                                                                <img src="../assets/images/crypto-currencies/regular/Bitcoin.svg" alt="">
+                                                            </span>
+                                                        </div>
+                                                        <div class="align-items-center">
+                                                            <span class="fs-12">Bitcoin</span>
+                                                            <p class="mb-0 text-muted">(0.0092312)</p>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <span>$1,11,290</span>
+                                                </td>
+                                                <td>
+                                                    <span>1.00089BTC</span>
+                                                </td>
+                                                <td class="">
+                                                    <a href="javascript:void(0);" class="btn btn-secondary btn-sm me-1">Buy</a>
+                                                    <a href="javascript:void(0);" class="btn btn-primary btn-sm">Sell</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="lh-1">
+                                                            <span class="avatar avatar-md avatar-rounded me-2 p-2 bg-light">
+                                                                <img src="../assets/images/crypto-currencies/regular/Ethereum.svg" alt="">
+                                                            </span>
+                                                        </div>
+                                                        <div class="align-items-center">
+                                                            <span class="fs-12">Etherium </span>
+                                                            <p class="mb-0 text-muted">(0.9207702)</p>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <span>$43,11,290</span>
+                                                </td>
+                                                <td>
+                                                    <span>1.00089ETH</span>
+                                                </td>
+                                                <td class="">
+                                                    <a href="javascript:void(0);" class="btn btn-secondary btn-sm me-1">Buy</a>
+                                                    <a href="javascript:void(0);" class="btn btn-primary btn-sm">Sell</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="lh-1">
+                                                            <span class="avatar avatar-md avatar-rounded me-2 p-2 bg-light">
+                                                                <img src="../assets/images/crypto-currencies/regular/Dash.svg" alt="">
+                                                            </span>
+                                                        </div>
+                                                        <div class="align-items-center">
+                                                            <span class="fs-12">Dash</span>
+                                                            <p class="mb-0 text-muted">(0.83092333)</p>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <span>$6,11,290</span>
+                                                </td>
+                                                <td>
+                                                    <span>1.00089DAH</span>
+                                                </td>
+                                                <td class="">
+                                                    <a href="javascript:void(0);" class="btn btn-secondary btn-sm me-1">Buy</a>
+                                                    <a href="javascript:void(0);" class="btn btn-primary btn-sm">Sell</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="lh-1">
+                                                            <span class="avatar avatar-md avatar-rounded me-2 p-2 bg-light">
+                                                                <img src="../assets/images/crypto-currencies/regular/Euro.svg" alt="">
+                                                            </span>
+                                                        </div>
+                                                        <div class="align-items-center">
+                                                            <span class="fs-12">Euro</span>
+                                                            <p class="mb-0 text-muted">(0.0092363)<span class="text-muted"></span></p>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <span>$93,11,290</span>
+                                                </td>
+                                                <td>
+                                                    <span>1.00089EUR</span>
+                                                </td>
+                                                <td class="">
+                                                    <a href="javascript:void(0);" class="btn btn-secondary btn-sm me-1">Buy</a>
+                                                    <a href="javascript:void(0);" class="btn btn-primary btn-sm">Sell</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="lh-1">
+                                                            <span class="avatar avatar-md avatar-rounded me-2 p-2 bg-light">
+                                                                <img src="../assets/images/crypto-currencies/regular/litecoin.svg" alt="">
+                                                            </span>
+                                                        </div>
+                                                        <div class="align-items-center">
+                                                            <span class="fs-12 text-muted">Litecoin</span>
+                                                            <p class="mb-0 text-muted">(1.00009023)</p>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <span>$7,11,290</span>
+                                                </td>
+                                                <td>
+                                                    <span>1.00089LIT</span>
+                                                </td>
+                                                <td class="">
+                                                    <a href="javascript:void(0);" class="btn btn-secondary btn-sm me-1">Buy</a>
+                                                    <a href="javascript:void(0);" class="btn btn-primary btn-sm">Sell</a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 <!-- End::row-2 -->
+
+                 <!-- Start::row-2 -->
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="card custom-card custom-card">
+                            <div class="card-header justify-content-between flex-wrap">
+                                <div class="card-title">
+                                    Crypto currencies Market Value
+                                </div>
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <button type="button" class="btn btn-primary btn-sm btn-wave">1D</button>
+                                    <button type="button" class="btn btn-primary-light btn-sm btn-wave">1W</button>
+                                    <button type="button" class="btn btn-primary-light btn-sm btn-wave">1M</button>
+                                    <button type="button" class="btn btn-primary-light btn-sm btn-wave">3M</button>
+                                    <button type="button" class="btn btn-primary-light btn-sm btn-wave">6M</button>
+                                    <button type="button" class="btn btn-primary-light btn-sm btn-wave">1Y</button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover text-nowrap table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">S.No</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Price</th>
+                                                <th scope="col">24H Volume</th>
+                                                <th scope="col">MarketCap</th>
+                                                <th scope="col">Circulating Supply</th>
+                                                <th scope="col">CMGR / MONTH</th>
+                                                <th scope="col">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>
+                                                    <div class="lh-1 d-flex align-items-center">
+                                                        <span class="avatar avatar-xs avatar-rounded">
+                                                            <img src="../assets/images/crypto-currencies/regular/Bitcoin.svg" alt="">
+                                                        </span> - BTC
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    $16,839.10
+                                                </td>
+                                                <td class="">
+                                                    <span class="badge badge-sm bg-success-transparent rounded-pill">+12.02%</span>
+                                                </td>
+                                                <td>
+                                                    14,674,311,168
+                                                </td>
+                                                <td>
+                                                   <span>16,819,612</span><span class="text-danger ms-2 d-inline-block">BTC</span>
+                                                </td>
+                                                <td>
+                                                   <span>8.11% / 57</span>
+                                                </td>
+                                                <td class="">
+                                                    <div class="btn-list">
+                                                        <a href="javascript:void(0);" class="btn btn-primary-light btn-sm me-1">Buy</a>
+                                                        <a href="javascript:void(0);" class="btn btn-secondary-light btn-sm">Trade</a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>
+                                                    <div class="lh-1 d-flex align-items-center">
+                                                        <span class="avatar avatar-xs avatar-rounded">
+                                                            <img src="../assets/images/crypto-currencies/regular/Ethereum.svg" alt="">
+                                                        </span> - ETH
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    1,217.96
+                                                </td>
+                                                <td class="">
+                                                    <span class="badge badge-sm bg-success-transparent rounded-pill">+142.05%</span>
+                                                </td>
+                                                <td>
+                                                    $4,758,554,801
+                                                </td>
+                                                <td>
+                                                    <span>18,819,612</span><span class="text-danger ms-2 d-inline-block">ETH</span>
+                                                </td>
+                                                <td>
+                                                   <span>22.62% / 29</span>
+                                                </td>
+                                                <td class="">
+                                                    <div class="btn-list">
+                                                        <a href="javascript:void(0);" class="btn btn-primary-light btn-sm me-1">Buy</a>
+                                                        <a href="javascript:void(0);" class="btn btn-secondary-light btn-sm">Trade</a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>
+                                                    <div class="lh-1 d-flex align-items-center">
+                                                        <span class="avatar avatar-xs avatar-rounded">
+                                                            <img src="../assets/images/crypto-currencies/regular/Dash.svg" alt="">
+                                                        </span> - DASH
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    $43.49
+                                                </td>
+                                                <td class="">
+                                                    <span class="badge badge-sm bg-success-transparent rounded-pill">+712.02%</span>
+                                                </td>
+                                                <td class="">
+                                                    54,758,554,801
+                                                </td>
+                                                <td>
+                                                    <span>10,819,612</span><span class="text-success ms-2 d-inline-block">DASH</span>
+                                                </td>
+                                                <td>
+                                                   <span>10.85% / 53</span>
+                                                </td>
+                                                <td class="">
+                                                    <div class="btn-list">
+                                                        <a href="javascript:void(0);" class="btn btn-primary-light btn-sm me-1">Buy</a>
+                                                        <a href="javascript:void(0);" class="btn btn-secondary-light btn-sm">Trade</a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>
+                                                    <div class="lh-1 d-flex align-items-center">
+                                                        <span class="avatar avatar-xs avatar-rounded">
+                                                            <img src="../assets/images/crypto-currencies/regular/Ripple.svg" alt="">
+                                                        </span> - XRP
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    $0.3531
+                                                </td>
+                                                <td class="">
+                                                    <span class="badge badge-sm bg-danger-transparent rounded-pill">+12.02%</span>
+                                                </td>
+                                                <td>
+                                                    $511,598,941
+                                                </td>
+                                                <td>
+                                                    <span>10,959,122</span><span class="text-danger ms-2 d-inline-block">XRP</span>
+                                                </td>
+                                                <td>
+                                                   <span>21.30% / 6</span>
+                                                </td> 
+                                                <td class="">
+                                                    <div class="btn-list">
+                                                        <a href="javascript:void(0);" class="btn btn-primary-light btn-sm me-1">Buy</a>
+                                                        <a href="javascript:void(0);" class="btn btn-secondary-light btn-sm">Trade</a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>5</td>
+                                                <td>
+                                                    <div class="lh-1 d-flex align-items-center">
+                                                        <span class="avatar avatar-xs avatar-rounded">
+                                                            <img src="../assets/images/crypto-currencies/regular/IOTA.svg" alt="">
+                                                        </span> - IOTA
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    $0.169741
+                                                </td>
+                                                <td class="">
+                                                    <span class="badge badge-sm bg-success-transparent rounded-pill">+542.02%</span>
+                                                </td>
+                                                <td>
+                                                    $5,524,385
+                                                </td>
+                                                <td>
+                                                    <span>16,819,612</span><span class="text-warning ms-2 d-inline-block">MIOTA</span>
+                                                </td>
+                                                <td>
+                                                   <span>205.35% / 3</span>
+                                                </td> 
+                                                <td class="">
+                                                    <div class="btn-list">
+                                                        <a href="javascript:void(0);" class="btn btn-primary-light btn-sm me-1">Buy</a>
+                                                        <a href="javascript:void(0);" class="btn btn-secondary-light btn-sm">Trade</a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>6</td>
+                                                <td>
+                                                    <div class="lh-1 d-flex align-items-center">
+                                                        <span class="avatar avatar-xs avatar-rounded">
+                                                            <img src="../assets/images/crypto-currencies/regular/Neo.svg" alt="">
+                                                        </span> - NEO
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    $6.43
+                                                </td>
+                                                <td class="">
+                                                    <span class="badge badge-sm bg-danger-transparent rounded-pill">+12.02%</span>
+                                                </td>
+                                                <td>
+                                                    $12,904,320
+                                                </td>
+                                                <td>
+                                                    <span>86,819,612</span><span class="text-warning ms-2 d-inline-block">NEO</span>
+                                                </td>
+                                                <td>
+                                                   <span>26.99% / 33</span>
+                                                </td> 
+                                                <td class="">
+                                                    <div class="btn-list">
+                                                        <a href="javascript:void(0);" class="btn btn-primary-light btn-sm me-1">Buy</a>
+                                                        <a href="javascript:void(0);" class="btn btn-secondary-light btn-sm">Trade</a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="d-flex align-items-center">
+                                    <div>
+                                        Showing 6 Entries <i class="bi bi-arrow-right ms-2 fw-semibold"></i>
+                                    </div>
+                                    <div class="ms-auto">
+                                        <nav aria-label="Page navigation" class="pagination-style-4">
+                                            <ul class="pagination mb-0">
+                                                <li class="page-item disabled">
+                                                    <a class="page-link" href="javascript:void(0);">
+                                                        Prev
+                                                    </a>
+                                                </li>
+                                                <li class="page-item active"><a class="page-link" href="javascript:void(0);">1</a></li>
+                                                <li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
+                                                <li class="page-item">
+                                                    <a class="page-link text-primary" href="javascript:void(0);">
+                                                        next
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 <!-- End::row-2 -->
+            </div>
+        </div>
+        <!-- End::app-content -->
+
+        @SPK@include("partials/headersearch_modal.html")
+        @SPK@include("partials/footer.html")
+
+    </div>
+
+    @SPK@include("partials/commonjs.html")
+
+    <!-- Apex Charts JS -->
+    <script src="../assets/libs/apexcharts/apexcharts.min.js"></script>
+
+    <!-- Analytics dashbord JS -->
+    <script src="../assets/js/Crypto.js"></script>
+
+    @SPK@include("partials/custom_switcherjs.html")
+
+    <!-- Custom JS -->
+    <script src="../assets/js/custom.js"></script>
+
+</body>
+
+</html>

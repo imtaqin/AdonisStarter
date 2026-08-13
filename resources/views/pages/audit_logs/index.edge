@@ -1,0 +1,72 @@
+@layouts.dashboard({ title: 'Audit Log', subtitle: 'Administration' })
+  @ui.card({ bodyClass: '' })
+    @ui.datatable({
+      paginator: logs,
+      searchable: false,
+      emptyTitle: 'No activity recorded',
+      emptyText: 'Actions taken in the app will show up here.',
+      columns: [
+        { key: 'event', label: 'Event', width: '130px' },
+        { key: 'summary', label: 'Summary' },
+        { key: 'actor', label: 'Actor' },
+        { key: 'when', label: 'When', width: '170px' },
+        { key: 'ip', label: 'IP', width: '130px' },
+      ],
+    })
+      @slot('toolbar')
+        <form method="GET" action="{{ request.url() }}" class="d-flex align-items-center gap-2">
+          <select name="event" class="form-select form-select-sm" onchange="this.form.submit()">
+            <option value="">All events</option>
+            @each(name in events)
+              <option value="{{ name }}" {{ filters.event === name ? 'selected' : '' }}>
+                {{ name }}
+              </option>
+            @end
+          </select>
+
+          <select name="user" class="form-select form-select-sm" onchange="this.form.submit()">
+            <option value="">All actors</option>
+            @each(actor in actors)
+              <option
+                value="{{ actor.id }}"
+                {{ filters.user === String(actor.id) ? 'selected' : '' }}
+              >
+                {{ actor.email }}
+              </option>
+            @end
+          </select>
+
+          <noscript><button class="btn btn-sm btn-light" type="submit">Filter</button></noscript>
+        </form>
+      @end
+      @slot('row', scope)
+        <tr>
+          <td>
+            @!ui.badge({ text: scope.row.event, variant: scope.row.variant, soft: true })
+          </td>
+
+          <td class="text-wrap">
+            {{ scope.row.summary || '—' }}
+            @if(scope.row.auditableType)
+              <span class="d-block text-muted fs-11">
+                {{ scope.row.auditableType }}#{{ scope.row.auditableId }}
+              </span>
+            @end
+          </td>
+
+          <td>
+            @if(scope.row.user)
+              <span class="fs-12">{{ scope.row.user.email }}</span>
+            @else
+              <span class="text-muted fs-12">System</span>
+            @end
+          </td>
+
+          <td class="text-muted fs-12">{{ formatDate(scope.row.createdAt) }}</td>
+
+          <td class="text-muted fs-12">{{ scope.row.ipAddress || '—' }}</td>
+        </tr>
+      @end
+    @end
+  @end
+@end

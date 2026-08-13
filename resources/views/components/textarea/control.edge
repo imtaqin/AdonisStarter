@@ -1,0 +1,23 @@
+{{--
+  Textarea. Must be a child of @field.root.
+
+  Props
+  value  string  initial value; the flashed old value wins on re-render
+  rows   number  standard HTML attribute
+--}}
+@let(classes = ['form-control', $context.hasErrors ? 'is-invalid' : ''])
+
+<textarea {{
+  $props
+    .except(['value'])
+    .merge({
+      name: $context.name,
+      id: $context.id,
+      class: classes,
+      rows: '4',
+      'aria-invalid': $context.hasErrors ? 'true' : false,
+      'data-invalid': $context.hasErrors ? 'true' : false,
+      'aria-describedby': $context.hasErrors ? `${$context.id}-error` : '',
+    })
+    .toAttrs()
+}}>{{ $context.oldValue || $props.get('value') || '' }}</textarea>

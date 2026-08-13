@@ -1,0 +1,20 @@
+{
+  "mcpServers": {
+    "adonis-boost": {
+      "command": "node",
+      "args": [
+        "--import=@poppinss/ts-exec",
+        "mcp/boost/server.ts"
+      ]
+    },
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@playwright/mcp@latest",
+        "--browser",
+        "chromium"
+      ]
+    }
+  }
+}

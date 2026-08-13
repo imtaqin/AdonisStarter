@@ -1,0 +1,50 @@
+{{--
+  Props
+  text         string   link text (alternative to the slot)
+  href         string   literal URL
+  route        string   named route, resolved via urlFor()
+  routeParams  array
+  variant      string   render as a button of this variant instead of a plain link
+  outline      boolean  with `variant`, use the outline style
+  size         string   with `variant`, sm | lg
+  icon         string   Tabler icon class rendered before the text
+--}}
+@let(linkTextFromSlot = await $slots.main())
+@let(linkText = linkTextFromSlot.trim() ? linkTextFromSlot : ($props.get('text') ?? ''))
+@let(linkHref = $props.has('href')
+  ? $props.get('href')
+  : $props.get('route')
+    ? urlFor($props.get('route'), $props.get('routeParams'), $props.get('routeOptions'))
+    : undefined)
+@let(isActive = request.url() === linkHref)
+@let(variant = $props.get('variant'))
+@let(classes = variant
+  ? [
+      'btn',
+      $props.get('outline') ? `btn-outline-${variant}` : `btn-${variant}`,
+      $props.get('size') ? `btn-${$props.get('size')}` : '',
+    ]
+  : [isActive ? 'active' : ''])
+
+<a {{
+  $props
+    .except([
+      'href',
+      'text',
+      'route',
+      'routeParams',
+      'routeOptions',
+      'variant',
+      'outline',
+      'size',
+      'icon',
+    ])
+    .merge({ href: linkHref, class: classes })
+    .mergeIf(isActive, { 'aria-current': 'page' })
+    .toAttrs()
+}}>
+  @if($props.get('icon'))
+    <i class="{{ $props.get('icon') }} me-1"></i>
+  @end
+  {{{ linkText }}}
+</a>

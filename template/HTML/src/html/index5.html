@@ -1,0 +1,575 @@
+@SPK@include("partials/mainhead.html")
+
+</head>
+
+<body>
+
+    @SPK@include("partials/switcher.html")
+    @SPK@include("partials/loader.html")
+
+    <div class="page">
+        @SPK@include("partials/header.html")
+        @SPK@include("partials/sidebar.html")
+
+        <!-- Start::app-content -->
+        <div class="main-content app-content">
+            <div class="container-fluid">
+
+                @SPK@include("partials/page-header.html", {"title": "Marketing Dashboard", "subtitle": 'Dashboard'})
+
+                <!-- Start::row-1 -->
+                <div class="row">
+                    <div class="col-xl-3 col-sm-6">
+                        <div class="card mg-b-20">
+                            <div class="card-body pb-0">
+                                <div class="d-flex">
+                                    <div>
+                                        <p class=" mb-0">Total Revenue</p>
+                                        <h3 class="mb-0">$45,383</h3>
+                                        <small class=""><span class="text-danger me-1  d-inline-block">-0.5%</span>last month</small>
+                                    </div>
+                                    <div class="ms-auto text-end">
+                                        <div class="avatar avatar-lg bg-primary-transparent avatar-rounded">
+                                            <i class="fe fe-zap"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div id="spark1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6">
+                        <div class="card mg-b-20">
+                            <div class="card-body pb-0">
+                                <div class="d-flex">
+                                    <div>
+                                        <p class=" mb-0">Marketing Spend</p>
+                                        <h3 class="mb-0">$195.045</h3>
+                                        <small class=""><span class="text-success me-1 d-inline-block">+0.09%</span>last month</small>
+                                    </div>
+                                    <div class="ms-auto text-end">
+                                        <div class="avatar avatar-lg bg-secondary-transparent avatar-rounded">
+                                            <i class="fe fe-activity"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div id="spark2"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6">
+                        <div class="card mg-b-20">
+                            <div class="card-body pb-0">
+                                <div class="d-flex">
+                                    <div>
+                                        <p class=" mb-0">Total Profit</p>
+                                        <h3 class="mb-0">$46.352</h3>
+                                        <small class=""><span class="text-danger me-1 d-inline-block">-2.09%</span>last month</small>
+                                    </div>
+                                    <div class="ms-auto text-end">
+                                        <div class="avatar avatar-lg bg-info-transparent avatar-rounded">
+                                            <i class="fe fe-box"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div id="spark3"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6">
+                        <div class="card mg-b-20">
+                            <div class="card-body pb-0">
+                                <div class="d-flex">
+                                    <div>
+                                        <p class=" mb-0">Total Investment</p>
+                                        <h3 class="mb-0">85%</h3>
+                                        <small class=""><span class="text-success me-1 d-inline-block">+03.09%</span>last month</small>
+                                    </div>
+                                    <div class="ms-auto text-end">
+                                        <div class="avatar avatar-lg bg-danger-transparent avatar-rounded">
+                                            <i class="fe fe-repeat"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div id="spark4"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--End:: row-1-->
+                    <!--Start::row-2-->
+                    <div class="col-xxl-6 col-md-12">
+                        <div class="card custom-card">
+                            <div class="card-header  justify-content-between">
+                                <div class="card-title">Visitors By Users</div>
+                                <div class="dropdown">
+                                    <a href="javascript:void(0);" class="btn btn-outline-light btn-icons btn-sm text-muted" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fe fe-more-vertical"></i>
+                                    </a>
+                                    <ul class="dropdown-menu mb-0" role="menu">
+                                        <li class="border-bottom"><a class="dropdown-item" href="javascript:void(0);">Today</a></li>
+                                        <li class="border-bottom"><a class="dropdown-item" href="javascript:void(0);">This Week</a></li>
+                                        <li><a class="dropdown-item" href="javascript:void(0);">Last Week</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                                <div class="card-body">
+                                <div id="visitors"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-3 col-md-6 ">
+                        <div class="card custom-card">
+                            <div class="card-header justify-content-between">
+                                <div class="card-title">
+                                    Top Countries By Sales
+                                </div>
+                                <div class="dropdown">
+                                    <a href="javascript:void(0);" class="btn btn-outline-light btn-icons btn-sm text-muted" data-bs-toggle="dropdown">
+                                        <i class="fe fe-more-vertical"></i>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li class="border-bottom"><a class="dropdown-item" href="javascript:void(0);">Action</a></li>
+                                        <li class="border-bottom"><a class="dropdown-item" href="javascript:void(0);">Another action</a></li>
+                                        <li><a class="dropdown-item" href="javascript:void(0);">Something else here</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table text-nowrap mb-0">
+                                        <tbody class="top-selling">
+                                            <tr>
+                                                <td class="ps-4">
+                                                        <div class="d-inline-flex mt-1">
+                                                            <span class="avatar avatar-xs   text-default">
+                                                                <img src="../assets/images/flags/us_flag.jpg" alt="rounded-1">
+                                                            </span>
+                                                            <span class="ms-2 fs-14 fw-semibold mb-0">United States</span>
+                                                        </div>
+                                                </td>
+                                                <td class="text-end">
+                                                    <span class="fw-semibold fs-14">$15,091.00</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="ps-4">
+                                                        <div class="d-inline-flex mt-1">
+                                                            <span class="avatar avatar-xs   text-default">
+                                                                <img src="../assets/images/flags/india_flag.jpg" alt="rounded-1">
+                                                            </span>
+                                                            <span class="ms-2 fs-14 fw-semibold mb-0">India</span>
+                                                        </div>
+                                                </td>
+                                                <td class="text-end">
+                                                    <span class="fw-semibold fs-14">$14,091.00</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="ps-4">
+                                                        <div class="d-inline-flex mt-1">
+                                                            <span class="avatar avatar-xs   text-default">
+                                                                <img src="../assets/images/flags/argentina_flag.jpg" alt="rounded-1">
+                                                            </span>
+                                                            <span class="ms-2 fs-14 fw-semibold mb-0">Argentina</span>
+                                                        </div>
+                                                </td>
+                                                <td class="text-end">
+                                                    <span class="fw-semibold fs-14">$64,091.00</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="ps-4">
+                                                        <div class="d-inline-flex mt-1">
+                                                            <span class="avatar avatar-xs   text-default">
+                                                                <img src="../assets/images/flags/canada_flag.jpg" alt="rounded-1">
+                                                            </span>
+                                                            <span class="ms-2 fs-14 fw-semibold mb-0">Canada</span>
+                                                        </div>
+                                                </td>
+                                                <td class="text-end">
+                                                    <span class="fw-semibold fs-14">$23,981.00</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="ps-4">
+                                                        <div class="d-inline-flex mt-1">
+                                                            <span class="avatar avatar-xs   text-default">
+                                                                <img src="../assets/images/flags/russia_flag.jpg" alt="rounded-1">
+                                                            </span>
+                                                            <span class="ms-2 fs-14 fw-semibold mb-0">Russia</span>
+                                                        </div>
+                                                </td>
+                                                <td class="text-end">
+                                                    <span class="fw-semibold fs-14">$12,333.00</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="ps-4">
+                                                    <div class="">
+                                                        <div class="d-inline-flex mt-1">
+                                                            <span class="avatar avatar-xs   text-default">
+                                                                <img src="../assets/images/flags/spain_flag.jpg" alt="rounded-1">
+                                                            </span>
+                                                            <span class="ms-2 fs-14 fw-semibold mb-0">Spain</span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="text-end">
+                                                    <span class="fw-semibold fs-14">$87,987.00</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="ps-4">
+                                                    <div class="">
+                                                        <div class="d-inline-flex mt-1">
+                                                            <span class="avatar avatar-xs   text-default">
+                                                                <img src="../assets/images/flags/mexico_flag.jpg" alt="rounded-1">
+                                                            </span>
+                                                            <span class="ms-2 fs-14 fw-semibold mb-0">Mexico</span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="text-end">
+                                                    <span class="fw-semibold fs-14">$32,543.00</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-3 col-md-6">
+                        <div class="card custom-card">
+                           <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div class="mb-3">
+                                        <h6 class="mb-1 fw-semibold">Cost per Acquisition</h6>
+                                        <h2 class="mb-1"><span>$</span>67,891</h2>
+                                        <span class="fs-12"><span class="text-success"><i class="fas fa-caret-up me-1"></i>18.2%</span> vs previous month</span>
+                                    </div>
+                                    <div class="ms-auto">
+                                        <span class="avatar avatar-xl br-5 bg-success-transparent text-success"><i class="fe fe-zap"></i></span>
+                                    </div>
+                                </div>
+                                <h6 class="card-title pt-1">CPA by Channel</h6>
+                                <div class="table-responsive">
+									<table class="table mg-b-0 border">
+										<tbody>
+											<tr>
+												<td class="bd-t-0 fw-semibold">Search</td>
+												<td class="bd-t-0 fw-semibold fs-15">$309</td>
+												<td class="d-flex justify-content-end"> <span id="sparkline-1"></span></td>
+											</tr>
+											<tr>
+												<td class="bd-t-0 fw-semibold">Display</td>
+												<td class="bd-t-0 fw-semibold fs-15">$942</td>
+												<td class="d-flex justify-content-end"> <span id="sparkline-2"></span></td>
+											</tr>
+											<tr>
+												<td class="bd-t-0 fw-semibold">Social</td>
+												<td class="bd-t-0 fw-semibold fs-15">$278</td>
+												<td class="d-flex justify-content-end"> <span id="sparkline-3"></span></td>
+											</tr>
+											<tr>
+												<td class="bd-t-0 fw-semibold">TV</td>
+												<td class="bd-t-0 fw-semibold fs-15">$876</td>
+												<td class="d-flex justify-content-end"> <span id="sparkline-4"></span></td>
+											</tr>
+											<tr>
+												<td class="bd-t-0 fw-semibold">Fairs</td>
+												<td class="bd-t-0 fw-semibold fs-15">$124</td>
+												<td class="d-flex justify-content-end"> <span id="sparkline-5"></span></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+                           </div>
+                        </div>
+                    </div>
+                </div>
+                <!--End::row-2 -->
+
+                <!--Start::row-3 -->
+                <div class="row">
+					<div class="col-md-12">
+						<div class="card mg-b-20">
+							<div class="row mr-0 ml-0">
+								<div class="col-xl-2 col-lg-6 col-sm-6 pe-0 ps-0 border-end">
+									<div class="card-body text-center">
+										<p class="mb-1">Visits</p>
+										<h2 class="mb-0">23,678</h2>
+										<span class="mb-0 text-muted fs-12"><span class="text-success"><i class="fa fa-caret-up  me-1"></i> 0.7%</span> Last month</span>
+									</div>
+								</div>
+								<div class="col-xl-2 col-lg-6 col-sm-6 pe-0 ps-0 border-end">
+									<div class="card-body text-center">
+										<p class="mb-1">Avg visit Duration</p>
+										<h2 class="mb-0">45Sec</h2>
+										<span class="mb-0 text-muted fs-12"><span class="text-success"><i class="fa fa-caret-up  me-1"></i> 0.26%</span> Last month</span>
+									</div>
+								</div>
+								<div class="col-xl-2 col-lg-6 col-sm-6 pe-0 ps-0 border-end">
+									<div class="card-body text-center">
+										<p class="mb-1">Page Views</p>
+										<h2 class="mb-0">10,567</h2>
+										<span class="mb-0 text-muted fs-12"><span class="text-danger"><i class="fa fa-caret-down  me-1"></i> 12%</span> Last month</span>
+									</div>
+								</div>
+								<div class="col-xl-2 col-lg-6 col-sm-6 pe-0 ps-0 border-end">
+									<div class="card-body text-center">
+										<p class="mb-1">Bounce Rate</p>
+										<h2 class="mb-0">26.19%</h2>
+										<span class="mb-0 text-muted fs-12"><span class="text-success"><i class="fa fa-caret-up  me-1"></i> 0.2%</span> Last month</span>
+									</div>
+								</div>
+								<div class="col-xl-2 col-lg-6 col-sm-6 pe-0 ps-0 border-end">
+									<div class="card-body text-center">
+										<p class="mb-1">Pages per Visit</p>
+										<h2 class="mb-0">1:56</h2>
+										<span class="mb-0 text-muted fs-12"><span class="text-danger"><i class="fa fa-caret-down  me-1"></i> 1.2%</span> Last month</span>
+									</div>
+								</div>
+								<div class="col-xl-2 col-lg-6 col-sm-6 pe-0 ps-0">
+									<div class="card-body text-center">
+										<p class="mb-1">Goal Conversion</p>
+										<h2 class="mb-0">34.89%</h2>
+										<span class="mb-0 text-muted fs-12"><span class="text-danger"><i class="fa fa-caret-down  me-1"></i> 0.6%</span> Last month</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+                <!--End::row-3 -->
+                
+
+                <!-- Start:: row-4 -->
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="card custom-card custom-card">
+                            <div class="card-header justify-content-between flex-wrap">
+                                <div class="card-title">
+                                    Overview of Marketing Values
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover text-nowrap table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">S.No</th>
+                                                <th scope="col">currency</th>
+                                                <th scope="col">Price</th>
+                                                <th scope="col">Volume Id</th>
+                                                <th scope="col">MarketCap</th>
+                                                <th scope="col">CHANGE % (1D)</th>
+                                                <th scope="col">CHANGE % (1w)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>01</td>
+                                                <td>
+                                                    <div class="lh-1 d-flex align-items-center">
+                                                        Bitcoin
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    $16,839.10
+                                                </td>
+                                                <td class="">
+                                                    <span class="badge badge-sm bg-success-transparent rounded-pill">+12.02%</span>
+                                                </td>
+                                                <td>
+                                                    14,674,311,168
+                                                </td>
+                                                <td class="">
+                                                    <span class="badge badge-sm bg-primary rounded-1"><i class="ti ti-arrow-narrow-up text-fixed-white fw-bold "></i>12.02%</span>
+                                                </td>
+                                                <td class="">
+                                                    <span class="badge badge-sm bg-secondary rounded-1"><i class="ti ti-arrow-narrow-down text-fixed-white fw-bold "></i>110.02%</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>02</td>
+                                                <td>
+                                                    <div class="lh-1 d-flex align-items-center">
+                                                        Dash
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    1,217.96
+                                                </td>
+                                                <td class="">
+                                                    <span class="badge badge-sm bg-success-transparent rounded-pill">+142.05%</span>
+                                                </td>
+                                                <td>
+                                                    $4,758,554,801
+                                                </td>
+                                                <td class="">
+                                                    <span class="badge badge-sm bg-primary rounded-1"><i class="ti ti-arrow-narrow-up text-fixed-white fw-bold "></i>12.02%</span>
+                                                </td>
+                                                <td class="">
+                                                    <span class="badge badge-sm bg-secondary rounded-1"><i class="ti ti-arrow-narrow-down text-fixed-white fw-bold "></i>110.02%</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>03</td>
+                                                <td>
+                                                    <div class="lh-1 d-flex align-items-center">
+                                                        Euro
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    $43.49
+                                                </td>
+                                                <td class="">
+                                                    <span class="badge badge-sm bg-success-transparent rounded-pill">+712.02%</span>
+                                                </td>
+                                                <td class="">
+                                                    54,758,554,801
+                                                </td>
+                                                <td class="">
+                                                    <span class="badge badge-sm bg-primary rounded-1"><i class="ti ti-arrow-narrow-up text-fixed-white fw-bold "></i>12.02%</span>
+                                                </td>
+                                                <td class="">
+                                                    <span class="badge badge-sm bg-secondary rounded-1"><i class="ti ti-arrow-narrow-down text-fixed-white fw-bold "></i>110.02%</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>04</td>
+                                                <td>
+                                                    <div class="lh-1 d-flex align-items-center">
+                                                        Qtum    
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    $0.3531
+                                                </td>
+                                                <td class="">
+                                                    <span class="badge badge-sm bg-danger-transparent rounded-pill">+12.02%</span>
+                                                </td>
+                                                <td>
+                                                    $511,598,941
+                                                </td>
+                                                <td class="">
+                                                    <span class="badge badge-sm bg-primary rounded-1"><i class="ti ti-arrow-narrow-up text-fixed-white fw-bold "></i>12.02%</span>
+                                                </td>
+                                                <td class="">
+                                                    <span class="badge badge-sm bg-secondary rounded-1"><i class="ti ti-arrow-narrow-down text-fixed-white fw-bold "></i>110.02%</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>05</td>
+                                                <td>
+                                                    <div class="lh-1 d-flex align-items-center">
+                                                        Ripple
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    $0.169741
+                                                </td>
+                                                <td class="">
+                                                    <span class="badge badge-sm bg-success-transparent rounded-pill">+542.02%</span>
+                                                </td>
+                                                <td>
+                                                    $5,524,385
+                                                </td>
+                                                <td class="">
+                                                    <span class="badge badge-sm bg-primary rounded-1"><i class="ti ti-arrow-narrow-up text-fixed-white fw-bold "></i>12.02%</span>
+                                                </td>
+                                                <td class="">
+                                                    <span class="badge badge-sm bg-secondary rounded-1"><i class="ti ti-arrow-narrow-down text-fixed-white fw-bold "></i>110.02%</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>06</td>
+                                                <td>
+                                                    <div class="lh-1 d-flex align-items-center">
+                                                        Stellar
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    $6.43
+                                                </td>
+                                                <td class="">
+                                                    <span class="badge badge-sm bg-danger-transparent rounded-pill">+12.02%</span>
+                                                </td>
+                                                <td>
+                                                    $12,904,320
+                                                </td>
+                                                <td class="">
+                                                    <span class="badge badge-sm bg-primary rounded-1"><i class="ti ti-arrow-narrow-up text-fixed-white fw-bold "></i>12.02%</span>
+                                                </td>
+                                                <td class="">
+                                                    <span class="badge badge-sm bg-secondary rounded-1"><i class="ti ti-arrow-narrow-down text-fixed-white fw-bold "></i>110.02%</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="d-flex align-items-center">
+                                    <div>
+                                        Showing 6 Entries <i class="bi bi-arrow-right ms-2 fw-semibold"></i>
+                                    </div>
+                                    <div class="ms-auto">
+                                        <nav aria-label="Page navigation" class="pagination-style-4">
+                                            <ul class="pagination mb-0">
+                                                <li class="page-item disabled">
+                                                    <a class="page-link" href="javascript:void(0);">
+                                                        Prev
+                                                    </a>
+                                                </li>
+                                                <li class="page-item active"><a class="page-link" href="javascript:void(0);">1</a></li>
+                                                <li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
+                                                <li class="page-item">
+                                                    <a class="page-link text-primary" href="javascript:void(0);">
+                                                        next
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End:: row-4 -->
+
+            </div>
+        </div>
+        <!-- End::app-content -->
+
+        @SPK@include("partials/headersearch_modal.html")
+        @SPK@include("partials/footer.html")
+
+    </div>
+
+    @SPK@include("partials/commonjs.html")
+
+    <!-- Apex Charts JS -->
+    <script src="../assets/libs/apexcharts/apexcharts.min.js"></script>
+
+    <!-- Sales dashbord JS -->
+    <script src="../assets/js/Marketing.js"></script>
+
+    @SPK@include("partials/custom_switcherjs.html")
+
+    <!-- Custom JS -->
+    <script src="../assets/js/custom.js"></script>
+
+</body>
+
+</html>

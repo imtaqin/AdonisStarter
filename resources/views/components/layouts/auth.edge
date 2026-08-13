@@ -1,0 +1,90 @@
+{{--
+  Centred, chrome-free layout for sign in / sign up / password screens.
+
+  Props
+    title     string  page title
+    heading   string  large heading above the card
+    subtitle  string  muted text under the heading
+
+  Slots
+    main    the form
+    footer  link row under the card
+    styles  extra <link> tags
+    scripts extra <script> tags
+--}}
+
+@let(pageTitle = $props.get('title', 'Sign in'))
+
+<!DOCTYPE html>
+<html
+  lang="en"
+  dir="ltr"
+  data-nav-layout="vertical"
+  data-theme-mode="light"
+  data-header-styles="light"
+  data-menu-styles="light"
+  data-toggled="close"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ pageTitle }} &middot; {{ appName }}</title>
+
+    <link rel="icon" href="/theme/images/brand-logos/favicon.ico" type="image/x-icon" />
+
+    <script src="/theme/js/main.js"></script>
+
+    <link id="style" href="/theme/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/theme/css/styles.min.css" rel="stylesheet" />
+    <link href="/theme/css/icons.css" rel="stylesheet" />
+    {{-- Font Awesome Pro 7 — the icon set to use for new work. See AGENTS.md. --}}
+    <link href="/theme/fontawesome/css/fontawesome.min.css" rel="stylesheet" />
+
+    @if($slots.styles)
+      {{{ await $slots.styles() }}}
+    @end
+
+    @vite(['resources/css/dashboard.css'])
+    @stack('dumper')
+  </head>
+
+  <body class="authentication-background">
+    <div class="container">
+      <div class="row justify-content-center align-items-center authentication authentication-basic h-100">
+        <div class="col-xxl-4 col-xl-5 col-lg-6 col-md-8 col-sm-10 col-12">
+          <div class="my-4 d-flex justify-content-center">
+            <a href="{{ route('auth.login.show') }}">
+              <img src="/theme/images/brand-logos/desktop-logo.png" alt="{{ appName }}" class="authentication-brand desktop-logo" />
+              <img src="/theme/images/brand-logos/desktop-white.png" alt="{{ appName }}" class="authentication-brand desktop-dark" />
+            </a>
+          </div>
+
+          <div class="card custom-card">
+            <div class="card-body p-5">
+              <p class="h5 fw-semibold mb-2 text-center">{{ $props.get('heading', pageTitle) }}</p>
+              @if($props.get('subtitle'))
+                <p class="mb-4 text-muted op-7 fw-normal text-center fs-13">
+                  {{ $props.get('subtitle') }}
+                </p>
+              @end
+
+              @include('partials/dashboard/flash')
+
+              {{{ await $slots.main() }}}
+            </div>
+          </div>
+
+          @if($slots.footer)
+            <div class="text-center mt-4">{{{ await $slots.footer() }}}</div>
+          @end
+        </div>
+      </div>
+    </div>
+
+    <script src="/theme/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    @if($slots.scripts)
+      {{{ await $slots.scripts() }}}
+    @end
+    @vite(['resources/js/dashboard.js'])
+  </body>
+</html>

@@ -1,0 +1,17 @@
+{{--
+  Muted helper text under a control.
+
+  Props
+  text  string  helper text (alternative to the slot)
+--}}
+@let(helpFromSlot = await $slots.main())
+@let(helpText = helpFromSlot.trim() ? helpFromSlot : ($props.get('text') ?? ''))
+
+<div {{
+  $props
+    .except(['text'])
+    .merge({ id: `${$context.id}-help`, class: ['form-text'] })
+    .toAttrs()
+}}>
+  {{{ helpText }}}
+</div>

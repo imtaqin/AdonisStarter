@@ -1,0 +1,91 @@
+@layouts.dashboard({ title: 'Roles & Permissions', subtitle: 'Administration' })
+  @ui.card({ bodyClass: '' })
+    @slot('actions')
+      @if(can('roles.manage'))
+        @!link({
+          route: 'roles.create',
+          text: 'New role',
+          variant: 'primary',
+          size: 'sm',
+          icon: 'fa-solid fa-plus',
+        })
+      @end
+    @end
+    @if(roles.length === 0)
+      @!ui.empty({ title: 'No roles yet', icon: 'fa-solid fa-shield-keyhole' })
+    @else
+      @ui.table({
+        columns: [
+          { label: 'Role' },
+          { label: 'Permissions' },
+          { label: 'Users', width: '90px' },
+          { label: '', class: 'text-end', width: '160px' },
+        ],
+      })
+        @each(role in roles)
+          <tr>
+            <td>
+              <div class="d-flex align-items-center gap-2">
+                <p class="mb-0 fw-semibold">{{ role.name }}</p>
+                @if(role.isSystem)
+                  @!ui.badge({ text: 'System', variant: 'secondary', soft: true })
+                @end
+              </div>
+              <span class="text-muted fs-11">{{ role.slug }}</span>
+              @if(role.description)
+                <span class="d-block text-muted fs-12">{{ role.description }}</span>
+              @end
+            </td>
+
+            <td class="text-wrap" style="max-width: 420px">
+              @if(role.isAdmin)
+                @!ui.badge({ text: 'All permissions', variant: 'success', soft: true })
+              @elseif(role.permissions.length === 0)
+                <span class="text-muted fs-12">None</span>
+              @else
+                @each(permission in role.permissions)
+                  @!ui.badge({
+                    text: permission.slug,
+                    variant: 'light',
+                    class: 'me-1 mb-1 text-default',
+                  })
+                @end
+              @end
+            </td>
+
+            <td>{{ role.$extras.users_count ?? 0 }}</td>
+
+            <td class="text-end">
+              @if(can('roles.manage'))
+                <div class="d-inline-flex align-items-center gap-1">
+                  @!link({
+                    route: 'roles.edit',
+                    routeParams: [role.id],
+                    text: 'Edit',
+                    variant: 'light',
+                    size: 'sm',
+                    icon: 'fa-solid fa-pen',
+                  })
+                  @!ui.confirm({
+                    route: 'roles.destroy',
+                    routeParams: [role.id],
+                    confirm: `Delete the ${role.name} role?`,
+                    label: '',
+                    icon: 'fa-solid fa-trash',
+                    outline: true,
+                    disabled: role.isSystem,
+                    title: role.isSystem
+                      ? 'System roles cannot be deleted'
+                      : 'Delete role',
+                  })
+                </div>
+              @else
+                <span class="text-muted fs-12">—</span>
+              @end
+            </td>
+          </tr>
+        @end
+      @end
+    @end
+  @end
+@end

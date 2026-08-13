@@ -1,0 +1,16 @@
+<footer class="footer mt-auto py-3 bg-white text-center">
+  <div class="container">
+    <span class="text-muted">
+      {{--
+        The year is rendered server-side, but the id must stay: the theme's
+        custom.js does `getElementById('year').innerHTML = ...` unconditionally
+        and throws without it.
+      --}}
+      Copyright &copy;
+      <span id="year">{{ new Date().getFullYear() }}</span>
+      <a href="{{ route('dashboard') }}" class="text-dark fw-semibold">
+        {{ appName }}
+      </a>. All rights reserved.
+    </span>
+  </div>
+</footer>

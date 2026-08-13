@@ -1,0 +1,35 @@
+{{--
+  Toggle switch. Must be a child of @field.root.
+
+  Props
+  label    string   text beside the switch
+  checked  boolean  initial state; old input wins on re-render
+  value    string   submitted value (default '1')
+
+  A hidden input with the same name is emitted first so an unchecked switch
+  still submits a falsy value -- browsers omit unchecked checkboxes entirely,
+  which would otherwise make "turn this off" impossible to express.
+--}}
+@let(hasOld = flashMessages.has('__old__') || Boolean($context.oldValue))
+@let(isChecked = $context.oldValue ? true : Boolean($props.get('checked')))
+
+<input type="hidden" name="{{ $context.name }}" value="0" />
+
+<div class="form-check form-switch">
+  <input {{
+    $props
+      .except(['label', 'checked', 'value'])
+      .merge({
+        type: 'checkbox',
+        class: ['form-check-input'],
+        name: $context.name,
+        id: $context.id,
+        value: $props.get('value', '1'),
+        checked: isChecked,
+      })
+      .toAttrs()
+  }} />
+  @if($props.get('label'))
+    <label class="form-check-label" for="{{ $context.id }}">{{ $props.get('label') }}</label>
+  @end
+</div>

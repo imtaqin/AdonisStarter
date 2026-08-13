@@ -1,0 +1,114 @@
+@layouts.dashboard({ title: 'Users', subtitle: 'Administration' })
+  @ui.card({ bodyClass: '' })
+    @ui.datatable({
+      paginator: users,
+      searchValue: filters.search,
+      emptyTitle: 'No users found',
+      emptyText: 'Adjust your search, or add the first user.',
+      columns: [
+        { key: 'user', label: 'User' },
+        { key: 'roles', label: 'Roles' },
+        { key: 'status', label: 'Status' },
+        { key: 'lastLogin', label: 'Last login' },
+        { key: 'actions', label: '', class: 'text-end', width: '160px' },
+      ],
+    })
+      @slot('toolbar')
+        <form method="GET" action="{{ request.url() }}" class="d-flex align-items-center gap-2">
+          @if(filters.search)
+            <input type="hidden" name="search" value="{{ filters.search }}" />
+          @end
+
+          <select name="role" class="form-select form-select-sm" onchange="this.form.submit()">
+            <option value="">All roles</option>
+            @each(role in roles)
+              <option value="{{ role.slug }}" {{ filters.role === role.slug ? 'selected' : '' }}>
+                {{ role.name }}
+              </option>
+            @end
+          </select>
+          <noscript><button class="btn btn-sm btn-light" type="submit">Filter</button></noscript>
+        </form>
+      @end
+      @slot('actions')
+        @if(can('users.manage'))
+          @!link({
+            route: 'users.create',
+            text: 'New user',
+            variant: 'primary',
+            size: 'sm',
+            icon: 'fa-solid fa-plus',
+          })
+        @end
+      @end
+      @slot('row', scope)
+        <tr>
+          <td>
+            <div class="d-flex align-items-center gap-2">
+              @!avatar({ initials: scope.row.initials, size: 'sm' })
+              <div class="min-w-0">
+                <p class="mb-0 fw-semibold text-truncate">{{ scope.row.displayName }}</p>
+                <span class="text-muted fs-11">{{ scope.row.email }}</span>
+              </div>
+            </div>
+          </td>
+
+          <td>
+            @if(scope.row.roles.length === 0)
+              <span class="text-muted fs-12">—</span>
+            @else
+              @each(role in scope.row.roles)
+                @!ui.badge({
+                  text: role.name,
+                  variant: 'primary',
+                  soft: true,
+                  class: 'me-1',
+                })
+              @end
+            @end
+          </td>
+
+          <td>
+            @!ui.badge({
+              text: scope.row.isActive ? 'Active' : 'Inactive',
+              variant: boolVariant(scope.row.isActive),
+              soft: true,
+            })
+          </td>
+
+          <td class="text-muted fs-12">{{ formatDate(scope.row.lastLoginAt) }}</td>
+
+          <td class="text-end">
+            @if(can('users.manage'))
+              <div class="d-inline-flex align-items-center gap-1">
+                @!link({
+                  route: 'users.edit',
+                  routeParams: [scope.row.id],
+                  text: 'Edit',
+                  variant: 'light',
+                  size: 'sm',
+                  icon: 'fa-solid fa-pen',
+                })
+                @!ui.confirm({
+                  route: 'users.destroy',
+                  routeParams: [scope.row.id],
+                  confirm: `Delete ${scope.row.email}? This cannot be undone.`,
+                  label: '',
+                  icon: 'fa-solid fa-trash',
+                  outline: true,
+                  disabled: auth.user.id === scope.row.id,
+                  title:
+                    auth.user.id === scope.row.id
+                      ? 'You cannot delete your own account'
+                      : 'Delete user',
+                })
+              </div>
+            @else
+              <span class="text-muted fs-12">—</span>
+            @end
+          </td>
+        </tr>
+      @end
+    @end
+  @end
+@end

@@ -1,0 +1,47 @@
+{{--
+  Props
+  title     string   header title
+  subtitle  string   muted text under the title
+  bodyClass string   extra classes on the body (pass 'p-0' for flush tables)
+  flush     boolean  omit the body wrapper entirely
+
+  Slots
+  main     card body
+  header   replaces the whole header
+  actions  right-aligned controls in the header
+  footer   card footer
+--}}
+@let(hasHeader = $props.get('title') || $slots.header || $slots.actions)
+
+<div {{
+  $props
+    .except(['title', 'subtitle', 'bodyClass', 'flush'])
+    .merge({ class: ['card', 'custom-card'] })
+    .toAttrs()
+}}>
+  @if(hasHeader)
+    <div class="card-header justify-content-between align-items-center">
+      @if($slots.header)
+        {{{ await $slots.header() }}}
+      @else
+        <div>
+          <div class="card-title">{{ $props.get('title') }}</div>
+          @if($props.get('subtitle'))
+            <span class="text-muted fs-12">{{ $props.get('subtitle') }}</span>
+          @end
+        </div>
+      @end
+      @if($slots.actions)
+        <div class="d-flex align-items-center gap-2">{{{ await $slots.actions() }}}</div>
+      @end
+    </div>
+  @end
+  @if($props.get('flush'))
+    {{{ await $slots.main() }}}
+  @else
+    <div class="card-body {{ $props.get('bodyClass', '') }}">{{{ await $slots.main() }}}</div>
+  @end
+  @if($slots.footer)
+    <div class="card-footer">{{{ await $slots.footer() }}}</div>
+  @end
+</div>

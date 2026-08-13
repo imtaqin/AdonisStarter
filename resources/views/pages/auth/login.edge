@@ -1,0 +1,54 @@
+@layouts.auth({
+  title: 'Sign in',
+  heading: 'Sign in',
+  subtitle: 'Welcome back — please enter your details.',
+})
+  @form({ route: 'auth.login.store', method: 'POST' })
+    @field.root({ name: 'email' })
+      @!field.label({ text: 'Email', required: true })
+      @!input.control({
+        type: 'email',
+        autocomplete: 'username',
+        placeholder: 'you@example.com',
+        required: true,
+        autofocus: true,
+      })
+      @!field.error()
+    @end
+    @field.root({ name: 'password' })
+      @!field.label({ text: 'Password', required: true })
+      @!input.control({
+        type: 'password',
+        autocomplete: 'current-password',
+        placeholder: '••••••••',
+        required: true,
+      })
+      @!field.error()
+    @end
+    @field.root({ name: 'rememberMe', wrapper: 'form-check mb-4' })
+      @!input.control({ type: 'checkbox', value: '1', keepChecked: true })
+      @!field.label({ text: 'Remember me', class: 'form-check-label' })
+    @end
+    @!button({ type: 'submit', text: 'Sign in', block: true })
+  @end
+  @slot('footer')
+    <p class="fs-12 text-muted mb-0">
+      
+      
+      
+      
+      
+      
+      Don't have an account?
+
+
+
+
+
+
+      @link({ route: 'auth.register.show', class: 'text-primary' })
+        Create one
+      @end
+    </p>
+  @end
+@end

@@ -1,0 +1,52 @@
+{{--
+  A single metric tile.
+
+  Props
+  label   string  what the number measures
+  value   string|number
+  icon    string  Tabler icon class
+  variant string  colour for the icon chip (default 'primary')
+  trend   number  percentage change; sign selects the up/down treatment
+  caption string  small muted text under the value
+  href    string  makes the whole tile a link
+--}}
+@let(variant = $props.get('variant', 'primary'))
+@let(trend = $props.get('trend'))
+@let(trendUp = typeof trend === 'number' && trend >= 0)
+
+<div {{
+  $props
+    .except(['label', 'value', 'icon', 'variant', 'trend', 'caption', 'href'])
+    .merge({ class: ['card', 'custom-card'] })
+    .toAttrs()
+}}>
+  <div class="card-body">
+    <div class="d-flex align-items-start justify-content-between">
+      <div>
+        <span class="text-muted fs-12 d-block mb-1">{{ $props.get('label') }}</span>
+        <h4 class="fw-semibold mb-1">{{ $props.get('value') }}</h4>
+        @if(typeof trend === 'number')
+          <span class="fs-12 text-{{ trendUp ? 'success' : 'danger' }}">
+            <i class="fa-solid fa-arrow-trend-{{ trendUp ? 'up' : 'down' }} me-1"></i>
+            {{ Math.abs(trend) }}%
+          </span>
+        @end
+        @if($props.get('caption'))
+          <span class="text-muted fs-12 d-block">{{ $props.get('caption') }}</span>
+        @end
+      </div>
+      @if($props.get('icon'))
+        <span class="avatar avatar-md bg-{{ variant }}-transparent rounded">
+          <i class="{{ $props.get('icon') }} fs-18"></i>
+        </span>
+      @end
+    </div>
+    @if($props.get('href'))
+      <a
+        href="{{ $props.get('href') }}"
+        class="stretched-link"
+        aria-label="{{ $props.get('label') }}"
+      ></a>
+    @end
+  </div>
+</div>

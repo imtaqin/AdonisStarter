@@ -1,0 +1,61 @@
+{{--
+  Props
+  id     string  required, namespaces the generated element ids
+  items  array   [{ key, label, icon?, active? }]
+  pills  boolean use the pill style instead of underlined tabs
+
+  Slots
+  panel  scoped slot called once per item with { item, index }
+
+  Usage
+  @ui.tabs({ id: 'profile', items: [{ key: 'info', label: 'Info', active: true }] })
+  @slot('panel', scope)
+  @if(scope.item.key === 'info')
+  <p>…</p>
+  @end
+  @end
+  @end
+--}}
+@let(id = $props.get('id'))
+@let(items = $props.get('items') || [])
+
+<ul
+  class="nav {{ $props.get('pills') ? 'nav-pills' : 'nav-tabs' }} mb-3"
+  id="{{ id }}-tabs"
+  role="tablist"
+>
+  @each((item, index) in items)
+    @let(isActive = item.active || (index === 0 && !items.some((entry) => entry.active)))
+    <li class="nav-item" role="presentation">
+      <button
+        class="nav-link {{ isActive ? 'active' : '' }}"
+        id="{{ id }}-{{ item.key }}-tab"
+        data-bs-toggle="tab"
+        data-bs-target="#{{ id }}-{{ item.key }}"
+        type="button"
+        role="tab"
+        aria-controls="{{ id }}-{{ item.key }}"
+        aria-selected="{{ isActive ? 'true' : 'false' }}"
+      >
+        @if(item.icon)
+          <i class="{{ item.icon }} me-1"></i>
+        @end
+        {{ item.label }}
+      </button>
+    </li>
+  @end
+</ul>
+
+<div class="tab-content" id="{{ id }}-content">
+  @each((item, index) in items)
+    @let(isActive = item.active || (index === 0 && !items.some((entry) => entry.active)))
+    <div
+      class="tab-pane fade {{ isActive ? 'show active' : '' }}"
+      id="{{ id }}-{{ item.key }}"
+      role="tabpanel"
+      aria-labelledby="{{ id }}-{{ item.key }}-tab"
+    >
+      {{{ await $slots.panel({ item, index }) }}}
+    </div>
+  @end
+</div>

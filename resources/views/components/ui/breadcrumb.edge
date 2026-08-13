@@ -1,0 +1,27 @@
+{{--
+  Standalone breadcrumb. The dashboard layout already renders one from its
+  `title`/`breadcrumbs` props -- use this only inside page content.
+
+  Props
+  items    array   [{ label, href? }]
+  current  string  the active trailing crumb
+--}}
+{{-- `@each` needs a bare identifier, so the fallback is resolved up here. --}}
+@let(crumbItems = $props.get('items') || [])
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb mb-0">
+    @each(item in crumbItems)
+      <li class="breadcrumb-item">
+        @if(item.href)
+          <a href="{{ item.href }}">{{ item.label }}</a>
+        @else
+          {{ item.label }}
+        @end
+      </li>
+    @end
+    @if($props.get('current'))
+      <li class="breadcrumb-item active" aria-current="page">{{ $props.get('current') }}</li>
+    @end
+  </ol>
+</nav>

@@ -1,0 +1,182 @@
+@layouts.dashboard({ title: 'Dashboard', subtitle: 'Overview' })
+  <div class="row">
+    <div class="col-xxl-3 col-sm-6">
+      @!ui.stat({
+        label: 'Total users',
+        value: stats.totalUsers,
+        icon: 'fa-solid fa-users',
+        variant: 'primary',
+        href: can('users.view') ? route('users.index') : '',
+      })
+    </div>
+    <div class="col-xxl-3 col-sm-6">
+      @!ui.stat({
+        label: 'Active users',
+        value: stats.activeUsers,
+        icon: 'fa-solid fa-user-check',
+        variant: 'success',
+        caption: `${stats.totalUsers - stats.activeUsers} deactivated`,
+      })
+    </div>
+    <div class="col-xxl-3 col-sm-6">
+      @!ui.stat({
+        label: 'New in 30 days',
+        value: stats.newUsers,
+        icon: 'fa-solid fa-user-plus',
+        variant: 'info',
+      })
+    </div>
+    <div class="col-xxl-3 col-sm-6">
+      @!ui.stat({
+        label: 'Events today',
+        value: stats.eventsToday,
+        icon: 'fa-solid fa-wave-pulse',
+        variant: 'warning',
+        href: can('audit.view') ? route('audit_logs.index') : '',
+      })
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xl-8">
+      @ui.card({ title: 'Signups', subtitle: 'Last 14 days' })
+        <div id="signup-chart"></div>
+      @end
+    </div>
+
+    <div class="col-xl-4">
+      @ui.card({ title: 'Users by role' })
+        @if(usersByRole.length === 0)
+          @!ui.empty({ title: 'No roles yet', icon: 'fa-solid fa-shield-halved' })
+        @else
+          @each(entry in usersByRole)
+            @!ui.progress({
+              label: entry.name,
+              value: stats.totalUsers
+                ? Math.round((entry.total / stats.totalUsers) * 100)
+                : 0,
+              showValue: true,
+              size: 'sm',
+              class: 'mb-3',
+            })
+          @end
+        @end
+      @end
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xl-7">
+      @ui.card({ title: 'Recent users', bodyClass: 'p-0' })
+        @slot('actions')
+          @if(can('users.view'))
+            @!link({
+              route: 'users.index',
+              text: 'View all',
+              variant: 'light',
+              size: 'sm',
+            })
+          @end
+        @end
+        @if(recentUsers.length === 0)
+          @!ui.empty({ title: 'No users yet', icon: 'fa-solid fa-users' })
+        @else
+          @ui.table({
+            columns: [{ label: 'User' }, { label: 'Roles' }, { label: 'Joined' }],
+          })
+            @each(user in recentUsers)
+              <tr>
+                <td>
+                  <div class="d-flex align-items-center gap-2">
+                    @!avatar({ initials: user.initials, size: 'sm' })
+                    <div class="min-w-0">
+                      <p class="mb-0 fw-semibold text-truncate">{{ user.displayName }}</p>
+                      <span class="text-muted fs-11">{{ user.email }}</span>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  @each(role in user.roles)
+                    @!ui.badge({
+                      text: role.name,
+                      variant: 'primary',
+                      soft: true,
+                      class: 'me-1',
+                    })
+                  @end
+                </td>
+                <td class="text-muted fs-12">{{ formatDate(user.createdAt, 'dd LLL yyyy') }}</td>
+              </tr>
+            @end
+          @end
+        @end
+      @end
+    </div>
+
+    <div class="col-xl-5">
+      @ui.card({ title: 'Recent activity' })
+        @slot('actions')
+          @if(can('audit.view'))
+            @!link({
+              route: 'audit_logs.index',
+              text: 'View all',
+              variant: 'light',
+              size: 'sm',
+            })
+          @end
+        @end
+        @if(recentActivity.length === 0)
+          @!ui.empty({
+            title: 'Nothing recorded yet',
+            icon: 'fa-solid fa-clock-rotate-left',
+          })
+        @else
+          @!ui.timeline({
+            items: recentActivity.map((entry) => ({
+              title: entry.summary || entry.event,
+              description: entry.user ? entry.user.email : 'System',
+              time: formatDate(entry.createdAt, 'dd LLL, HH:mm'),
+              variant: entry.variant,
+              icon: 'fa-solid fa-circle',
+            })),
+          })
+        @end
+      @end
+    </div>
+  </div>
+  @slot('scripts')
+    <script src="/theme/libs/apexcharts/apexcharts.min.js"></script>
+    <script>
+
+
+
+
+
+
+                                          /* Data is serialised by the `toJson` Edge global, which escapes `<`. */
+                                          ;(function () {
+                                            var trend = {{{ toJson(signupTrend) }}}
+                                            var target = document.querySelector('#signup-chart')
+                                            if (!target || typeof ApexCharts === 'undefined') return
+
+                                            new ApexCharts(target, {
+                                              chart: { type: 'area', height: 300, toolbar: { show: false } },
+                                              dataLabels: { enabled: false },
+                                              stroke: { curve: 'smooth', width: 2 },
+                                              series: [{ name: 'Signups', data: trend.map(function (point) { return point.total }) }],
+                                              xaxis: { categories: trend.map(function (point) { return point.label }) },
+                                              yaxis: { labels: { formatter: function (value) { return Math.round(value) } } },
+                                              fill: { type: 'gradient', gradient: { opacityFrom: 0.4, opacityTo: 0.05 } },
+                                              colors: ['#845adf'],
+                                              grid: { borderColor: 'rgba(0,0,0,0.06)' }
+                                            }).render()
+                                          })()
+
+
+
+
+
+
+    </script>
+  @end
+@end

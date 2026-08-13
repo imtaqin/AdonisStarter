@@ -1,0 +1,24 @@
+{{--
+  Radio input. Must be nested in @radio.group and @field.root.
+
+  Props
+  value    any      submitted value
+  checked  boolean  initial state; old input wins when the form was re-rendered
+--}}
+@assign($context.counter = $context.counter + 1)
+@let(classes = ['form-check-input'])
+
+<input {{
+  $props
+    .except(['type', 'checked'])
+    .merge({
+      type: 'radio',
+      id: $context.id,
+      name: $context.name,
+      class: classes,
+      checked: $context.oldValue
+        ? String($context.oldValue) === String($props.get('value'))
+        : Boolean($props.get('checked')),
+    })
+    .toAttrs()
+}} />

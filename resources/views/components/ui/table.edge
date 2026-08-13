@@ -1,0 +1,63 @@
+{{--
+  Plain table chrome. Use @ui.datatable when you need search, sorting and
+  pagination; this is the low-level building block.
+
+  Props
+  columns   array    [{ label, class?, width? }] -- omit to supply your own <thead>
+  striped   boolean
+  hover     boolean  (default true)
+  bordered  boolean
+  size      string   'sm' for a compact table
+
+  Slots
+  main    <tr> rows
+  head    replaces the generated <thead>
+  footer  <tfoot> content
+
+  Always wrapped in .table-responsive: a wide table that forces the whole page
+  to scroll sideways is never what you want, and the wrapper is inert when the
+  table fits.
+--}}
+{{-- `@each` needs a bare identifier, so the fallback is resolved up here. --}}
+@let(headColumns = $props.get('columns') || [])
+@let(classes = [
+  'table',
+  'text-nowrap',
+  'align-middle',
+  $props.get('striped') ? 'table-striped' : '',
+  $props.get('hover') === false ? '' : 'table-hover',
+  $props.get('bordered') ? 'table-bordered' : '',
+  $props.get('size') ? `table-${$props.get('size')}` : '',
+])
+
+<div class="table-responsive">
+  <table {{
+    $props
+      .except(['columns', 'striped', 'hover', 'bordered', 'responsive', 'size'])
+      .merge({ class: classes })
+      .toAttrs()
+  }}>
+    <thead>
+      @if($slots.head)
+        {{{ await $slots.head() }}}
+      @else
+        <tr>
+          @each(column in headColumns)
+            <th
+              scope="col"
+              class="{{ column.class || '' }}"
+              style="{{ column.width ? `width: ${column.width}` : '' }}"
+            >
+              {{ column.label }}
+            </th>
+          @end
+        </tr>
+      @end
+    </thead>
+
+    <tbody>{{{ await $slots.main() }}}</tbody>
+    @if($slots.footer)
+      <tfoot>{{{ await $slots.footer() }}}</tfoot>
+    @end
+  </table>
+</div>

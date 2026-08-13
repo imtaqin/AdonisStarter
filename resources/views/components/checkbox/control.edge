@@ -1,0 +1,34 @@
+{{--
+  Checkbox input. Must be nested in @checkbox.group and @field.root.
+
+  Props
+  value    any      submitted value
+  checked  boolean  initial state; old input wins when the form was re-rendered
+--}}
+@assign($context.counter = $context.counter + 1)
+@let(classes = ['form-check-input'])
+@let(hasOld = Boolean($context.oldValue))
+@let(oldList = Array.isArray($context.oldValue)
+  ? $context.oldValue.map(String)
+  : $context.oldValue
+    ? [String($context.oldValue)]
+    : [])
+
+<input {{
+  $props
+    .except(['type', 'checked'])
+    .merge({
+      type: 'checkbox',
+      name: $context.name,
+      id: $context.id,
+      class: classes,
+      /**
+       * After a failed submit the flashed value is authoritative; otherwise
+       * fall back to the `checked` prop supplied by the caller.
+       */
+      checked: hasOld
+        ? oldList.includes(String($props.get('value')))
+        : Boolean($props.get('checked')),
+    })
+    .toAttrs()
+}} />

@@ -1,0 +1,66 @@
+{{--
+  Recursive renderer for the sidebar tree produced by MenuService.
+
+  Props
+  items  ResolvedNode[]  nodes to render
+  level  number          submenu depth; 0 is the top-level <ul class="main-menu">
+
+  The markup mirrors what /theme/js/defaultmenu.min.js expects:
+  `.slide.has-sub` toggles `.slide-menu.childN`, and `open`/`active` drive the
+  expanded state. Those class names are theme API -- do not rename them.
+--}}
+@let(level = $props.get('level', 0))
+@each(node in $props.get('items', []))
+  @if(node.type === 'category')
+    <li class="slide__category"><span class="category-name">{{ node.label }}</span></li>
+  @elseif(node.children && node.children.length)
+    <li class="slide has-sub {{ node.open ? 'open' : '' }}">
+      <a href="javascript:void(0);" class="side-menu__item">
+        @if(node.icon)
+          <i class="{{ node.icon }} side-menu__icon"></i>
+        @end
+
+        <span class="side-menu__label">{{ node.label }}</span>
+        <i class="fa-solid fa-chevron-right side-menu__angle"></i>
+      </a>
+      {{--
+        Conditional attributes are written as ternary interpolation. A block
+        `@if` cannot appear inline inside a tag -- Edge requires block tags to
+        own their line, so the inline form is a compile error.
+      --}}
+      <ul class="slide-menu child{{ level + 1 }}" style="{{ node.open ? 'display: block' : '' }}">
+        {{-- Decorative header the theme shows in the collapsed fly-out. --}}
+        <li class="slide side-menu__label1"><a href="javascript:void(0)">{{ node.label }}</a></li>
+        @!sidebar.items({ items: node.children, level: level + 1 })
+      </ul>
+    </li>
+  @else
+    <li class="slide">
+      @if(node.href)
+        <a href="{{ node.href }}" class="side-menu__item {{ node.active ? 'active' : '' }}">
+          @if(node.icon)
+            <i class="{{ node.icon }} side-menu__icon"></i>
+          @end
+
+          <span class="side-menu__label">
+            {{ node.label }}
+            @if(node.badge)
+              <span class="badge bg-{{ node.badge.variant || 'primary' }} ms-2">
+                {{ node.badge.label }}
+              </span>
+            @end
+          </span>
+        </a>
+      @else
+        {{-- Route not registered yet: render inert rather than linking nowhere. --}}
+        <span class="side-menu__item opacity-50" title="Route not registered">
+          @if(node.icon)
+            <i class="{{ node.icon }} side-menu__icon"></i>
+          @end
+
+          <span class="side-menu__label">{{ node.label }}</span>
+        </span>
+      @end
+    </li>
+  @end
+@end

@@ -1,0 +1,18 @@
+@layouts.dashboard({
+  title: 'New user',
+  breadcrumbs: [
+    { label: 'Administration' },
+    { label: 'Users', href: route('users.index') },
+  ],
+})
+  @ui.card()
+    @form({ route: 'users.store', method: 'POST' })
+      @include('pages/users/_form')
+
+      <div class="d-flex justify-content-end gap-2">
+        @!link({ route: 'users.index', text: 'Cancel', variant: 'light' })
+        @!button({ type: 'submit', text: 'Create user' })
+      </div>
+    @end
+  @end
+@end

@@ -1,0 +1,90 @@
+{{--
+  Shared by roles/create.edge and roles/edit.edge.
+
+  Expects in scope:
+  permissionGroups       [{ name, permissions }]
+  assignedPermissionIds  number[]
+  role                   Role | undefined  (edit only)
+  isEdit                 boolean
+--}}
+@let(editing = typeof isEdit !== 'undefined' && isEdit)
+
+<div class="row">
+  <div class="col-md-6">
+    @field.root({ name: 'name' })
+      @!field.label({ text: 'Name', required: true })
+      @!input.control({
+        type: 'text',
+        value: editing ? role.name : '',
+        placeholder: 'Editor',
+        required: true,
+      })
+      @!field.error()
+    @end
+  </div>
+
+  <div class="col-md-6">
+    @field.root({ name: 'slug' })
+      @!field.label({ text: 'Slug', required: true })
+      @!input.control({
+        type: 'text',
+        value: editing ? role.slug : '',
+        placeholder: 'editor',
+        required: true,
+        readonly: editing && role.isSystem,
+      })
+      @!field.help({
+        text:
+          editing && role.isSystem
+            ? 'System role slugs are referenced in code and cannot be changed.'
+            : 'Lowercase letters, numbers and dashes. Referenced from code — pick carefully.',
+      })
+      @!field.error()
+    @end
+  </div>
+
+  <div class="col-12">
+    @field.root({ name: 'description' })
+      @!field.label({ text: 'Description' })
+      @!textarea.control({ rows: '2', value: editing ? role.description : '' })
+      @!field.error()
+    @end
+  </div>
+</div>
+
+<hr class="my-4" />
+
+<label class="form-label d-block">Permissions</label>
+@if(editing && role.isAdmin)
+  {{-- components/alert/root.edge -> @alert.root (there is no `ui.` prefix) --}}
+  @alert.root({ variant: 'info', dismissible: false, icon: 'fa-solid fa-circle-info' })
+    @!alert.description({
+      text: 'The administrator role bypasses every permission check, so its grants are not editable.',
+    })
+  @end
+@else
+  <p class="text-muted fs-12">Grant only what the role genuinely needs.</p>
+  @checkbox.group({ name: 'permissionIds' })
+    @each(group in permissionGroups)
+      <div class="mb-4">
+        <p class="fw-semibold text-uppercase fs-11 text-muted mb-2">{{ group.name }}</p>
+        <div class="row">
+          @each(permission in group.permissions)
+            <div class="col-md-6">
+              @field.root({ id: `permission-${permission.id}` })
+                @!checkbox.control({
+                  value: permission.id,
+                  checked: assignedPermissionIds.includes(permission.id),
+                })
+                @field.label()
+                  {{ permission.name }}
+                  <span class="d-block text-muted fs-11">{{ permission.slug }}</span>
+                @end
+              @end
+            </div>
+          @end
+        </div>
+      </div>
+    @end
+  @end
+@end

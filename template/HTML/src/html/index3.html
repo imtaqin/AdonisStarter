@@ -1,0 +1,504 @@
+@SPK@include("partials/mainhead.html")
+
+</head>
+
+<body>
+
+    @SPK@include("partials/switcher.html")
+    @SPK@include("partials/loader.html")
+
+    <div class="page">
+        @SPK@include("partials/header.html")
+        @SPK@include("partials/sidebar.html")
+
+        <!-- Start::app-content -->
+        <div class="main-content app-content">
+            <div class="container-fluid">
+
+                @SPK@include("partials/page-header.html", {"title": "Finance Dashboard", "subtitle": 'Dashboard'})
+
+                <!-- Start::row-1 -->
+                <div class="row row-sm">
+					<div class="col-xl-3 col-sm-6">
+						<div class="card custom-card">
+							<div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div>
+                                        <span class="mb-1 fs-14">Total Income</span>
+                                        <h3><span>$</span>83,320</h3>
+                                    </div>
+                                    <div class="ms-auto">
+                                        <div class="avatar avatar-lg bg-secondary-transparent">
+                                            <i class="fe fe-dollar-sign"></i>
+                                        </div>
+                                    </div>
+
+                                </div>
+								<span class="fs-12 text-muted"><span class="text-success text-bold">18.2%</span> higher vs previous month</span>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-3 col-sm-6">
+						<div class="card custom-card">
+							<div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div>
+                                        <span class="mb-1 fs-14">Total Expenses</span>
+                                        <h3><span>$</span>32,370</h3>
+                                    </div>
+                                    <div class="ms-auto">
+                                        <div class="avatar avatar-lg bg-success-transparent">
+                                            <i class="fe fe-repeat"></i>
+                                        </div>
+                                    </div>
+                                </div>
+								<span class="fs-12  text-muted"><span class="text-danger text-bold">0.7%</span> higher vs previous month</span>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-3 col-sm-6">
+						<div class="card custom-card">
+							<div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div>
+                                        <span class="mb-1 fs-14">Total Revenue</span>
+                                        <h3><span>$</span>13,370</h3>
+                                    </div>
+                                    <div class="ms-auto">
+                                        <div class="avatar avatar-lg bg-primary-transparent">
+                                            <i class="fe fe-briefcase"></i>
+                                        </div>
+                                    </div>
+                                </div>
+								<span class="fs-12  text-muted"><span class="text-success text-bold">0.7%</span> higher vs previous month</span>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-3 col-sm-6">
+						<div class="card custom-card">
+							<div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div>
+                                        <span class="mb-1 fs-14">Total Profit</span>
+                                        <h3><span>$</span>78,098</h3>
+                                    </div>
+                                    <div class="ms-auto">
+                                        <div class="avatar avatar-lg bg-danger-transparent">
+                                            <i class="fe fe-command"></i>
+                                        </div>
+                                    </div>
+                                </div>
+								<span class="fs-12 text-muted"><span class="text-success text-bold">0.7%</span> higher vs previous month</span>
+							</div>
+						</div>
+					</div>
+				</div>
+                <!--End::row-1 -->
+
+                  <!--End::row-2 -->
+                  <div class="row row-sm">
+                    <div class="col-xxl-6 col-md-12">
+                        <div class="card custom-card overflow-hidden">
+                            <div class="card-header justify-content-between">
+                                <div class="card-title">Project Analysis</div>
+                                <div class="dropdown">
+                                    <a href="javascript:void(0);" class="btn btn-outline-light btn-icons btn-sm text-muted" data-bs-toggle="dropdown">
+                                        <i class="fe fe-more-vertical"></i>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li class="border-bottom"><a class="dropdown-item" href="javascript:void(0);">Action</a></li>
+                                        <li class="border-bottom"><a class="dropdown-item" href="javascript:void(0);">Another action</a></li>
+                                        <li><a class="dropdown-item" href="javascript:void(0);">Something else here</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-body p-0 pt-4">
+                                <div id="applicantStats"></div>
+                            </div>
+                        </div>
+                    </div> 
+                    <div class="col-xxl-3 col-md-6">
+                        <div class="card"> 
+                           <div class="card-body"> 
+                                <h6 class="">Budget Overview</h6>
+                                <p class="text-muted">Sed ut perspiciatis unde omnis iste natus error sit voluptatem  <a href="" class="text-primary">Learn more</a></p>
+                                <div id="Budgetoverview"></div>
+                                <div class="d-flex mt-2 mb-1">
+                                    <div>
+                                        <p class="mb-3">Budget</p>
+                                        <p class=" mb-0">Balance</p>
+                                    </div>
+                                    <div class="ms-auto text-end">
+                                        <h6 class="mb-3">3500,00</h6>
+                                        <h6 class=" mb-0">1500,00</h6>
+                                    </div>
+                                </div>
+                            </div>
+                          </div>
+                    </div>
+                    <div class="col-xxl-3 col-md-6">
+                        <div class="card"> 
+                           <div class="card-body"> 
+                                <h6 class="">Budget Expense</h6>
+                                <p class="text-muted">Sed ut perspiciatis unde omnis iste natus error sit voluptatem  <a href="" class="text-primary">Learn more</a></p>
+                                <div id="Budgetexpense"></div>
+                                <div class="d-flex mt-2 mb-1">
+                                    <div>
+                                        <p class="mb-3">Budget</p>
+                                        <p class=" mb-0">Balance</p>
+                                    </div>
+                                    <div class="ms-auto text-end">
+                                        <h6 class="mb-3">3500,00</h6>
+                                        <h6 class=" mb-0">1500,00</h6>
+                                    </div>
+                                </div>
+                            </div>
+                          </div>
+                    </div>
+                    <div class="col-xxl-3 col-md-6 ">
+                        <div class="card custom-card">
+                            <div class="card-header justify-content-between">
+                                <div class="card-title">
+                                    Customer Balance Summary
+                                </div>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table table-hover text-nowrap">
+                                        <tbody>
+                                            <tr>
+                                                <td class="ps-4">
+                                                    <div class="d-flex">
+                                                        <span class="avatar avatar-md avatar-rounded">
+                                                            <img src="../assets/images/faces/1.jpg" class="" alt="">
+                                                        </span>
+                                                        <div class="flex-1 ms-2">
+                                                            <p class="mb-0 fs-14">Diam Ipsum</p>
+                                                            <a href="javascript:void(0);" class="text-muted fs-11">Due Date:28 Dec 2022</a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+													<span class="mb-0 fs-15">$15,245.00</span>
+                                                    <p class="text-muted fs-11 mb-0">Due Amount</p>
+												</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="ps-4">
+                                                    <div class="d-flex">
+                                                        <span class="avatar avatar-md avatar-rounded">
+                                                            <img src="../assets/images/faces/2.jpg" class="" alt="">
+                                                        </span>
+                                                        <div class="flex-1 ms-2">
+                                                            <p class="mb-0 fs-14">Kevin Johnston</p>
+                                                            <a href="javascript:void(0);" class="text-muted fs-11">Due Date:18 Dec 2022</a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+													<span class="mb-0 fs-15">$25,245.00</span>
+                                                    <p class="text-muted fs-11 mb-0">Due Amount</p>
+												</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="ps-4">
+                                                    <div class="d-flex">
+                                                        <span class="avatar avatar-md avatar-rounded">
+                                                            <img src="../assets/images/faces/3.jpg" class="" alt="">
+                                                        </span>
+                                                        <div class="flex-1 ms-2">
+                                                            <p class="mb-0 fs-14">Karen Watson</p>
+                                                            <a href="javascript:void(0);" class="text-muted fs-11">Due Date: 14-12-2023</a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+													<span class="mb-0 fs-15">$65,245.00</span>
+                                                    <p class="text-muted fs-11 mb-0">Due Amount</p>
+												</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="ps-4">
+                                                    <div class="d-flex">
+                                                        <span class="avatar avatar-md avatar-rounded">
+                                                            <img src="../assets/images/faces/4.jpg" class="" alt="">
+                                                        </span>
+                                                        <div class="flex-1 ms-2">
+                                                            <p class="mb-0 fs-14">Justin Gray</p>
+                                                            <a href="javascript:void(0);" class="text-muted fs-11">Due Date: 14-12-2023</a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+													<span class="mb-0 fs-15">$75,245.00</span>
+                                                    <p class="text-muted fs-11 mb-0">Due Amount</p>
+												</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="ps-4">
+                                                    <div class="d-flex">
+                                                        <span class="avatar avatar-md avatar-rounded">
+                                                            <img src="../assets/images/faces/5.jpg" class="" alt="">
+                                                        </span>
+                                                        <div class="flex-1 ms-2">
+                                                            <p class="mb-0 fs-14">Robert Hamilton</p>
+                                                            <a href="javascript:void(0);" class="text-muted fs-11">Due Date: 14-12-2023</a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+													<span class="mb-0 fs-15">$61,045.00</span>
+                                                    <p class="text-muted fs-11 mb-0">Due Amount</p>
+												</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="ps-4">
+                                                    <div class="d-flex">
+                                                        <span class="avatar avatar-md avatar-rounded">
+                                                            <img src="../assets/images/faces/6.jpg" class="" alt="">
+                                                        </span>
+                                                        <div class="flex-1 ms-2">
+                                                            <p class="mb-0 fs-14">Rachel Poole</p>
+                                                            <a href="javascript:void(0);" class="text-muted fs-11">Due Date: 14-12-2023</a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+													<span class="mb-0 fs-15">$51,045.00</span>
+                                                    <p class="text-muted fs-11 mb-0">Due Amount</p>
+												</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-3 col-md-6 ">
+                        <div class="card mg-b-20">
+                            <div class="card-body">
+                                <h6 class="">Quick Ratio</h6>
+								<p class="text-muted">Measures your Current Assets + Accounts Receivable  <a href="" class="text-primary">Learn more</a></p>
+                                <div class="d-flex mt-2 mb-1">
+                                    <div>
+                                        <h2 class="mb-1">1.6:0</h2>
+                                    </div>
+                                </div>
+                                <div class="progress progress-sm mb-2" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                    <div class="progress-bar bg-primary" style="width: 55%">
+                                    </div>
+                                </div>
+                                <small class="mb-0 text-muted">Quick Ratio Target: 1.0 or higher</small>
+                            </div>
+                        </div>
+                        <div class="card mg-b-20">
+                            <div class="card-body">
+                                <h6 class="">Current Ratio</h6>
+								<p class="text-muted">Measures your Current Assets / Current Liabilitie  <a href="" class="text-primary">Learn more</a></p>
+                                <div class="d-flex mt-2 mb-1">
+                                    <div>
+                                        <h2 class="mb-1">4.2:0</h2>
+                                    </div>
+                                </div>
+                                <div class="progress progress-sm mb-2" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                    <div class="progress-bar bg-secondary" style="width: 55%">
+                                    </div>
+                                </div>
+                                <small class="mb-0 text-muted">Quick Ratio Target: 2.0 or higher</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-6">
+                        <div class="card custom-card">
+                            <div class="card-header justify-content-between">
+                                <div class="card-title">
+                                    Transaction
+                                </div>
+                                <div class="dropdown">
+                                    <a href="javascript:void(0);" class="btn-outline-light btn btn-sm text-muted" data-bs-toggle="dropdown" aria-expanded="false">
+                                        View All<i class="ri-arrow-down-s-line align-middle ms-1 d-inline-block"></i>
+                                    </a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li class="border-bottom"><a class="dropdown-item" href="javascript:void(0);">Today</a></li>
+                                        <li class="border-bottom"><a class="dropdown-item" href="javascript:void(0);">This Week</a></li>
+                                        <li><a class="dropdown-item" href="javascript:void(0);">Last Week</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table card-table table-vcenter text-nowrap mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Sender</th>
+                                                <th scope="col">Transaction Id</th>
+                                                <th scope="col">Date</th>
+                                                <th scope="col">Status</th>
+                                                <th scope="col">Amount</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="active-tab">
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="lh-1">
+                                                            <span class="avatar avatar-md avatar-rounded">
+                                                                <img src="../assets/images/faces/1.jpg" alt="">
+                                                            </span>
+                                                        </div>
+                                                        <div class="align-items-center">
+                                                            <span class="fs-14 ms-2">Jorge Robbite </span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <span>#SPK0012301</span>
+                                                </td>
+                                                <td>
+                                                    <span>Jan, 10 2023</span>
+                                                </td>
+                                                <td>
+                                                    <span class="badge bg-success-transparent">Success</span>
+                                                </td>
+                                                <td class="">
+                                                    <span>$12,987.00</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="lh-1">
+                                                            <span class="avatar avatar-md avatar-rounded">
+                                                                <img src="../assets/images/faces/2.jpg" alt="">
+                                                            </span>
+                                                        </div>
+                                                        <div class="align-items-center">
+                                                            <span class="fs-14 ms-2">Arbeti Combe </span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <span>#SPK0012302</span>
+                                                </td>
+                                                <td>
+                                                    <span>Jan, 11 2023</span>
+                                                </td>
+                                                <td>
+                                                    <span class="badge bg-success-transparent">Success</span>
+                                                </td>
+                                                <td class="">
+                                                    <span>$14,876.00</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="lh-1">
+                                                            <span class="avatar avatar-md avatar-rounded">
+                                                                <img src="../assets/images/faces/3.jpg" alt="">
+                                                            </span>
+                                                        </div>
+                                                        <div class="align-items-center">
+                                                            <span class="fs-14 ms-2">Algbet Honne </span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <span>#SPK0012303</span>
+                                                </td>
+                                                <td>
+                                                    <span>Jan, 29 2023</span>
+                                                </td>
+                                                <td>
+                                                    <span class="badge bg-danger-transparent">Faild</span>
+                                                </td>
+                                                <td class="">
+                                                    <span>$34,676.00</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="lh-1">
+                                                            <span class="avatar avatar-md avatar-rounded">
+                                                                <img src="../assets/images/faces/4.jpg" alt="">
+                                                            </span>
+                                                        </div>
+                                                        <div class="align-items-center">
+                                                            <span class="fs-14 ms-2">John Akber </span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <span>#SPK0012304</span>
+                                                </td>
+                                                <td>
+                                                    <span>Jan, 22 2023</span>
+                                                </td>
+                                                <td>
+                                                    <span class="badge bg-success-transparent">Success</span>
+                                                </td>
+                                                <td class="">
+                                                    <span>$76,176.00</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="lh-1">
+                                                            <span class="avatar avatar-md avatar-rounded">
+                                                                <img src="../assets/images/faces/5.jpg" alt="">
+                                                            </span>
+                                                        </div>
+                                                        <div class="align-items-center">
+                                                            <span class="fs-14 ms-2">Monnel Krafts</span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <span>#SPK0012307</span>
+                                                </td>
+                                                <td>
+                                                    <span>Feb, 02 2023</span>
+                                                </td>
+                                                <td>
+                                                    <span class="badge bg-danger-transparent">Faild</span>
+                                                </td>
+                                                <td class="">
+                                                    <span>$187,676.00</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 <!--End::row-2 -->
+
+            </div>
+        </div>
+        <!-- End::app-content -->
+
+        @SPK@include("partials/headersearch_modal.html")
+        @SPK@include("partials/footer.html")
+
+    </div>
+
+    @SPK@include("partials/commonjs.html")
+
+    <!-- Apex Charts JS -->
+    <script src="../assets/libs/apexcharts/apexcharts.min.js"></script>
+
+    <!-- Analytics dashbord JS -->
+    <script src="../assets/js/Finance.js"></script>
+
+    @SPK@include("partials/custom_switcherjs.html")
+
+    <!-- Custom JS -->
+    <script src="../assets/js/custom.js"></script>
+
+</body>
+
+</html>

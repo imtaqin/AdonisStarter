@@ -1,0 +1,37 @@
+{{--
+  Props
+  label    string   trigger text
+  icon     string   Tabler icon class on the trigger
+  variant  string   trigger button variant (default 'light')
+  size     string   trigger button size
+  align    string   'end' to right-align the menu
+  caret    boolean  show the caret (default true)
+
+  Slots
+  main  <li> items, e.g.
+  <li><a class="dropdown-item" href="…">Edit</a></li>
+--}}
+@let(id = $props.get('id', `dropdown-${Math.random().toString(36).slice(2, 9)}`))
+@let(variant = $props.get('variant', 'light'))
+
+<div class="dropdown">
+  <button
+    class="btn btn-{{ variant }} {{ $props.get('size') ? `btn-${$props.get('size')}` : '' }} {{ $props.get('caret') === false ? '' : 'dropdown-toggle' }}"
+    type="button"
+    id="{{ id }}"
+    data-bs-toggle="dropdown"
+    aria-expanded="false"
+  >
+    @if($props.get('icon'))
+      <i class="{{ $props.get('icon') }}"></i>
+    @end
+    {{ $props.get('label', '') }}
+  </button>
+
+  <ul
+    class="dropdown-menu {{ $props.get('align') === 'end' ? 'dropdown-menu-end' : '' }}"
+    aria-labelledby="{{ id }}"
+  >
+    {{{ await $slots.main() }}}
+  </ul>
+</div>

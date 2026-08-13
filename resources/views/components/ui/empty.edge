@@ -1,0 +1,32 @@
+{{--
+  Shown in place of an empty list. Give people the action that fills it.
+
+  Props
+  title        string
+  description  string
+  icon         string  Tabler icon class (default fa-solid fa-inbox)
+  actionLabel  string
+  actionHref   string
+--}}
+<div {{
+  $props
+    .except(['title', 'description', 'icon', 'actionLabel', 'actionHref'])
+    .merge({ class: ['text-center', 'py-5'] })
+    .toAttrs()
+}}>
+  <span class="avatar avatar-xl bg-primary-transparent rounded-circle mb-3">
+    <i class="{{ $props.get('icon', 'fa-solid fa-inbox') }} fs-24"></i>
+  </span>
+
+  <h6 class="fw-semibold mb-1">{{ $props.get('title', 'Nothing here yet') }}</h6>
+  @if($props.get('description'))
+    <p class="text-muted fs-13 mb-3">{{ $props.get('description') }}</p>
+  @end
+  @if($slots.main)
+    {{{ await $slots.main() }}}
+  @elseif($props.get('actionHref'))
+    <a href="{{ $props.get('actionHref') }}" class="btn btn-primary btn-sm">
+      {{ $props.get('actionLabel', 'Create one') }}
+    </a>
+  @end
+</div>

@@ -1,0 +1,157 @@
+{{--
+  Server-driven data table: search, sortable headers, pagination and an empty
+  state, all through plain GET query parameters. No JavaScript required, so it
+  keeps working with the back button, bookmarks and screen readers.
+
+  Props
+  paginator   ModelPaginator  rows to render (required)
+  columns     array           [{ key, label, sortable?, class?, width? }]
+  searchable  boolean         show the search box (default true)
+  searchValue string          current search term, echoed into the input
+  sort        string          current sort key
+  dir         string          'asc' | 'desc'
+  emptyTitle  string
+  emptyText   string
+  id          string          used for the search input id (default 'datatable')
+
+  Slots
+  row      REQUIRED scoped slot, called once per record with { row, index }
+  toolbar  extra filter controls next to the search box
+  actions  buttons on the right of the toolbar (e.g. "New user")
+  empty    replaces the default empty state
+
+  Usage
+  @ui.datatable({ paginator: users, columns: cols, searchValue: filters.search })
+  @slot('row', scope)
+  <tr>
+  <td>{{ scope.row.email }}</td>
+  </tr>
+  @end
+  @end
+
+  Sorting note: the component only emits the links. The controller must
+  allowlist the incoming `sort` key against its own column list before putting
+  it in an orderBy -- never pass user input straight to the query builder.
+--}}
+@let(paginator = $props.get('paginator'))
+@let(columns = $props.get('columns') || [])
+@let(rows = paginator.all ? paginator.all() : paginator)
+@let(currentSort = $props.get('sort', ''))
+@let(currentDir = $props.get('dir', 'asc'))
+@let(tableId = $props.get('id', 'datatable'))
+@let(searchable = $props.get('searchable') !== false)
+{{--
+  Preserve every existing query parameter except the ones this control owns,
+  so searching does not silently drop an active filter.
+--}}
+@let(baseQuery = Object.fromEntries(
+  Object.entries(request.qs()).filter(([key]) => !['page', 'sort', 'dir'].includes(key)),
+))
+
+<div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-3">
+  <div class="d-flex flex-wrap align-items-center gap-2">
+    @if(searchable)
+      <form method="GET" action="{{ request.url() }}" class="d-flex align-items-center gap-2">
+        {{--
+          Carry the other filters through as hidden inputs; a GET form replaces
+          the whole query string on submit.
+        --}}
+        @each((value, key) in baseQuery)
+          @if(key !== 'search')
+            <input type="hidden" name="{{ key }}" value="{{ value }}" />
+          @end
+        @end
+
+        <div class="input-group input-group-sm">
+          <input
+            type="search"
+            class="form-control"
+            id="{{ tableId }}-search"
+            name="search"
+            value="{{ $props.get('searchValue', '') }}"
+            placeholder="Search…"
+            aria-label="Search"
+          />
+          <button class="btn btn-primary" type="submit">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </div>
+      </form>
+    @end
+    @if($slots.toolbar)
+      {{{ await $slots.toolbar() }}}
+    @end
+  </div>
+  @if($slots.actions)
+    <div class="d-flex align-items-center gap-2">{{{ await $slots.actions() }}}</div>
+  @end
+</div>
+@if(rows.length === 0)
+  @if($slots.empty)
+    {{{ await $slots.empty() }}}
+  @else
+    @!ui.empty({
+      title: $props.get('emptyTitle', 'No records found'),
+      description: $props.get('emptyText', 'Try adjusting your search or filters.'),
+    })
+  @end
+@else
+  <div class="table-responsive">
+    <table class="table text-nowrap table-hover align-middle">
+      <thead>
+        <tr>
+          @each(column in columns)
+            <th
+              scope="col"
+              class="{{ column.class || '' }}"
+              style="{{ column.width ? `width: ${column.width}` : '' }}"
+              aria-sort="{{
+                column.sortable && currentSort === column.key
+                  ? currentDir === 'asc'
+                    ? 'ascending'
+                    : 'descending'
+                  : 'none'
+              }}"
+            >
+              @if(column.sortable)
+                @let(nextDir =
+                  currentSort === column.key && currentDir === 'asc' ? 'desc' : 'asc')
+                @let(sortQuery = new URLSearchParams({
+                  ...baseQuery,
+                  sort: column.key,
+                  dir: nextDir,
+                }).toString())
+                <a
+                  href="{{ request.url() }}?{{ sortQuery }}"
+                  class="text-inherit d-inline-flex align-items-center gap-1"
+                >
+                  {{ column.label }}
+                  @if(currentSort === column.key)
+                    <i
+                      class="fa-solid fa-arrow-{{ currentDir === 'asc' ? 'up' : 'down' }} fs-12"
+                    ></i>
+                  @else
+                    <i class="fa-solid fa-sort fs-12 op-5"></i>
+                  @end
+                </a>
+              @else
+                {{ column.label }}
+              @end
+            </th>
+          @end
+        </tr>
+      </thead>
+
+      <tbody>
+        @each((row, index) in rows)
+          {{{ await $slots.row({ row, index }) }}}
+        @end
+      </tbody>
+    </table>
+  </div>
+  @if(paginator.getUrlsForRange)
+    <div class="mt-3">
+      @!ui.pagination({ paginator })
+    </div>
+  @end
+@end

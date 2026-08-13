@@ -1,0 +1,164 @@
+@SPK@include("partials/mainhead.html")
+
+<!-- Notifications Css -->
+<link rel="stylesheet" href="../assets/libs/awesome-notifications/style.css">
+
+</head>
+
+<body>
+
+    @SPK@include("partials/switcher.html")
+    @SPK@include("partials/loader.html")
+
+    <div class="page">
+
+            @SPK@include("partials/header.html")
+            @SPK@include("partials/sidebar.html")
+
+            <!--APP-CONTENT START-->
+            <div class="main-content app-content">
+                <div class="container-fluid">
+
+                    @SPK@include("partials/page-header.html", {"title": "Notifications", "subtitle": 'Pages'})
+                    
+                        <!-- ROW-1 OPEN -->
+                        <div class="row">
+                            <div class="col-xl-4">
+                                <div class="card custom-card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Basic Notification</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="card-content">
+                                            <div class="btn-list">
+                                                <button type="button" class="btn btn-primary" id="basic">Basic Notification</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4">
+                                <div class="card custom-card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Info Notification</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="card-content">
+                                            <div class="btn-list">
+                                                <button type="button" class="btn btn-info" id="info">Info Notification</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4">
+                                <div class="card custom-card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Success Notification</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="card-content">
+                                            <div class="btn-list">
+                                                <button type="button" class="btn btn-success" id="success">Success Notification</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4">
+                                <div class="card custom-card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Warning Notification</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="card-content">
+                                            <div class="btn-list">
+                                                <button type="button" class="btn btn-warning" id="warning">Warning Notification</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4">
+                                <div class="card custom-card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Error Notification</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="card-content">
+                                            <div class="btn-list">
+                                                <button type="button" class="btn btn-danger" id="error">Error Notification</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4">
+                                <div class="card custom-card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Confirmation Notification</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="card-content">
+                                            <div class="btn-list">
+                                                <button type="button" class="btn btn-primary" id="confirm">Notification</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4">
+                                <div class="card custom-card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Async Block With Error Notification</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="card-content">
+                                            <div class="btn-list">
+                                                <button type="button" class="btn btn-primary"  id="async">Notification</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4">
+                                <div class="card custom-card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Async Block With Success Notification</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="card-content">
+                                            <div class="btn-list">
+                                                <button type="button" class="btn btn-primary"  id="async-block">Notification</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- COL-END -->
+                        </div>
+                        <!-- ROW-1 CLOSED -->
+                    
+                </div>
+            </div>
+            <!--APP-CONTENT CLOSE-->
+
+        @SPK@include("partials/headersearch_modal.html")
+        @SPK@include("partials/footer.html")
+
+    </div>
+
+    @SPK@include("partials/commonjs.html")
+
+    @SPK@include("partials/custom_switcherjs.html")
+
+    <!-- Custom JS -->
+    <script src="../assets/js/custom.js"></script>
+
+    <!-- Rating JS -->
+    <script src="../assets/libs/awesome-notifications/index.var.js"></script>
+    <script src="../assets/js/notifications.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,167 @@
+{{--
+  Top bar. The class names here are load-bearing: /theme/js/defaultmenu.min.js
+  and custom-switcher.min.js hook onto `.sidemenu-toggle`, `.layout-setting`,
+  `.switcher-icon` and `.header-link`. Rename them and the theme stops working.
+
+  The template's demo cart and notification dropdowns have been removed -- add
+  them back from template/HTML/src/html/partials/header.html if you need them.
+--}}
+<header class="app-header">
+  <div class="main-header-container container-fluid">
+    <div class="header-content-left">
+      <div class="header-element">
+        <div class="horizontal-logo">
+          <a href="{{ route('dashboard') }}" class="header-logo">
+            <img src="/theme/images/brand-logos/desktop-logo.png" alt="logo" class="desktop-logo" />
+            <img src="/theme/images/brand-logos/toggle-logo.png" alt="logo" class="toggle-logo" />
+            <img src="/theme/images/brand-logos/desktop-dark.png" alt="logo" class="desktop-dark" />
+            <img src="/theme/images/brand-logos/toggle-dark.png" alt="logo" class="toggle-dark" />
+            <img
+              src="/theme/images/brand-logos/desktop-white.png"
+              alt="logo"
+              class="desktop-white"
+            />
+            <img src="/theme/images/brand-logos/toggle-white.png" alt="logo" class="toggle-white" />
+          </a>
+        </div>
+      </div>
+
+      <div class="header-element">
+        <a
+          aria-label="Hide Sidebar"
+          class="sidemenu-toggle header-link animated-arrow hor-toggle horizontal-navtoggle"
+          data-bs-toggle="sidebar"
+          href="javascript:void(0);"
+        >
+          <span></span>
+        </a>
+
+        <div class="header-link header-search-element d-none d-lg-block">
+          <input
+            type="text"
+            class="form-control"
+            id="typehead"
+            placeholder="Search for results..."
+            autocomplete="off"
+          />
+          <button class="btn pe-1">
+            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="header-content-right">
+      <div class="header-element header-search d-block d-lg-none">
+        <a
+          href="javascript:void(0);"
+          class="header-link"
+          data-bs-toggle="modal"
+          data-bs-target="#searchModal"
+        >
+          <i class="fa-solid fa-magnifying-glass header-link-icon"></i>
+        </a>
+      </div>
+      {{-- Light/dark toggle, handled by the theme's own script. --}}
+      <div class="header-element header-theme-mode">
+        <a href="javascript:void(0);" class="header-link layout-setting">
+          <span class="light-layout"><i class="fa-solid fa-moon header-link-icon"></i></span>
+          <span class="dark-layout"><i class="fa-solid fa-sun header-link-icon"></i></span>
+        </a>
+      </div>
+      {{--
+        Bound from resources/js/dashboard.js rather than an inline onclick, so
+        the app's own shell does not depend on CSP `unsafe-inline`.
+      --}}
+      <div class="header-element header-fullscreen">
+        <a href="#" class="header-link" data-fullscreen-toggle>
+          <i class="fa-solid fa-expand full-screen-open header-link-icon"></i>
+          <i class="fa-solid fa-compress full-screen-close header-link-icon d-none"></i>
+        </a>
+      </div>
+      @if(auth.user)
+        <div class="header-element">
+          <a
+            href="#"
+            class="header-link dropdown-toggle"
+            id="mainHeaderProfile"
+            data-bs-toggle="dropdown"
+            data-bs-auto-close="outside"
+            aria-expanded="false"
+          >
+            <div class="d-flex align-items-center">
+              <div class="me-sm-2 me-0">
+                @if(auth.user.avatar)
+                  <img
+                    src="{{ auth.user.avatar }}"
+                    alt="{{ auth.user.displayName }}"
+                    width="32"
+                    height="32"
+                    class="rounded-circle"
+                  />
+                @else
+                  <span
+                    class="avatar avatar-sm bg-primary text-fixed-white rounded-circle"
+                    style="width: 32px; height: 32px"
+                  >
+                    {{ auth.user.initials }}
+                  </span>
+                @end
+              </div>
+              <div class="d-none d-xl-block">
+                <p class="fw-semibold mb-0 lh-1">{{ auth.user.displayName }}</p>
+                <span class="op-7 fw-normal d-block fs-11">{{ auth.user.email }}</span>
+              </div>
+            </div>
+          </a>
+
+          <ul
+            class="main-header-dropdown dropdown-menu pt-0 overflow-hidden header-profile-dropdown dropdown-menu-end"
+            aria-labelledby="mainHeaderProfile"
+          >
+            <li>
+              <a class="dropdown-item d-flex" href="/showcase/profile">
+                <i class="fa-solid fa-circle-user fs-18 me-2 op-7"></i>Profile
+              </a>
+            </li>
+            @if(can('users.view'))
+              <li>
+                <a class="dropdown-item d-flex" href="{{ route('users.index') }}">
+                  <i class="fa-solid fa-users fs-18 me-2 op-7"></i>Users
+                </a>
+              </li>
+            @end
+
+            <li>
+              <a class="dropdown-item d-flex border-block-end" href="/showcase/settings">
+                <i class="fa-solid fa-sliders fs-18 me-2 op-7"></i>Settings
+              </a>
+            </li>
+            <li>
+              @form({ route: 'auth.logout', method: 'POST' })
+                <button type="submit" class="dropdown-item d-flex border-0 bg-transparent w-100">
+                  <i class="fa-solid fa-right-from-bracket fs-18 me-2 op-7"></i>Log Out
+                </button>
+              @end
+            </li>
+          </ul>
+        </div>
+      @else
+        <div class="header-element">
+          <a href="{{ route('auth.login.show') }}" class="btn btn-primary btn-sm">Sign in</a>
+        </div>
+      @end
+
+      <div class="header-element">
+        <a
+          href="#"
+          class="header-link switcher-icon"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#switcher-canvas"
+        >
+          <i class="fa-solid fa-gear header-link-icon"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</header>

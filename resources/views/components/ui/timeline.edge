@@ -1,0 +1,44 @@
+{{--
+  Vertical activity feed.
+
+  Props
+  items  array  [{ title, description?, time?, icon?, variant?, href? }]
+
+  Slots
+  item  optional scoped slot ({ item, index }) to fully control each entry
+--}}
+@let(items = $props.get('items') || [])
+
+<ul class="list-unstyled mb-0">
+  @each((item, index) in items)
+    <li class="d-flex gap-3 pb-3 {{ index === items.length - 1 ? '' : 'border-bottom mb-3' }}">
+      <span
+        class="avatar avatar-sm bg-{{ item.variant || 'primary' }}-transparent rounded-circle flex-shrink-0"
+      >
+        <i class="{{ item.icon || 'fa-solid fa-circle' }}"></i>
+      </span>
+
+      <div class="flex-grow-1 min-w-0">
+        @if($slots.item)
+          {{{ await $slots.item({ item, index }) }}}
+        @else
+          <div class="d-flex justify-content-between align-items-start gap-2">
+            <p class="fw-semibold mb-0 text-truncate">
+              @if(item.href)
+                <a href="{{ item.href }}" class="text-inherit">{{ item.title }}</a>
+              @else
+                {{ item.title }}
+              @end
+            </p>
+            @if(item.time)
+              <span class="text-muted fs-11 flex-shrink-0">{{ item.time }}</span>
+            @end
+          </div>
+          @if(item.description)
+            <p class="text-muted fs-12 mb-0">{{ item.description }}</p>
+          @end
+        @end
+      </div>
+    </li>
+  @end
+</ul>

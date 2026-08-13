@@ -1,0 +1,46 @@
+{{--
+  Select box. Must be a child of @field.root.
+
+  Props
+  options     array   [{ value, name?, isSelected? }]
+  placeholder string  renders a disabled, empty first option
+  multiple    boolean standard HTML attribute; remember to name the field `foo[]`
+  selected    any|any[]  currently selected value(s); old input still wins
+--}}
+{{-- `@each` needs a bare identifier, so the fallback is resolved up here. --}}
+@let(optionList = $props.get('options') || [])
+@let(classes = ['form-select', $context.hasErrors ? 'is-invalid' : ''])
+@let(selectedProp = $props.get('selected'))
+@let(selectedList = Array.isArray(selectedProp)
+  ? selectedProp.map(String)
+  : selectedProp !== undefined
+    ? [String(selectedProp)]
+    : [])
+
+<select {{
+  $props
+    .except(['options', 'placeholder', 'selected'])
+    .merge({
+      name: $context.name,
+      id: $context.id,
+      class: classes,
+      'aria-invalid': $context.hasErrors ? 'true' : false,
+      'data-invalid': $context.hasErrors ? 'true' : false,
+      'aria-describedby': $context.hasErrors ? `${$context.id}-error` : '',
+    })
+    .toAttrs()
+}}>
+  @if($props.get('placeholder'))
+    <option value="">{{ $props.get('placeholder') }}</option>
+  @end
+  @each(option in optionList)
+    @let(isSelected = option.isSelected
+      ? true
+      : $context.oldValue
+        ? String($context.oldValue) === String(option.value)
+        : selectedList.includes(String(option.value)))
+    <option value="{{ option.value }}" {{ isSelected ? 'selected' : '' }}>
+      {{ option.name ?? option.value }}
+    </option>
+  @end
+</select>

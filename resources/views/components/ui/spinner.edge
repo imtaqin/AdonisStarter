@@ -1,0 +1,25 @@
+{{--
+  Props
+  variant  string   colour (default 'primary')
+  size     string   'sm'
+  grow     boolean  use the growing style
+  label    string   accessible label (default 'Loading…')
+--}}
+@let(variant = $props.get('variant', 'primary'))
+@let(style = $props.get('grow') ? 'spinner-grow' : 'spinner-border')
+
+<div {{
+  $props
+    .except(['variant', 'size', 'grow', 'label'])
+    .merge({
+      class: [
+        style,
+        $props.get('size') ? `${style}-${$props.get('size')}` : '',
+        `text-${variant}`,
+      ],
+      role: 'status',
+    })
+    .toAttrs()
+}}>
+  <span class="visually-hidden">{{ $props.get('label', 'Loading…') }}</span>
+</div>

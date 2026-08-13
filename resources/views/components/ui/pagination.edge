@@ -1,0 +1,81 @@
+{{--
+  Pagination for a Lucid paginator.
+
+  Props
+  paginator  ModelPaginator  required
+  window     number          page links either side of the current one (default 2)
+  showMeta   boolean         render the "Showing x to y of z" line (default true)
+
+  The controller must call `paginator.baseUrl()` and `paginator.queryString()`
+  so the generated links keep the current filters.
+--}}
+@let(paginator = $props.get('paginator'))
+@let(win = $props.get('window', 2))
+@let(current = paginator.currentPage)
+@let(last = paginator.lastPage)
+@let(start = Math.max(1, current - win))
+@let(end = Math.min(last, current + win))
+@let(pages = paginator.getUrlsForRange(start, end))
+@let(from = paginator.total === 0 ? 0 : (current - 1) * paginator.perPage + 1)
+@let(to = Math.min(current * paginator.perPage, paginator.total))
+
+<div class="d-flex flex-wrap align-items-center justify-content-between gap-2">
+  @if($props.get('showMeta') !== false)
+    <div class="text-muted fs-12">
+      Showing
+      {{ from }}
+      to
+      {{ to }}
+      of
+      {{ paginator.total }}
+      result{{ paginator.total === 1 ? '' : 's' }}
+    </div>
+  @else
+    <div></div>
+  @end
+  @if(paginator.hasPages)
+    <nav aria-label="Pagination">
+      <ul class="pagination mb-0">
+        <li class="page-item {{ current === 1 ? 'disabled' : '' }}">
+          <a
+            class="page-link"
+            href="{{ paginator.getPreviousPageUrl() || '#' }}"
+            {{ current === 1 ? 'tabindex=-1 aria-disabled=true' : '' }}
+          >
+            Prev
+          </a>
+        </li>
+        @if(start > 1)
+          <li class="page-item"><a class="page-link" href="{{ paginator.getUrl(1) }}">1</a></li>
+          @if(start > 2)
+            <li class="page-item disabled"><span class="page-link">…</span></li>
+          @end
+        @end
+        @each(page in pages)
+          <li class="page-item {{ page.isActive ? 'active' : '' }}">
+            <a class="page-link" href="{{ page.url }}">{{ page.page }}</a>
+          </li>
+        @end
+        @if(end < last)
+          @if(end < last - 1)
+            <li class="page-item disabled"><span class="page-link">…</span></li>
+          @end
+
+          <li class="page-item">
+            <a class="page-link" href="{{ paginator.getUrl(last) }}">{{ last }}</a>
+          </li>
+        @end
+
+        <li class="page-item {{ current === last ? 'disabled' : '' }}">
+          <a
+            class="page-link"
+            href="{{ paginator.getNextPageUrl() || '#' }}"
+            {{ current === last ? 'tabindex=-1 aria-disabled=true' : '' }}
+          >
+            Next
+          </a>
+        </li>
+      </ul>
+    </nav>
+  @end
+</div>

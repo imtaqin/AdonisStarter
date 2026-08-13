@@ -1,0 +1,33 @@
+{{--
+  Props
+  src       string  image URL; when absent, initials are rendered instead
+  initials  string  fallback text
+  size      string  xs | sm | md | lg | xl  (theme sizes)
+  rounded   boolean circular (default true)
+  variant   string  background colour for the initials fallback
+--}}
+@let(nameInitials = $props.get('initials'))
+@let(size = $props.get('size', 'md'))
+@let(rounded = $props.get('rounded') === false ? '' : 'rounded-circle')
+@let(classes = ['avatar', `avatar-${size}`, rounded])
+@if($props.get('src'))
+  <span class="{{ classes.filter(Boolean).join(' ') }}">
+    <img {{
+      $props
+        .except(['initials', 'name', 'size', 'rounded', 'variant'])
+        .merge({ alt: $props.get('name') ?? '', class: [rounded] })
+        .toAttrs()
+    }} />
+  </span>
+@elseif(nameInitials)
+  <span {{
+    $props
+      .except(['initials', 'name', 'src', 'size', 'rounded', 'variant'])
+      .merge({
+        class: [...classes, `bg-${$props.get('variant', 'primary')}`, 'text-fixed-white'],
+      })
+      .toAttrs()
+  }}>
+    {{ nameInitials.toUpperCase() }}
+  </span>
+@end

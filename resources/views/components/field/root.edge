@@ -1,0 +1,61 @@
+{{--
+  Establishes the context (name, id, old value, errors) that field.label,
+  field.error and the *.control components read.
+
+  Props
+  name     string  field name; also the key used to look up validation errors
+  id       string  element id (defaults to `name`)
+  wrapper  string  override the wrapper class (default `mb-3`, or
+  `form-check` when nested in a checkbox/radio group)
+  unstyled boolean render no wrapper element at all
+
+  Usage
+  @field.root({ name: 'email' })
+  @!field.label({ text: 'Email' })
+  @!input.control({ type: 'email' })
+  @!field.error()
+  @end
+--}}
+@if($context.groupCounter)
+  {{--
+    When there is a groupCounter, then the field.root is within
+    a group and we must re-share the entire context with the
+    root children.
+
+    Also, each control should get a counter incremented id
+  --}}
+  @assign($context.groupCounter = $context.groupCounter + 1)
+  @inject({
+    ...$context,
+    id: `${$context.id}_${$context.groupCounter}`,
+    inGroup: true,
+  })
+@else
+  {{--
+    Otherwise the field.root is not wrapped and it must share a
+    fresh context with its children components like error, label
+    and control.
+  --}}
+  @let(fieldKey = $props.get('name'))
+  @inject({
+    name: fieldKey,
+    id: $props.get('id') ?? fieldKey,
+    oldValue: old(fieldKey) || '',
+    errors: flashMessages.get('inputErrorsBag', {})[fieldKey],
+    hasErrors: fieldKey in flashMessages.get('inputErrorsBag', {}),
+    inGroup: false,
+  })
+@end
+@let(defaultWrapper = $context.inGroup ? 'form-check' : 'mb-3')
+@if($props.get('unstyled'))
+  {{{ await $slots.main() }}}
+@else
+  <div {{
+    $props
+      .except(['name', 'id', 'wrapper', 'unstyled'])
+      .merge({ class: [$props.get('wrapper') ?? defaultWrapper] })
+      .toAttrs()
+  }}>
+    {{{ await $slots.main() }}}
+  </div>
+@end

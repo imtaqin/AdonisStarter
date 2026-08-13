@@ -1,0 +1,904 @@
+@SPK@include("partials/mainhead.html")
+
+</head>
+
+<body>
+
+    @SPK@include("partials/switcher.html")
+    @SPK@include("partials/loader.html")
+
+    <div class="page">
+        @SPK@include("partials/header.html")
+        @SPK@include("partials/sidebar.html")
+
+        <!-- Start::app-content -->
+        <div class="main-content app-content">
+            <div class="container-fluid">
+
+                @SPK@include("partials/page-header.html", {"title": "Analytics Dashboard", "subtitle": 'Dashboard'})
+
+                <!-- Start::row-1 -->
+                <div class="row">
+                    <div class="col-xl-5">
+                        <div class="card mg-b-20">
+                            <div class="card-body">
+                                <div class="d-sm-flex">
+                                    <div class="me-3">
+                                        <img src="../assets/images/png/trophy.png" alt="img" class="wd-130 ie-image-5">
+                                    </div>
+                                    <div class="mt-2">
+                                        <h4 class="mb-1"><span class="tx-20 font-weight-bold">Congratulations!</span> John Team</h4>
+                                        <p>Your Team is Successufully completed the Projects in this year. Keep Staying moticated to Receive More Awards</p>
+                                        <a class="btn btn-primary rounded-lg mt-1" href="javascript:void(0);">Get Award</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card custom-card">
+                            <div class="card-header justify-content-between">
+                                <div class="card-title">
+                                    Top Countries By Sales
+                                </div>
+                                <div class="dropdown">
+                                    <a href="javascript:void(0);" class="btn-outline-light btn btn-sm text-muted" data-bs-toggle="dropdown" aria-expanded="true">
+                                        View All<i class="ri-arrow-down-s-line align-middle ms-1 d-inline-block"></i>
+                                    </a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li class="border-bottom"><a class="dropdown-item" href="javascript:void(0);">Today</a></li>
+                                        <li class="border-bottom"><a class="dropdown-item" href="javascript:void(0);">This Week</a></li>
+                                        <li><a class="dropdown-item" href="javascript:void(0);">Last Week</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xxl-5 col-xl-12 col-md-4">
+                                    <div class="card-body p-0">
+                                        <div id="avgsales"></div>
+                                    </div>
+                                </div>
+                                <div class="col-xxl-7 col-xl-12 col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="mb-4">Active Users</h5>
+                                        <div class="">
+                                            <div class="d-flex mb-1 ">
+                                                <span class="tx-14 text-muted"><b>74,526</b> Email Accounts</span>
+                                                <span class="ms-auto fw-semibold fs-16">73%</span>
+                                            </div>
+                                            <div class="progress progress-md mb-3" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                                <div class="progress-bar bg-primary" style="width: 75%">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mt-4">
+                                            <div class="d-flex mb-1 ">
+                                                <span class="tx-14 text-muted"><b>14,326</b>Requests</span>
+                                                <span class="ms-auto  fw-semibold fs-16">62%</span>
+                                            </div>
+                                            <div class="progress progress-md mb-3" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                                <div class="progress-bar bg-secondary" style="width: 55%">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-7">
+                        <div class="card custom-card overflow-hidden">
+                            <div class="card-header flex-between justify-content-between d-flrx">
+                                <h6 class="card-title">Average Website Details</h6>
+                                <div class="btns">
+                                    <a class="btn btn-sm btn-outline-light" href="javascript:void(0);"><span>Week</span></a>
+                                    <a class="btn btn-sm btn-light" href="javascript:void(0);"><span>Month</span></a>
+                                    <a class="btn btn-sm btn-outline-light" href="javascript:void(0);"><span>Year</span></a>
+                                </div>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="p-4 pb-0">
+                                    <div class="row row-sm flot-absolute-value">
+                                        <div class="col mg-t-15">
+                                            <p class="mb-0"><i class="bx bxs-circle text-primary fs-13  me-1"></i> Page Views</p>
+                                            <h4 class="mb-0">63,45,885</h4>
+                                        </div><!-- col-4 -->
+                                        <div class="col mg-t-15">
+                                            <p class="mb-0"><i class="bx bxs-circle text-primary fs-13 op-3 me-1"></i> Total Sales</p>
+                                            <h4 class="mb-0">2,54,362</h4>
+                                        </div>
+                                        <div class="col mg-t-15">
+                                            <p class="mb-1">Select Year</p>
+                                            <select class="form-control" data-trigger name="choices-single-default" id="choices-single-default">
+                                                <option value="">2018</option>
+                                                <option value="Choice 1">2018</option>
+                                                <option value="Choice 2">2019</option>
+                                                <option value="Choice 3">2020</option>
+                                                <option value="Choice 4">2021</option>
+                                                <option value="Choice 5">2022</option>
+                                                <option value="Choice 6">2023 </option>
+                                            </select>
+                                        </div><!-- col-4 -->
+                                        <div class="col mt-4">
+                                            <a class="btn btn-primary mg-t-25" href="javascript:void(0);">Get Complete Details</a>
+                                        </div><!-- col-4 -->
+                                    </div>
+                                </div>
+                                <div id="balance" class="pb-4"></div>
+                            </div>
+                        </div>
+                    </div>
+				</div>
+                <!--End::row-1 -->
+                 <!-- Start::row-2 -->
+                <div class="row">
+                    <div class="col-xxl-3 col-md-6 ">
+                        <div class="card custom-card">
+                            <div class="card-header justify-content-between flex-wrap">
+                                <div class="card-title flex-between">
+                                    Activity
+                                </div>
+                                <div class="dropdown">
+                                    <a href="javascript:void(0);" class="btn btn-outline-light btn-icons btn-sm text-muted" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fe fe-more-vertical"></i>
+                                    </a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li class="border-bottom"><a class="dropdown-item" href="javascript:void(0);">Today</a></li>
+                                        <li class="border-bottom"><a class="dropdown-item" href="javascript:void(0);">This Week</a></li>
+                                        <li><a class="dropdown-item" href="javascript:void(0);">Last Week</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-body pe-0">
+                                <div class="latest-timeline-1 pd-t-0" id="activiti-timeline">
+                                    <ul class="timeline-1 mb-0 pe-4">
+                                        <li class="mt-0">
+                                            <i class="fe fe-check bg-primary text-white product-icon primary-dropshadow"></i>
+                                            <a target="_blank" href="javascript:void(0);" class="fw-semibold fs-14">Task finished</a>
+                                            <a href="javascript:void(0);" class="float-end fs-13 text-muted">01 Jun, 2019</a>
+                                            <p class="mb-0 mt-2 text-muted"><span class="text-primary fw-semibold">Adam	Berry</span>  finished task on<a href="javascript:void(0);" class="text-info"> Project Management</a></p>
+                                            <div class="mt-2">
+                                                <span class="badge bg-light text-dark fw-normal">Bootstrap</span>
+                                                <span class="badge bg-light text-dark fw-normal fw-normal">HTML</span>
+                                                <span class="badge bg-light text-dark fw-normal">Css</span>
+                                            </div>
+                                        </li>
+                                        <li class="mt-0">
+                                            <i class="fe fe-message-square bg-secondary text-white product-icon secondary-dropshadow"></i>
+                                            <a target="_blank" href="javascript:void(0);" class="fw-semibold fs-14">New Comment</a>
+                                            <a href="javascript:void(0);" class="float-end fs-13 text-muted">05 Jun, 2019</a>
+                                            <p class="mb-0 mt-2 text-muted"><span class="text-primary fw-semibold">Victoria</span> commented on Project <a href="javascript:void(0);" class="text-info"> AngularJS Template</a></p>
+                                        </li>
+                                        <li class="mt-0">
+                                            <i class="fe fe-alert-triangle bg-danger text-white product-icon danger-dropshadow"></i>
+                                            <a target="_blank" href="javascript:void(0);" class="fw-semibold fs-14">Task Overdue</a>
+                                            <a href="javascript:void(0);" class="float-end fs-13 text-muted">01 Jun, 2019</a>
+                                            <p class="mb-0 mt-2"> Task the <span class="text-info">Wordpress Project</span> is on hold its takes longer than usual.</p>
+                                            <div class="mt-2">
+                                                <span class="badge bg-light text-dark fw-normal">Bootstrap</span>
+                                                <span class="badge bg-light text-dark fw-normal fw-normal">HTML</span>
+                                                <span class="badge bg-light text-dark fw-normal">Css</span>
+                                            </div>
+                                        </li>
+                                        <li class="mt-0">
+                                            <i class="fe fe-check bg-success text-white product-icon success-dropshadow"></i>
+                                            <a target="_blank" href="javascript:void(0);" class="fw-semibold fs-14">Task finished</a>
+                                            <a href="javascript:void(0);" class="float-end fs-13 text-muted">01 Jun, 2019</a>
+                                            <p class="mb-0 mt-2"><span class="text-primary fw-semibold">Petey Cruiser</span> finished task <a href="javascript:void(0);" class="text-info"> Integrated management</a></p>
+                                            <div class="mt-2">
+                                                <span class="badge bg-light text-dark fw-normal">Bootstrap</span>
+                                                <span class="badge bg-light text-dark fw-normal fw-normal">HTML</span>
+                                                <span class="badge bg-light text-dark fw-normal">Css</span>
+                                            </div>
+                                        </li>
+                                        <li class="mt-0">
+                                            <i class="fe fe-check bg-success text-white product-icon success-dropshadow"></i>
+                                            <a target="_blank" href="javascript:void(0);" class="fw-semibold fs-14">Task finished</a>
+                                            <a href="javascript:void(0);" class="float-end fs-13 text-muted">01 Jun, 2019</a>
+                                            <p class="mb-0 mt-2"><span class="text-primary fw-semibold">Manuel Labor</span> finished task <a href="javascript:void(0);" class="text-info"> Program Management</a></p>
+                                            <div class="mt-2">
+                                                <span class="badge bg-light text-dark fw-normal">Bootstrap</span>
+                                                <span class="badge bg-light text-dark fw-normal fw-normal">HTML</span>
+                                                <span class="badge bg-light text-dark fw-normal">Css</span>
+                                            </div>
+                                        </li>
+                                        <li class="mt-0 mb-0">
+                                            <i class="fe fe-message-square bg-info text-white product-icon info-dropshadow"></i>
+                                            <a target="_blank" href="javascript:void(0);" class="fw-semibold fs-14">Warren Peace</a>
+                                            <a href="javascript:void(0);" class="float-end fs-13 text-muted">01 Jun, 2019</a>
+                                            <p class="mb-0 mt-2"><span class="text-primary fw-semibold">Adam	Berry</span> commented on task <a href="javascript:void(0);" class="text-info"> AngularJS Template</a></p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-3 col-md-6 ">
+                        <div class="card custom-card">
+                            <div class="card-header justify-content-between">
+                                <div class="card-title">
+                                    Browser Usuage
+                                </div>
+                                <div class="dropdown">
+                                    <a href="javascript:void(0);" class="btn-outline-light btn btn-sm text-muted" data-bs-toggle="dropdown" aria-expanded="false">
+                                        View All<i class="ri-arrow-down-s-line align-middle ms-1 d-inline-block"></i>
+                                    </a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li class="border-bottom"><a class="dropdown-item" href="javascript:void(0);">Today</a></li>
+                                        <li class="border-bottom"><a class="dropdown-item" href="javascript:void(0);">This Week</a></li>
+                                        <li><a class="dropdown-item" href="javascript:void(0);">Last Week</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table table-hover text-nowrap">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" class="ps-4">Browser</th>
+                                                <th scope="col">Sessions</th>
+                                                <th scope="col">Bounce Rate</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="ps-4">
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="avatar avatar-rounded avatar-sm p-2 bg-primary me-2">
+                                                            <i class="ri-google-fill fs-18"></i>
+                                                        </span>
+                                                        <div class="fw-semibold">Google</div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <span class="fs-15">23,379</span>
+                                                </td>
+                                                <td>
+                                                    <span class="d-block text-success fs-14">+0.892 <i class="ti ti-trending-up ms-1"></i></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="ps-4">
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="avatar avatar-rounded avatar-sm p-2 bg-pink me-2">
+                                                            <i class="ri-android-line fs-18 "></i>
+                                                        </span>
+                                                        <div class="fw-semibold">Android</div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <span class="fs-15">78,973</span>
+                                                </td>
+                                                <td>
+                                                    <span class="d-block text-success fs-14">+4.892 <i class="ti ti-trending-up ms-1"></i></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="ps-4">
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="avatar avatar-rounded avatar-sm p-2 bg-secondary me-2">
+                                                            <i class="ri-safari-line fs-18 "></i>
+                                                        </span>
+                                                        <div class="fw-semibold">Safari</div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <span class="fs-15">78,973</span>
+                                                </td>
+                                                <td>
+                                                    <span class="d-block text-success fs-14">+4.892 <i class="ti ti-trending-up ms-1"></i></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="ps-4">
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="avatar avatar-rounded avatar-sm p-2 bg-success me-2">
+                                                            <i class="ri-opera-fill fs-18"></i>
+                                                        </span>
+                                                        <div class="fw-semibold">Opera</div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <span class="fs-15">12,457</span>
+                                                </td>
+                                                <td>
+                                                    <span class="d-block text-danger fs-14">-0.142 <i class="ti ti-trending-down ms-1"></i></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="ps-4">
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="avatar avatar-rounded avatar-sm p-2 bg-info me-2">
+                                                            <i class="ri-edge-fill fs-18 "></i>
+                                                        </span>
+                                                        <div class="fw-semibold">Edge</div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <span class="fs-15">8,570</span>
+                                                </td>
+                                                <td>
+                                                    <span class="d-block text-success fs-14">+21.092 <i class="ti ti-trending-up ms-1"></i></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="ps-4">
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="avatar avatar-rounded avatar-sm p-2 bg-warning me-2">
+                                                            <i class="ri-firefox-fill fs-18 "></i>
+                                                        </span>
+                                                        <div class="fw-semibold">Firefox</div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <span class="fs-15">6,135</span>
+                                                </td>
+                                                <td>
+                                                    <span class="d-block text-danger fs-14">-2.098 <i class="ti ti-trending-down ms-1"></i></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="border-bottom-0 ps-4">
+                                                    <div class="d-flex align-items-center mb-1">
+                                                        <span class="avatar avatar-rounded avatar-sm p-2 bg-danger me-2">
+                                                            <i class="ri-ubuntu-fill fs-18 "></i>
+                                                        </span>
+                                                        <div class="fw-semibold">Ubuntu</div>
+                                                    </div>
+                                                </td>
+                                                <td class="border-bottom-0">
+                                                    <span class="fs-15">4,789</span>
+                                                </td>
+                                                <td>
+                                                    <span class="d-block text-success fs-14">+31.765 <i class="ti ti-trending-up ms-1"></i></span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-3 col-md-6 ">
+                        <div class="card custom-card ">
+                             <div class="card-header justify-content-between">
+                                <div class="card-title">
+                                    Visitors
+                                </div>
+                                <div class="dropdown">
+                                    <a href="javascript:void(0);" class="btn btn-outline-light btn-icons btn-sm text-muted" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fe fe-more-vertical"></i>
+                                    </a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li class="border-bottom"><a class="dropdown-item" href="javascript:void(0);">Today</a></li>
+                                        <li class="border-bottom"><a class="dropdown-item" href="javascript:void(0);">This Week</a></li>
+                                        <li><a class="dropdown-item" href="javascript:void(0);">Last Week</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-body p-0">
+                                <div id="projectAnalysis" class="mx-auto"></div>
+                                    <div class="d-flex justify-content-center">
+                                        <div class="d-flex p-4 ">
+                                            <div class="text-center">
+                                                <p class="mb-1 text-muted"> <i class="bx bxs-circle text-primary fs-13  me-1"></i>Online visitors</p>
+                                                <h5 class="mb-0">765,98 </h5>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex p-4 ">
+                                            <div class="text-center">
+                                                <p class="mb-1 text-muted"> <i class="bx bxs-circle text-secondary fs-13  me-1"></i>Offline visitors</p>
+                                                <h5 class=" mb-0">241,98 </h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                             </div>
+                    </div>
+                    <div class="col-xxl-3 col-md-6 ">
+                        <div class="card custom-card">
+                            <div class="card-header justify-content-between">
+                                <div class="card-title">
+                                    Top Countries By visitors
+                                </div>
+                                <div class="dropdown">
+                                    <a href="javascript:void(0);" class="btn btn-outline-light btn-icons btn-sm text-muted" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fe fe-more-vertical"></i>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li class="border-bottom"><a class="dropdown-item" href="javascript:void(0);">Action</a></li>
+                                        <li class="border-bottom"><a class="dropdown-item" href="javascript:void(0);">Another action</a></li>
+                                        <li><a class="dropdown-item" href="javascript:void(0);">Something else here</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table text-nowrap mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" class="ps-4">Country</th>
+                                                <th scope="col">Users</th>
+                                                <th scope="col">Bounce Rate</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="top-selling">
+                                            <tr>
+                                                <td class="ps-4">
+                                                        <div class="d-inline-flex mt-1">
+                                                            <span class="avatar avatar-xs  text-default">
+                                                                <img src="../assets/images/flags/us_flag.jpg" alt="">
+                                                            </span>
+                                                            <span class="ms-2 fs-14 fw-semibold mb-0">USA</span>
+                                                        </div>
+                                                </td>
+                                                <td class="wd-100">
+                                                    <span class="fs-14">56,857</span> 
+                                                </td>
+                                                <td class="">
+                                                    <span class="fw-semibold fs-14">98.75k</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="ps-4">
+                                                        <div class="d-inline-flex mt-1">
+                                                            <span class="avatar avatar-xs  text-default">
+                                                                <img src="../assets/images/flags/india_flag.jpg" alt="">
+                                                            </span>
+                                                            <span class="ms-2 fs-14 fw-semibold mb-0">India</span>
+                                                        </div>
+                                                </td>
+                                                <td class="wd-100">
+                                                    <span class="fs-14">19,857</span> 
+                                                </td>
+                                                <td class="">
+                                                    <span class="fw-semibold fs-14">14.82k</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="ps-4">
+                                                        <div class="d-inline-flex mt-1">
+                                                            <span class="avatar avatar-xs  text-default">
+                                                                <img src="../assets/images/flags/argentina_flag.jpg" alt="">
+                                                            </span>
+                                                            <span class="ms-2 fs-14 fw-semibold mb-0">Argentina</span>
+                                                        </div>
+                                                </td>
+                                                <td class="wd-100">
+                                                    <span class="fs-14">16,857</span> 
+                                                </td>
+                                                <td class="">
+                                                    <span class="fw-semibold fs-14">14.82k</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="ps-4">
+                                                        <div class="d-inline-flex mt-1">
+                                                            <span class="avatar avatar-xs  text-default">
+                                                                <img src="../assets/images/flags/canada_flag.jpg" alt="">
+                                                            </span>
+                                                            <span class="ms-2 fs-14 fw-semibold mb-0">Canada</span>
+                                                        </div>
+                                                </td>
+                                                <td class="wd-100">
+                                                    <span class="fs-14">23,767</span> 
+                                                </td>
+                                                <td class="">
+                                                    <span class="fw-semibold fs-14">91.60k</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="ps-4">
+                                                        <div class="d-inline-flex mt-1">
+                                                            <span class="avatar avatar-xs  text-default">
+                                                                <img src="../assets/images/flags/russia_flag.jpg" alt="">
+                                                            </span>
+                                                            <span class="ms-2 fs-14 fw-semibold mb-0">Russia</span>
+                                                        </div>
+                                                </td>
+                                                <td class="wd-100">
+                                                    <span class="fs-14">57,907</span> 
+                                                </td>
+                                                <td class="">
+                                                    <span class="fw-semibold fs-14">15.60k</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="ps-4">
+                                                    <div class="">
+                                                        <div class="d-inline-flex mt-1">
+                                                            <span class="avatar avatar-xs  text-default">
+                                                                <img src="../assets/images/flags/spain_flag.jpg" alt="">
+                                                            </span>
+                                                            <span class="ms-2 fs-14 fw-semibold mb-0">Spain</span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="wd-100">
+                                                    <span class="fs-14">09,857</span> 
+                                                </td>
+                                                <td class="">
+                                                    <span class="fw-semibold fs-14">14.60k</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="ps-4">
+                                                    <div class="">
+                                                        <div class="d-inline-flex mt-1">
+                                                            <span class="avatar avatar-xs  text-default">
+                                                                <img src="../assets/images/flags/mexico_flag.jpg" alt="">
+                                                            </span>
+                                                            <span class="ms-2 fs-14 fw-semibold mb-0">Mexico</span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="wd-100">
+                                                    <span class="fs-14">12,857</span> 
+                                                </td>
+                                                <td class="">
+                                                    <span class="fw-semibold fs-14">14.60k</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 <!--End::row-2 -->
+                 
+                <!--End::start-3 -->
+                <div class="row">
+                    <div class="col-xxl-12">
+                        <div class="card custom-card">
+                            <div class="card-header justify-content-between">
+                                <div class="card-title">
+                                    Projects Summary
+                                </div>
+                                <div class="d-flex flex-wrap">
+                                    <div class="me-3 my-1">
+                                        <input class="form-control form-control-sm" type="text" placeholder="Search Here" aria-label=" example">
+                                    </div>
+                                    <div class="dropdown my-1">
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-primary btn-wave waves-effect waves-light" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Sort By<i class="ri-arrow-down-s-line align-middle ms-1 d-inline-block"></i>
+                                        </a>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li><a class="dropdown-item border-bottom" href="javascript:void(0);">New</a></li>
+                                            <li><a class="dropdown-item border-bottom" href="javascript:void(0);">Popular</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);">Relevant</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover text-nowrap table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">S.No</th>
+                                                <th scope="col">Project Name</th>
+                                                <th scope="col">Team Members</th>
+                                                <th scope="col">Start Date</th>
+                                                <th scope="col">Due Date</th>
+                                                <th scope="col">Status</th>
+                                                <th scope="col">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">
+                                                    01
+                                                </th>
+                                                <td>
+                                                    Home Page
+                                                </td>
+                                                <td>
+                                                    <div class="avatar-list-stacked">
+                                                        <span class="avatar avatar-xs avatar-rounded">
+                                                            <img src="../assets/images/faces/2.jpg" alt="img">
+                                                        </span>
+                                                        <span class="avatar avatar-xs avatar-rounded">
+                                                            <img src="../assets/images/faces/8.jpg" alt="img">
+                                                        </span>
+                                                        <span class="avatar avatar-xs avatar-rounded">
+                                                            <img src="../assets/images/faces/2.jpg" alt="img">
+                                                        </span>
+                                                        <a class="avatar avatar-xs bg-primary avatar-rounded text-fixed-white" href="javascript:void(0);">
+                                                            +2
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    01 Apr 2023
+                                                </td>
+                                                <td>
+                                                    14-04-2023
+                                                </td>
+                                                <td>
+                                                    <span class="badge bg-primary-transparent">In Progress</span>
+                                                </td>
+                                                <td>
+                                                    <div class="g-2">
+                                                        <a class="btn  btn-primary-light btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Edit">
+                                                            <span class="ri-pencil-line fs-14"></span>
+                                                        </a>
+                                                        <a class="btn btn-danger-light btn-sm ms-2" data-bs-toggle="tooltip" data-bs-original-title="Delete">
+                                                            <span class="ri-delete-bin-7-line fs-14"></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">
+                                                    02
+                                                </th>
+                                                <td>
+                                                    Landing Design
+                                                </td>
+                                                <td>
+                                                    <div class="avatar-list-stacked">
+                                                        <span class="avatar avatar-xs avatar-rounded">
+                                                            <img src="../assets/images/faces/5.jpg" alt="img">
+                                                        </span>
+                                                        <span class="avatar avatar-xs avatar-rounded">
+                                                            <img src="../assets/images/faces/6.jpg" alt="img">
+                                                        </span>
+                                                        <span class="avatar avatar-xs avatar-rounded">
+                                                            <img src="../assets/images/faces/9.jpg" alt="img">
+                                                        </span>
+                                                        <span class="avatar avatar-xs avatar-rounded">
+                                                            <img src="../assets/images/faces/15.jpg" alt="img">
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    02 Apr 2023
+                                                </td>
+                                                <td>
+                                                    20-04-2023
+                                                </td>
+                                                <td>
+                                                    <span class="badge bg-primary-transparent">In Progress</span>
+                                                </td>
+                                                <td>
+                                                    <div class="g-2">
+                                                        <a class="btn  btn-primary-light btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Edit">
+                                                            <span class="ri-pencil-line fs-14"></span>
+                                                        </a>
+                                                        <a class="btn btn-danger-light btn-sm ms-2" data-bs-toggle="tooltip" data-bs-original-title="Delete">
+                                                            <span class="ri-delete-bin-7-line fs-14"></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">
+                                                    03
+                                                </th>
+                                                <td>
+                                                    New Template Design
+                                                </td>
+                                                <td>
+                                                    <div class="avatar-list-stacked">
+                                                        <span class="avatar avatar-xs avatar-rounded">
+                                                            <img src="../assets/images/faces/1.jpg" alt="img">
+                                                        </span>
+                                                        <span class="avatar avatar-xs avatar-rounded">
+                                                            <img src="../assets/images/faces/3.jpg" alt="img">
+                                                        </span>
+                                                        <span class="avatar avatar-xs avatar-rounded">
+                                                            <img src="../assets/images/faces/4.jpg" alt="img">
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    10 Apr 2023
+                                                </td>
+                                                <td>
+                                                    29-05-2023
+                                                </td>
+                                                <td>
+                                                    <span class="badge bg-warning-transparent">Pending</span>
+                                                </td>
+                                                <td>
+                                                    <div class="g-2">
+                                                        <a class="btn  btn-primary-light btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Edit">
+                                                            <span class="ri-pencil-line fs-14"></span>
+                                                        </a>
+                                                        <a class="btn btn-danger-light btn-sm ms-2" data-bs-toggle="tooltip" data-bs-original-title="Delete">
+                                                            <span class="ri-delete-bin-7-line fs-14"></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">
+                                                    04
+                                                </th>
+                                                <td>
+                                                    HR Management Template Design
+                                                </td>
+                                                <td>
+                                                    <div class="avatar-list-stacked">
+                                                        <span class="avatar avatar-xs avatar-rounded">
+                                                            <img src="../assets/images/faces/10.jpg" alt="img">
+                                                        </span>
+                                                        <span class="avatar avatar-xs avatar-rounded">
+                                                            <img src="../assets/images/faces/11.jpg" alt="img">
+                                                        </span>
+                                                        <span class="avatar avatar-xs avatar-rounded">
+                                                            <img src="../assets/images/faces/4.jpg" alt="img">
+                                                        </span>
+                                                        <a class="avatar avatar-xs bg-primary avatar-rounded text-fixed-white" href="javascript:void(0);">
+                                                            +5
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    01 May 2023
+                                                </td>
+                                                <td>
+                                                    18-04-2023
+                                                </td>
+                                                <td>
+                                                    <span class="badge bg-primary-transparent">In Progress</span>
+                                                </td>
+                                                <td>
+                                                    <div class="g-2">
+                                                        <a class="btn  btn-primary-light btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Edit">
+                                                            <span class="ri-pencil-line fs-14"></span>
+                                                        </a>
+                                                        <a class="btn btn-danger-light btn-sm ms-2" data-bs-toggle="tooltip" data-bs-original-title="Delete">
+                                                            <span class="ri-delete-bin-7-line fs-14"></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">
+                                                    05
+                                                </th>
+                                                <td>
+                                                    Designing New Template
+                                                </td>
+                                                <td>
+                                                    <div class="avatar-list-stacked">
+                                                        <span class="avatar avatar-xs avatar-rounded">
+                                                            <img src="../assets/images/faces/2.jpg" alt="img">
+                                                        </span>
+                                                        <span class="avatar avatar-xs avatar-rounded">
+                                                            <img src="../assets/images/faces/9.jpg" alt="img">
+                                                        </span>
+                                                        <span class="avatar avatar-xs avatar-rounded">
+                                                            <img src="../assets/images/faces/16.jpg" alt="img">
+                                                        </span>
+                                                        <a class="avatar avatar-xs bg-primary avatar-rounded text-fixed-white" href="javascript:void(0);">
+                                                            +3
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    20 May 2023
+                                                </td>
+                                                <td>
+                                                    11-04-2023
+                                                </td>
+                                                <td>
+                                                    <span class="badge bg-success-transparent">Completed</span>
+                                                </td>
+                                                <td>
+                                                    <div class="g-2">
+                                                        <a class="btn  btn-primary-light btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Edit">
+                                                            <span class="ri-pencil-line fs-14"></span>
+                                                        </a>
+                                                        <a class="btn btn-danger-light btn-sm ms-2" data-bs-toggle="tooltip" data-bs-original-title="Delete">
+                                                            <span class="ri-delete-bin-7-line fs-14"></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">
+                                                    06
+                                                </th>
+                                                <td>
+                                                    Documentation Project
+                                                </td>
+                                                <td>
+                                                    <div class="avatar-list-stacked">
+                                                        <span class="avatar avatar-xs avatar-rounded">
+                                                            <img src="../assets/images/faces/4.jpg" alt="img">
+                                                        </span>
+                                                        <span class="avatar avatar-xs avatar-rounded">
+                                                            <img src="../assets/images/faces/7.jpg" alt="img">
+                                                        </span>
+                                                        <span class="avatar avatar-xs avatar-rounded">
+                                                            <img src="../assets/images/faces/12.jpg" alt="img">
+                                                        </span>
+                                                        <span class="avatar avatar-xs avatar-rounded">
+                                                            <img src="../assets/images/faces/13.jpg" alt="img">
+                                                        </span>
+                                                        <span class="avatar avatar-xs avatar-rounded">
+                                                            <img src="../assets/images/faces/15.jpg" alt="img">
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    21 May 2023
+                                                </td>
+                                                <td>
+                                                    18-04-2023
+                                                </td>
+                                                <td>
+                                                    <span class="badge bg-primary-transparent">In Progress</span>
+                                                </td>
+                                                <td>
+                                                    <div class="g-2">
+                                                        <a class="btn  btn-primary-light btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Edit">
+                                                            <span class="ri-pencil-line fs-14"></span>
+                                                        </a>
+                                                        <a class="btn btn-danger-light btn-sm ms-2" data-bs-toggle="tooltip" data-bs-original-title="Delete">
+                                                            <span class="ri-delete-bin-7-line fs-14"></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="d-flex align-items-center">
+                                    <div>
+                                        Showing 6 Entries <i class="bi bi-arrow-right ms-2 fw-semibold"></i>
+                                    </div>
+                                    <div class="ms-auto">
+                                        <nav aria-label="Page navigation" class="pagination-style-4">
+                                            <ul class="pagination mb-0">
+                                                <li class="page-item disabled">
+                                                    <a class="page-link" href="javascript:void(0);">
+                                                        Prev
+                                                    </a>
+                                                </li>
+                                                <li class="page-item active"><a class="page-link" href="javascript:void(0);">1</a></li>
+                                                <li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
+                                                <li class="page-item">
+                                                    <a class="page-link text-primary" href="javascript:void(0);">
+                                                        next
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End::row-3 -->
+
+            </div>
+        </div>
+        <!-- End::app-content -->
+
+        @SPK@include("partials/headersearch_modal.html")
+        @SPK@include("partials/footer.html")
+
+    </div>
+
+    @SPK@include("partials/commonjs.html")
+
+    <!-- Apex Charts JS -->
+    <script src="../assets/libs/apexcharts/apexcharts.min.js"></script>
+
+    <!-- Analytics dashbord JS -->
+    <script src="../assets/js/Analytics.js"></script>
+
+    @SPK@include("partials/custom_switcherjs.html")
+
+    <!-- Custom JS -->
+    <script src="../assets/js/custom.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+{{--
+  Props
+  text     string   badge text (alternative to the slot)
+  variant  string   primary | secondary | success | danger | warning | info | light | dark
+  soft     boolean  use the theme's translucent style
+  pill     boolean  fully rounded
+  icon     string   Tabler icon class
+--}}
+@let(textFromSlot = await $slots.main())
+@let(label = textFromSlot.trim() ? textFromSlot : ($props.get('text') ?? ''))
+@let(variant = $props.get('variant', 'primary'))
+@let(classes = [
+  'badge',
+  $props.get('soft') ? `bg-${variant}-transparent` : `bg-${variant}`,
+  $props.get('pill') ? 'rounded-pill' : '',
+])
+
+<span {{
+  $props
+    .except(['text', 'variant', 'soft', 'pill', 'icon'])
+    .merge({ class: classes })
+    .toAttrs()
+}}>
+  @if($props.get('icon'))
+    <i class="{{ $props.get('icon') }} me-1"></i>
+  @end
+  {{{ label }}}
+</span>

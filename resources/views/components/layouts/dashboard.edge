@@ -1,0 +1,140 @@
+{{--
+  The dashboard shell (Imtaqin theme).
+
+  Props
+    title       string   page title, also the <title> and page-header heading
+    subtitle    string   breadcrumb parent, e.g. 'Ui Elements'
+    breadcrumbs array    [{ label, href? }] -- overrides `subtitle` when given
+    pageHeader  boolean  set false to suppress the title/breadcrumb bar
+    bodyClass   string   extra classes on <body>
+
+  Slots
+    main         page content (implicit)
+    styles       extra <link> tags, injected into <head>
+    scripts      extra <script> tags, injected before </body>
+    pageActions  buttons rendered on the right of the page header
+--}}
+
+@let(pageTitle = $props.get('title', 'Dashboard'))
+@let(subtitle = $props.get('subtitle', ''))
+@let(showPageHeader = $props.get('pageHeader', true))
+@let(crumbs = $props.get('breadcrumbs', subtitle ? [{ label: subtitle }] : []))
+
+<!DOCTYPE html>
+<html
+  lang="en"
+  dir="ltr"
+  data-nav-layout="vertical"
+  data-theme-mode="light"
+  data-header-styles="light"
+  data-menu-styles="light"
+  data-toggled="close"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ pageTitle }} &middot; {{ appName }}</title>
+
+    <link rel="icon" href="/theme/images/brand-logos/favicon.ico" type="image/x-icon" />
+
+    {{--
+      main.js must run before paint: it restores the saved theme from
+      localStorage, and loading it later causes a flash of the wrong theme.
+    --}}
+    <script src="/theme/libs/choices.js/public/assets/scripts/choices.min.js"></script>
+    <script src="/theme/js/main.js"></script>
+
+    <link id="style" href="/theme/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/theme/css/styles.min.css" rel="stylesheet" />
+    <link href="/theme/css/icons.css" rel="stylesheet" />
+    {{-- Font Awesome Pro 7 — the icon set to use for new work. See AGENTS.md. --}}
+    <link href="/theme/fontawesome/css/fontawesome.min.css" rel="stylesheet" />
+    <link href="/theme/libs/node-waves/waves.min.css" rel="stylesheet" />
+    <link href="/theme/libs/simplebar/simplebar.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/theme/libs/flatpickr/flatpickr.min.css" />
+    <link rel="stylesheet" href="/theme/libs/@simonwep/pickr/themes/nano.min.css" />
+    <link rel="stylesheet" href="/theme/libs/choices.js/public/assets/styles/choices.min.css" />
+
+    @if($slots.styles)
+      {{{ await $slots.styles() }}}
+    @end
+
+    {{-- Project overrides load last so they win over the theme. --}}
+    @vite(['resources/css/dashboard.css'])
+    @stack('dumper')
+  </head>
+
+  <body class="{{ $props.get('bodyClass', '') }}">
+    @include('partials/dashboard/switcher')
+    @include('partials/dashboard/loader')
+
+    <div class="page">
+      @include('partials/dashboard/header')
+      @include('partials/dashboard/sidebar')
+
+      <div class="main-content app-content">
+        <div class="container-fluid">
+          @if(showPageHeader)
+            <div
+              class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb"
+            >
+              <h1 class="page-title fw-semibold fs-18 mb-0">{{ pageTitle }}</h1>
+
+              <div class="ms-md-1 ms-0 d-flex align-items-center gap-2">
+                @if(crumbs.length)
+                  <nav>
+                    <ol class="breadcrumb mb-0">
+                      @each(crumb in crumbs)
+                        <li class="breadcrumb-item">
+                          @if(crumb.href)
+                            <a href="{{ crumb.href }}">{{ crumb.label }}</a>
+                          @else
+                            {{ crumb.label }}
+                          @end
+                        </li>
+                      @end
+                      <li class="breadcrumb-item active" aria-current="page">{{ pageTitle }}</li>
+                    </ol>
+                  </nav>
+                @end
+
+                @if($slots.pageActions)
+                  {{{ await $slots.pageActions() }}}
+                @end
+              </div>
+            </div>
+          @end
+
+          @include('partials/dashboard/flash')
+
+          {{{ await $slots.main() }}}
+        </div>
+      </div>
+
+      @include('partials/dashboard/search_modal')
+      @include('partials/dashboard/footer')
+    </div>
+
+    <div class="scrollToTop">
+      <span class="arrow"><i class="fa-solid fa-chevron-up fs-20"></i></span>
+    </div>
+    <div id="responsive-overlay"></div>
+
+    <script src="/theme/libs/@popperjs/core/umd/popper.min.js"></script>
+    <script src="/theme/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/theme/js/defaultmenu.min.js"></script>
+    <script src="/theme/libs/node-waves/waves.min.js"></script>
+    <script src="/theme/js/sticky.js"></script>
+    <script src="/theme/libs/simplebar/simplebar.min.js"></script>
+    <script src="/theme/js/simplebar.js"></script>
+    <script src="/theme/libs/@simonwep/pickr/pickr.min.js"></script>
+    <script src="/theme/js/custom-switcher.min.js"></script>
+
+    @if($slots.scripts)
+      {{{ await $slots.scripts() }}}
+    @end
+
+    <script src="/theme/js/custom.js"></script>
+    @vite(['resources/js/dashboard.js'])
+  </body>
+</html>

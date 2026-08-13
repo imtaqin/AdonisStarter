@@ -1,0 +1,25 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "adonis-boost": {
+      "type": "local",
+      "command": [
+        "node",
+        "--import=@poppinss/ts-exec",
+        "mcp/boost/server.ts"
+      ],
+      "enabled": true
+    },
+    "playwright": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@playwright/mcp@latest",
+        "--browser",
+        "chromium"
+      ],
+      "enabled": true
+    }
+  }
+}

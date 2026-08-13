@@ -1,0 +1,45 @@
+{{--
+  A destructive action rendered as a CSRF-protected POST form with a
+  confirmation prompt.
+
+  This app uses GET and POST only, so deletes are POST endpoints -- never links.
+  A GET delete can be triggered by a prefetch, a crawler, or an <img> tag.
+
+  Props
+  route        string   named route
+  routeParams  array
+  action       string   literal URL (alternative to `route`)
+  confirm      string   confirmation message
+  label        string   button text (default 'Delete')
+  icon         string   Tabler icon class
+  variant      string   button variant (default 'danger')
+  size         string   button size (default 'sm')
+  outline      boolean
+  disabled     boolean
+  title        string   tooltip, useful for explaining a disabled state
+
+  The prompt is convenience only. Authorization is enforced server-side by the
+  route's permission middleware.
+--}}
+@let(variant = $props.get('variant', 'danger'))
+@let(size = $props.get('size', 'sm'))
+@form({
+  route: $props.get('route'),
+  routeParams: $props.get('routeParams'),
+  action: $props.get('action'),
+  method: 'POST',
+  class: 'd-inline',
+  'data-confirm': $props.get('confirm', 'Are you sure? This cannot be undone.'),
+})
+  <button
+    type="submit"
+    class="btn {{ $props.get('outline') ? `btn-outline-${variant}` : `btn-${variant}` }} btn-{{ size }}"
+    {{ $props.get('disabled') ? 'disabled' : '' }}
+    title="{{ $props.get('title', '') }}"
+  >
+    @if($props.get('icon'))
+      <i class="{{ $props.get('icon') }}"></i>
+    @end
+    {{ $props.get('label', 'Delete') }}
+  </button>
+@end

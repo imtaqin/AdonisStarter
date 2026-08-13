@@ -1,0 +1,46 @@
+{{--
+  Bootstrap modal.
+
+  Props
+  id      string  required; the value you point data-bs-target at
+  title   string
+  size    string  sm | lg | xl
+  scroll  boolean scrollable body
+  static  boolean do not close on backdrop click
+
+  Slots
+  main    body
+  footer  footer buttons
+
+  Trigger it with:
+  <button data-bs-toggle="modal" data-bs-target="#my-modal">Open</button>
+--}}
+@let(id = $props.get('id'))
+@let(size = $props.get('size'))
+@let(isStatic = Boolean($props.get('static')))
+
+<div
+  class="modal fade"
+  id="{{ id }}"
+  tabindex="-1"
+  aria-labelledby="{{ id }}-label"
+  aria-hidden="true"
+  data-bs-backdrop="{{ isStatic ? 'static' : 'true' }}"
+  data-bs-keyboard="{{ isStatic ? 'false' : 'true' }}"
+>
+  <div
+    class="modal-dialog modal-dialog-centered {{ size ? `modal-${size}` : '' }} {{ $props.get('scroll') ? 'modal-dialog-scrollable' : '' }}"
+  >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h6 class="modal-title" id="{{ id }}-label">{{ $props.get('title', '') }}</h6>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">{{{ await $slots.main() }}}</div>
+      @if($slots.footer)
+        <div class="modal-footer">{{{ await $slots.footer() }}}</div>
+      @end
+    </div>
+  </div>
+</div>

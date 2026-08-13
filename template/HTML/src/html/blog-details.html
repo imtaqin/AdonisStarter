@@ -1,0 +1,284 @@
+@SPK@include("partials/mainhead.html")
+
+</head>
+
+<body>
+
+    @SPK@include("partials/switcher.html")
+    @SPK@include("partials/loader.html")
+
+    <div class="page">
+        @SPK@include("partials/header.html")
+        @SPK@include("partials/sidebar.html")
+
+        <!-- Start::app-content -->
+        <div class="main-content app-content">
+            <div class="container-fluid">
+
+                @SPK@include("partials/page-header.html", {"title": "Blog-details", "subtitle": 'Blog'})
+
+                 <!-- Start::row-1 -->
+                 <div class="row">
+                    <div class="col-xl-9">
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="card custom-card">
+                                    <a href="javascript:void(0);">
+                                        <img src="../assets/images/media/media-10.jpg" class=" blog-details-img card-img-top" alt="...">
+                                    </a>
+                                    <div class="card-header d-block border-bottom border-block-end-dashed">
+                                        <p class="fs-22 fw-semibold mb-1">Touring excites in winter when we travel with friends !</p>
+                                        <div class="d-sm-flex align-items-cneter">
+                                            <div class="d-flex align-items-center flex-fill">
+                                                <span class="avatar avatar-sm avatar-rounded me-3">
+                                                    <img src="../assets/images/faces/15.jpg" alt="" class="">
+                                                </span>
+                                                <div>
+                                                    <p class="mb-0 fw-semibold fs-14">Json Taylor - <span class="fs-12 text-muted fw-normal">Tue,25 Dec 2022 - 11:45</span></p>
+                                                </div>
+                                            </div>
+                                            <div class="mt-sm-0 mt-2">
+                                                <span class="badge bg-success-transparent me-3">
+                                                    <i class="ri-thumb-up-line me-1 align-middle d-inline-block"></i> 32 Likes
+                                                </span>
+                                                <span class="badge bg-info-transparent me-3">
+                                                    <i class="ri-chat-4-line me-1 align-middle d-inline-block"></i> 10 Comments
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <h6 class="fw-semibold">
+                                            Seeing with “fresh eyes” – A deeper nature experience
+                                        </h6>
+                                        <p class="mb-5 text-muted">
+                                            The world is animated by the wind. This invisible Its absence can cast a calm stillness over the earth. On barren mountain tops its power is barely perceptible; in forests and seas its presence becomes manifest. Winds are wild, and sometimes destructive. When we look deeply into the surely gravity’s law, strong as an ocean current, takes hold of even the strongest thing and pulls it toward the heart of the world. Each thing- each stone, blossom, child – is held in place. Only we, in our arrogance, push out beyond what we belong to for some empty freedom. If we surrendered
+                                        </p>
+                                        <div class="card custom-card bg-light mb-5 shadow-none">
+                                            <a href="javascript:void(0);" class="card-anchor"></a>
+                                            <div class="card-body">
+                                              <blockquote class="blockquote mb-0 text-center">
+                                                <p class="fs-16 fw-semibold mb-2 text-dark">In nature, nothing is perfect and everything is perfect. Trees can be contorted, bent in weird ways, and they're still beautiful..</p>
+                                                <footer class="blockquote-footer mt-2 fs-14 text-muted">Someone famous as <cite title="Source Title">-Alice Walker</cite></footer>
+                                              </blockquote>
+                                            </div>
+                                        </div>
+                                        <p class="mb-5 text-muted">
+                                            From enchanting nature's beauty quotes that evoke visions of lush meadows full of brilliantly-colored flowers or dense forests with sky-high trees to famous quotes about nature's ever-present—and absolutely fundamental—role in our lives, these 101 quotes about nature will have you itching to get off your couch and get outside. For famous <b>quotes about nature</b>, we have them here!
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-12">
+                                <div class="card custom-card">
+                                    <div class="card-header">
+                                        <div class="card-title">
+                                            Leave a Comment
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row gy-3">
+                                            <div class="col-xl-6">
+                                                <label for="blog-first-name" class="form-label">First Name</label>
+                                                <input type="text" class="form-control" id="blog-first-name" placeholder="Enter Name">
+                                            </div>
+                                            <div class="col-xl-6">
+                                                <label for="blog-last-name" class="form-label">Last Name</label>
+                                                <input type="text" class="form-control" id="blog-last-name" placeholder="Enter Name">
+                                            </div>
+                                            <div class="col-xl-12"> 
+                                                <label for="blog-email" class="form-label">Email ID</label>
+                                                <input type="text" class="form-control" id="blog-email" placeholder="Enter Email">
+                                            </div>
+                                            <div class="col-xl-12">
+                                                <label for="blog-comment" class="form-label">Write Comment</label>
+                                                <textarea class="form-control" id="blog-comment" rows="5"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="text-end">
+                                            <button class="btn btn-primary">Post Comment</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="row">
+                            <div class="col-xxl-12">
+                                <div class="card custom-card">
+                                    <img src="../assets/images/media/media-11.jpg" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h6 class="card-title fw-semibold mb-0">Emiley Jackson</h6> 
+                                        <p class="fs-12 text-muted"><span>emaileyjackson2134</span>@gmail.com</p>
+                                        <p class="card-text">It is a long fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution </p>
+                                    </div>
+                                    <div class="card-footer border-block-start-dashed text-center">
+                                        <div class="btn-list">
+                                            <div class="btn-list">
+                                                <button class="btn btn-sm btn-icon btn-primary-light btn-wave waves-effect waves-light">
+                                                    <i class="ri-facebook-line"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-icon btn-secondary-light btn-wave waves-effect waves-light">
+                                                    <i class="ri-twitter-line"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-icon btn-warning-light btn-wave waves-effect waves-light">
+                                                    <i class="ri-instagram-line"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-icon btn-success-light btn-wave waves-effect waves-light">
+                                                    <i class="ri-github-line"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-icon btn-danger-light btn-wave waves-effect waves-light">
+                                                    <i class="ri-youtube-line"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-12">
+                                <div class="card custom-card">
+                                    <div class="card-header">
+                                        <div class="card-title">
+                                            Recent Posts
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <ul class="list-group">
+                                            <li class="list-group-item">
+                                                <div class="d-flex flex-wrap align-items-center">
+                                                    <span class="avatar avatar-xl me-3">
+                                                        <img src="../assets/images/media/media-1.jpg" class="img-fluid" alt="...">
+                                                    </span>
+                                                    <div class="flex-fill">
+                                                        <a href="javascript:void(0);" class="fs-14 fw-semibold mb-0">Animals</a>
+                                                        <p class="mb-1 popular-blog-content">
+                                                            There are passages of available
+                                                        </p>
+                                                        <span class="text-muted fs-11">24,Nov 2022 - 18:27</span>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <div class="d-flex flex-wrap align-items-center">
+                                                    <span class="avatar avatar-xl me-3">
+                                                        <img src="../assets/images/media/media-2.jpg" class="img-fluid" alt="...">
+                                                    </span>
+                                                    <div class="flex-fill">
+                                                        <a href="javascript:void(0);" class="fs-14 fw-semibold mb-0">Travel</a>
+                                                        <p class="mb-1 popular-blog-content">
+                                                            Latin words with model sentence
+                                                        </p>
+                                                        <span class="text-muted fs-11">28,Nov 2022 - 10:45</span>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <div class="d-flex flex-wrap align-items-center">
+                                                    <span class="avatar avatar-xl me-3">
+                                                        <img src="../assets/images/media/media-3.jpg" class="img-fluid" alt="...">
+                                                    </span>
+                                                    <div class="flex-fill">
+                                                        <a href="javascript:void(0);" class="fs-14 fw-semibold mb-0">Interior</a>
+                                                        <p class="mb-1 popular-blog-content">
+                                                            Contrary is not simply random
+                                                        </p>
+                                                        <span class="text-muted fs-11">30,Nov 2022 - 08:32</span>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <div class="d-flex flex-wrap align-items-center">
+                                                    <span class="avatar avatar-xl me-3">
+                                                        <img src="../assets/images/media/media-4.jpg" class="img-fluid" alt="...">
+                                                    </span>
+                                                    <div class="flex-fill">
+                                                        <a href="javascript:void(0);" class="fs-14 fw-semibold mb-0">Nature</a>
+                                                        <p class="mb-1 popular-blog-content">
+                                                            It was  in the 1960s of Letraset</p>
+                                                        <span class="text-muted fs-11">3,Dec 2022 - 12:56</span>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item text-center d-grid">
+                                                <button class="btn btn-primary-light">Load more</button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-12">
+                                <div class="card custom-card">
+                                    <div class="card-header">
+                                        <div class="card-title">
+                                            Popular Tags
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="blog-popular-tags">
+                                            <a href="javascript:void(0);" class="badge bg-light text-muted m-1">#blogger></a>
+                                            <a href="javascript:void(0);"  class="badge bg-light text-muted m-1">#styleblogger</a>    
+                                            <a href="javascript:void(0);" class="badge bg-light text-muted m-1">#livecolorfully</a>
+                                            <a href="javascript:void(0);" class="badge bg-light text-muted m-1">#amwriting</a>
+                                            <a href="javascript:void(0);" class="badge bg-light text-muted m-1">#analytics</a>
+                                            <a href="javascript:void(0);" class="badge bg-light text-muted m-1">#designblogger</a>
+                                            <a href="javascript:void(0);" class="badge bg-light text-muted m-1">#picoftheday</a>
+                                            <a href="javascript:void(0);" class="badge bg-light text-muted m-1">#adventure</a>
+                                            <a href="javascript:void(0);" class="badge bg-light text-muted m-1">#landscape</a>
+                                            <a href="javascript:void(0);" class="badge bg-light text-muted m-1">#fitnessgoals</a>
+                                            <a href="javascript:void(0);" class="badge bg-light text-muted m-1">#foodblogger</a>
+                                            <a href="javascript:void(0);" class="badge bg-light text-muted m-1">#vegan</a>
+                                            <a href="javascript:void(0);" class="badge bg-light text-muted m-1">#portrait</a>
+                                            <a href="javascript:void(0);" class="badge bg-light text-muted m-1">#canonphotography</a>
+                                            <a href="javascript:void(0);" class="badge bg-light text-muted m-1">#fineart</a>
+                                            <a href="javascript:void(0);" class="badge bg-light text-muted m-1">#trending</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-12">
+                                <div class="card custom-card">
+                                    <div class="card-header">
+                                        <div class="card-title">
+                                            Newsletter
+                                        </div>    
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="text-center">
+                                            <h6 class="fw-semibold mb-3"><span class="text-primary fs-18">1658</span> Subscribers</h6>
+                                            <div class="input-group mb-3">
+                                                <input type="text" class="form-control" placeholder="Email Here" aria-label="blog-email" aria-describedby="blog-subscribe">
+                                                <button class="btn btn-primary" type="button" id="blog-subscribe">Subscribe</button>
+                                            </div>
+                                            <label class="form-check-label">
+                                                By Subscribing you accept to <a href="javascript:void(0);" class="text-success"><u>privacy policy</u></a>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--End::row-1 -->
+            </div>
+        </div>
+        <!-- End::app-content -->
+
+        @SPK@include("partials/headersearch_modal.html")
+        @SPK@include("partials/footer.html")
+
+    </div>
+
+    @SPK@include("partials/commonjs.html")
+
+    @SPK@include("partials/custom_switcherjs.html")
+
+    <!-- Custom JS -->
+    <script src="../assets/js/custom.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,19 @@
+@layouts.dashboard({
+  title: `Edit ${role.name}`,
+  breadcrumbs: [
+    { label: 'Administration' },
+    { label: 'Roles', href: route('roles.index') },
+  ],
+})
+  @let(isEdit = true)
+  @ui.card()
+    @form({ route: 'roles.update', routeParams: [role.id], method: 'POST' })
+      @include('pages/roles/_form')
+
+      <div class="d-flex justify-content-end gap-2">
+        @!link({ route: 'roles.index', text: 'Cancel', variant: 'light' })
+        @!button({ type: 'submit', text: 'Save changes' })
+      </div>
+    @end
+  @end
+@end

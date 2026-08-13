@@ -1,0 +1,24 @@
+{{--
+  Props
+  text     string   label text (alternative to the slot)
+  required boolean  appends a red asterisk
+--}}
+@let(labelTextFromSlot = await $slots.main())
+@let(labelText = labelTextFromSlot.trim() ? labelTextFromSlot : $props.get('text'))
+@let(classes = [$context.inGroup ? 'form-check-label' : 'form-label'])
+
+<label {{
+  $props
+    .except(['text', 'required'])
+    .merge({
+      for: $context.id,
+      class: classes,
+      'data-invalid': $context.hasErrors ? 'true' : false,
+    })
+    .toAttrs()
+}}>
+  {{{ labelText }}}
+  @if($props.get('required'))
+    <span class="text-danger" aria-hidden="true">*</span>
+  @end
+</label>

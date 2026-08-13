@@ -1,0 +1,41 @@
+{{--
+  Text-like input. Must be a child of @field.root.
+  All unknown props pass through as HTML attributes.
+
+  Props
+  type         string   input type (default 'text')
+  value        string   initial value; the flashed old value wins on re-render
+  keepChecked  boolean  for checkbox/radio inputs rendered outside a group
+--}}
+@let(useOldValue = !['password', 'file', 'checkbox', 'radio'].includes($props.get('type')))
+@let(inputValue = useOldValue
+  ? $context.oldValue || $props.get('value') || ''
+  : $props.get('value') || '')
+@let(isCheckable = ['checkbox', 'radio'].includes($props.get('type')))
+@let(classes = [
+  isCheckable ? 'form-check-input' : 'form-control',
+  $context.hasErrors ? 'is-invalid' : '',
+])
+
+<input {{
+  $props
+    .except(['value', 'keepChecked'])
+    .merge({
+      name: $context.name,
+      id: $context.id,
+      value: inputValue,
+      class: classes,
+      type: 'text',
+      'aria-invalid': $context.hasErrors ? 'true' : false,
+      'data-invalid': $context.hasErrors ? 'true' : false,
+      autofocus: $context.hasErrors ? 'true' : false,
+      'aria-describedby': $context.hasErrors ? `${$context.id}-error` : '',
+    })
+    .mergeIf($props.get('keepChecked'), {
+      checked: !!(
+        $context.oldValue &&
+        ($context.oldValue === inputValue || $context.oldValue === 'on')
+      ),
+    })
+    .toAttrs()
+}} />

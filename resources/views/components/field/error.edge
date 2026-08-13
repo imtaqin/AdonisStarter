@@ -1,0 +1,14 @@
+{{--
+  Renders validation errors for the surrounding field.root.
+
+  `d-block` is required: Bootstrap only reveals `.invalid-feedback` when it
+  follows an `.is-invalid` sibling, and the control is not always adjacent.
+--}}
+@let(classes = ['invalid-feedback', 'd-block'])
+@if($context.hasErrors)
+  <div {{ $props.merge({ id: `${$context.id}-error`, class: classes }).toAttrs() }}>
+    @each(message in $context.errors)
+      <span>{{ message }}</span>
+    @end
+  </div>
+@end

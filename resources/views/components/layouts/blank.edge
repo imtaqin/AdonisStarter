@@ -1,0 +1,36 @@
+{{--
+  Chrome-free page with no dependency on request-scoped data.
+
+  Error pages use this deliberately: the exception handler can run before (or
+  instead of) ShareViewDataMiddleware, so `menu`, `auth` and `can` may not be in
+  scope. A layout that touched them would turn a 404 into a 500.
+
+  Props
+  title  string
+--}}
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme-mode="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ $props.get('title', 'Error') }}</title>
+
+    <link rel="icon" href="/theme/images/brand-logos/favicon.ico" type="image/x-icon" />
+    <link id="style" href="/theme/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/theme/css/styles.min.css" rel="stylesheet" />
+    <link href="/theme/css/icons.css" rel="stylesheet" />
+    {{-- Font Awesome Pro 7 — the icon set to use for new work. See AGENTS.md. --}}
+    <link href="/theme/fontawesome/css/fontawesome.min.css" rel="stylesheet" />
+  </head>
+
+  <body class="bg-white">
+    <div class="container">
+      <div
+        class="row justify-content-center align-items-center text-center"
+        style="min-height: 100vh"
+      >
+        <div class="col-xl-5 col-lg-6 col-md-8 col-12">{{{ await $slots.main() }}}</div>
+      </div>
+    </div>
+  </body>
+</html>

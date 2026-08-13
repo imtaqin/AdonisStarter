@@ -1,0 +1,19 @@
+@layouts.dashboard({
+  title: `Edit ${user.displayName}`,
+  breadcrumbs: [
+    { label: 'Administration' },
+    { label: 'Users', href: route('users.index') },
+  ],
+})
+  @let(isEdit = true)
+  @ui.card()
+    @form({ route: 'users.update', routeParams: [user.id], method: 'POST' })
+      @include('pages/users/_form')
+
+      <div class="d-flex justify-content-end gap-2">
+        @!link({ route: 'users.index', text: 'Cancel', variant: 'light' })
+        @!button({ type: 'submit', text: 'Save changes' })
+      </div>
+    @end
+  @end
+@end

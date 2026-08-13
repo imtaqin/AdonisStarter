@@ -1,0 +1,34 @@
+{{--
+  Props
+  text     string   button label (alternative to the slot)
+  variant  string   primary | secondary | success | danger | warning | info | light | dark | link
+  outline  boolean  render the outline style
+  size     string   sm | lg
+  icon     string   Tabler icon class rendered before the label
+  block    boolean  full width
+  loading  boolean  disables the button and shows a spinner
+--}}
+@let(buttonTextFromSlot = await $slots.main())
+@let(buttonText = buttonTextFromSlot.trim() ? buttonTextFromSlot : ($props.get('text') ?? ''))
+@let(variant = $props.get('variant', 'primary'))
+@let(classes = [
+  'btn',
+  $props.get('outline') ? `btn-outline-${variant}` : `btn-${variant}`,
+  $props.get('size') ? `btn-${$props.get('size')}` : '',
+  $props.get('block') ? 'w-100' : '',
+])
+
+<button {{
+  $props
+    .except(['text', 'variant', 'outline', 'size', 'icon', 'block', 'loading'])
+    .merge({ type: 'button', class: classes })
+    .mergeIf($props.get('loading'), { disabled: true })
+    .toAttrs()
+}}>
+  @if($props.get('loading'))
+    <span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>
+  @elseif($props.get('icon'))
+    <i class="{{ $props.get('icon') }} me-1"></i>
+  @end
+  {{{ buttonText }}}
+</button>

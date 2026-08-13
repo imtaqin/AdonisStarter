@@ -1,0 +1,18 @@
+/*
+|--------------------------------------------------------------------------
+| Dashboard overrides
+|--------------------------------------------------------------------------
+|
+| Loaded AFTER the Imtaqin theme stylesheets, so anything here wins. Put project
+| specific styling in this file rather than editing public/theme/css/*, which is
+| vendor output and gets replaced wholesale on a theme update.
+|
+| Note: the starter's resources/css/app.css is deliberately NOT loaded on
+| dashboard pages -- its global reset fights Bootstrap.
+|
+*/
+
+/* Keeps generated showcase tables from forcing the page to scroll sideways. */
+.table-responsive {
+  width: 100%;
+}

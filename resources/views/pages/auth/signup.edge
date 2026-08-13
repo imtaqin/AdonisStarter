@@ -1,0 +1,60 @@
+@layouts.auth({
+  title: 'Create account',
+  heading: 'Create your account',
+  subtitle: 'It only takes a minute.',
+})
+  @form({ route: 'auth.register.store', method: 'POST' })
+    @field.root({ name: 'fullName' })
+      @!field.label({ text: 'Full name' })
+      @!input.control({
+        type: 'text',
+        autocomplete: 'name',
+        placeholder: 'Ada Lovelace',
+        autofocus: true,
+      })
+      @!field.error()
+    @end
+    @field.root({ name: 'email' })
+      @!field.label({ text: 'Email', required: true })
+      @!input.control({
+        type: 'email',
+        autocomplete: 'username',
+        placeholder: 'you@example.com',
+        required: true,
+      })
+      @!field.error()
+    @end
+    @field.root({ name: 'password' })
+      @!field.label({ text: 'Password', required: true })
+      @!input.control({ type: 'password', autocomplete: 'new-password', required: true })
+      @!field.help({ text: 'At least 8 characters.' })
+      @!field.error()
+    @end
+    @field.root({ name: 'passwordConfirmation' })
+      @!field.label({ text: 'Confirm password', required: true })
+      @!input.control({ type: 'password', autocomplete: 'new-password', required: true })
+      @!field.error()
+    @end
+    @!button({ type: 'submit', text: 'Create account', block: true })
+  @end
+  @slot('footer')
+    <p class="fs-12 text-muted mb-0">
+      
+      
+      
+      
+      
+      
+      Already have an account?
+
+
+
+
+
+
+      @link({ route: 'auth.login.show', class: 'text-primary' })
+        Sign in
+      @end
+    </p>
+  @end
+@end

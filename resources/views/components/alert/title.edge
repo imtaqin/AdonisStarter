@@ -1,0 +1,5 @@
+@let(titleFromSlot = await $slots.main())
+@let(title = titleFromSlot.trim() ? titleFromSlot : $props.get('text'))
+@let(classes = ['alert-heading', 'fw-semibold', 'fs-14', 'mb-1'])
+
+<h6 {{ $props.except(['text']).merge({ class: classes }).toAttrs() }}>{{{ title }}}</h6>

@@ -1,0 +1,91 @@
+{{--
+  Shared by users/create.edge and users/edit.edge.
+
+  Expects in scope:
+  roles             Role[]
+  user              User | undefined   (edit only)
+  assignedRoleIds   number[] | undefined
+  isEdit            boolean
+--}}
+@let(editing = typeof isEdit !== 'undefined' && isEdit)
+@let(assigned = typeof assignedRoleIds !== 'undefined' ? assignedRoleIds : [])
+
+<div class="row">
+  <div class="col-md-6">
+    @field.root({ name: 'fullName' })
+      @!field.label({ text: 'Full name' })
+      @!input.control({
+        type: 'text',
+        value: editing ? user.fullName : '',
+        placeholder: 'Ada Lovelace',
+        autofocus: true,
+      })
+      @!field.error()
+    @end
+  </div>
+
+  <div class="col-md-6">
+    @field.root({ name: 'email' })
+      @!field.label({ text: 'Email', required: true })
+      @!input.control({
+        type: 'email',
+        value: editing ? user.email : '',
+        placeholder: 'you@example.com',
+        required: true,
+      })
+      @!field.error()
+    @end
+  </div>
+
+  <div class="col-md-6">
+    @field.root({ name: 'password' })
+      @!field.label({ text: 'Password', required: !editing })
+      @!input.control({ type: 'password', autocomplete: 'new-password' })
+      @!field.help({
+        text: editing
+          ? 'Leave blank to keep the current password.'
+          : 'At least 8 characters.',
+      })
+      @!field.error()
+    @end
+  </div>
+
+  <div class="col-md-6">
+    @field.root({ name: 'isActive' })
+      @!field.label({ text: 'Status' })
+      @!ui.switch({
+        label: 'Account is active',
+        checked: editing ? user.isActive : true,
+      })
+      @!field.help({ text: 'Inactive accounts cannot sign in.' })
+      @!field.error()
+    @end
+  </div>
+</div>
+
+<hr class="my-4" />
+
+<div class="mb-3">
+  <label class="form-label d-block">Roles</label>
+  <p class="text-muted fs-12">Permissions are granted through roles.</p>
+  @checkbox.group({ name: 'roleIds' })
+    <div class="row">
+      @each(role in roles)
+        <div class="col-md-4">
+          @field.root({ id: `role-${role.id}` })
+            @!checkbox.control({
+              value: role.id,
+              checked: assigned.includes(role.id),
+            })
+            @field.label()
+              {{ role.name }}
+              @if(role.description)
+                <span class="d-block text-muted fs-11">{{ role.description }}</span>
+              @end
+            @end
+          @end
+        </div>
+      @end
+    </div>
+  @end
+</div>
