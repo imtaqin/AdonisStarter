@@ -34,6 +34,11 @@ const SERVERS = {
     args: ['--import=@poppinss/ts-exec', 'mcp/boost/server.ts'],
     note: 'This project: routes, schema, components, errors, memory, git context.',
   },
+  'adonis-docs': {
+    command: 'npx',
+    args: ['-y', 'mcp-adonis-docs'],
+    note: 'Official AdonisJS/Lucid/Edge/VineJS docs. Read before writing framework code.',
+  },
   'playwright': {
     command: 'npx',
     args: ['-y', '@playwright/mcp@latest', '--browser', 'chromium'],

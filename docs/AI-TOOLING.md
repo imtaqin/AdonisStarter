@@ -36,6 +36,30 @@ in the script. No new prose gets written.
 
 ---
 
+## 1b. Adonis Docs — read the framework before writing it
+
+Three MCP servers ship in every generated config. This one comes first in
+practice, because it is the one that stops wrong code being written at all:
+
+```
+adonis-docs    npx -y mcp-adonis-docs
+```
+
+It serves the official AdonisJS, Lucid, Edge and VineJS docs — `detect_version`,
+`search_docs`, `get_doc`.
+
+The stack is AdonisJS v7 alpha, Lucid 22, Edge 6. All moved recently, and a
+remembered API here usually belongs to the previous major. Worse, it fails
+silently: a mistyped Edge component tag renders as literal text and a wrong
+Lucid decorator simply never loads the relation, so neither the compiler nor
+the test suite catches it. `AGENTS.md` §1a makes the lookup mandatory before
+writing models, templates, validators, routes or middleware.
+
+Docs describe the framework; `AGENTS.md` describes the deliberate deviations in
+this app. Where they disagree, this repo wins.
+
+---
+
 ## 2. Adonis Boost — the project-aware MCP server
 
 The equivalent of Laravel Boost for this app. It **boots the real application**,
@@ -192,3 +216,13 @@ git_status            → what the working tree looks like
 Three calls, a few hundred tokens, and the agent is oriented. That is the whole
 point of this setup: cheaper and more reliable than reading twenty files and
 inferring.
+
+Then, the moment you are about to write framework code, one more:
+
+```
+search_docs "<the API you are about to use>"
+```
+
+Orientation tells you what this app decided; the docs tell you what the
+framework actually supports in the version it is pinned to. Skipping the second
+is how silent breakage gets written.

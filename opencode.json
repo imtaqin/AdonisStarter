@@ -10,6 +10,15 @@
       ],
       "enabled": true
     },
+    "adonis-docs": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "mcp-adonis-docs"
+      ],
+      "enabled": true
+    },
     "playwright": {
       "type": "local",
       "command": [

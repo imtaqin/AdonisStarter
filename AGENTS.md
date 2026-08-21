@@ -75,6 +75,47 @@ prefer Font Awesome for new code, but do not remove the others.
 
 ---
 
+## 1a. Documentation — read it before you write framework code
+
+This stack is **AdonisJS v7 alpha, Lucid 22, Edge 6, VineJS**. All four moved
+recently, and the APIs you remember are frequently the previous major. Guessing
+here does not raise a type error — it produces code that silently does nothing
+(a mistyped Edge tag renders as literal text; a wrong Lucid decorator just never
+loads the relation).
+
+So: **before writing code against any framework API, look it up.** The
+`adonis-docs` MCP server serves the official docs and ships in every generated
+agent config:
+
+```
+detect_version   → confirm which major you are actually on
+search_docs      → find the page for the thing you are about to write
+get_doc          → read it
+```
+
+Mandatory before you touch:
+
+| You are about to write                 | Read first                           |
+| -------------------------------------- | ------------------------------------ |
+| a model, relation, query, or migration | Lucid — relationships, query builder |
+| an Edge template, component, or slot   | Edge — components, slots, escaping   |
+| a validator                            | VineJS — schema, custom rules        |
+| a route, middleware, or exception      | AdonisJS core — HTTP, middleware     |
+| auth, session, shield, or limiter      | the docs for that package            |
+
+Two things the docs will not tell you, because they are ours: the rules in §1
+below, and what the app actually loaded right now — that is `adonis-boost` in
+§1b. Use both. `search_docs` tells you the API exists; `list_components` and
+`database_schema` tell you what this codebase named it.
+
+If the docs and this file disagree, **this file wins** — it records deviations
+we made deliberately. Say so rather than silently following the docs.
+
+Never paste an API from memory and let the browser find out. If you could not
+confirm it in the docs, say that in your reply instead of shipping a guess.
+
+---
+
 ## 1b. Tooling — use it before reading files
 
 This repo ships an MCP server, **adonis-boost**, that boots the real application

@@ -12,6 +12,14 @@
         "mcp/boost/server.ts"
       ]
     },
+    "adonis-docs": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-adonis-docs"
+      ]
+    },
     "playwright": {
       "type": "stdio",
       "command": "npx",

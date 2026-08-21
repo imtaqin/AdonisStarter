@@ -145,6 +145,23 @@ export function registerProjectTools(server: McpServer) {
           branding: 'config/dashboard.ts',
         },
         permissionSlugs: slugs,
+        readDocsFirst: {
+          rule: 'Before writing code against any framework API, look it up with the adonis-docs MCP server (detect_version, search_docs, get_doc). Do not write framework code from memory.',
+          why: 'AdonisJS v7 alpha, Lucid 22, Edge 6 and VineJS all moved recently, and a wrong API here fails silently rather than raising: a mistyped Edge tag renders as literal text, a wrong Lucid decorator just never loads the relation.',
+          mandatoryFor: {
+            'models, relations, queries, migrations': 'Lucid docs',
+            'Edge templates, components, slots': 'Edge docs',
+            'validators': 'VineJS docs',
+            'routes, middleware, exceptions': 'AdonisJS core HTTP docs',
+            'auth, session, shield, limiter': 'that package docs',
+          },
+          precedence:
+            'Docs describe the framework; project_conventions and AGENTS.md describe deliberate deviations in THIS app. Where they disagree, this project wins -- say so rather than silently following the docs.',
+          pairWith:
+            'search_docs proves the API exists; list_components, database_schema and list_routes tell you what this codebase named it. Use both.',
+          ifUnconfirmed:
+            'If you could not confirm an API in the docs, say so in your reply instead of shipping a guess.',
+        },
         changesets: {
           rule: 'Every task ships a changeset. Run `npm run changeset` before reporting work done -- it belongs next to `npm run typecheck` in the definition of done, not reserved for significant changes.',
           verify:
