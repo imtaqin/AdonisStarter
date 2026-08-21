@@ -21,7 +21,9 @@ export const controllers = {
     },
   },
   dashboard: {
-    Index: () => import('#controllers/Dashboard/index'),
+    index: {
+      Index: () => import('#controllers/Dashboard/Index/index'),
+    },
   },
   icon: {
     list: {
@@ -43,7 +45,9 @@ export const controllers = {
     },
   },
   showcase: {
-    Index: () => import('#controllers/Showcase/index'),
+    index: {
+      Index: () => import('#controllers/Showcase/Index/index'),
+    },
   },
   user: {
     create: {

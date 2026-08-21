@@ -149,25 +149,52 @@ is `public/assets` and `vite build` empties it, which would delete the theme.
 
 ## 3. Controllers
 
-One action group per folder, `index.ts` inside it. The generated barrel
-(`#generated/controllers`) mirrors the folder structure with lowercased
-directory keys and a PascalCase file key:
+**Every controller lives at `app/controllers/<Domain>/<Action>/index.ts`.**
+Three segments, always. There is no two-segment form: a domain with a single
+screen still gets an action folder named `Index`
+(`app/controllers/Profile/Index/index.ts`), never `app/controllers/Profile/index.ts`.
+One class per file, `export default`, one action group per folder.
 
-| File                                     | Barrel reference                  |
-| ---------------------------------------- | --------------------------------- |
-| `app/controllers/User/List/index.ts`     | `controllers.user.list.Index`     |
-| `app/controllers/Auth/Login/index.ts`    | `controllers.auth.login.Index`    |
-| `app/controllers/AuditLog/List/index.ts` | `controllers.auditLog.list.Index` |
-| `app/controllers/Dashboard/index.ts`     | `controllers.dashboard.Index`     |
+`<Domain>` is PascalCase and singular (`User`, `Role`, `AuditLog`, `OrgUnit`).
+`<Action>` comes from this vocabulary — do not invent synonyms:
 
-Method convention: `show()` renders a form, `handle()` does the work. Single
-action controllers just have `handle()`.
+| Action   | Serves                                                    | Methods              |
+| -------- | --------------------------------------------------------- | -------------------- |
+| `List`   | the index/table screen                                    | `handle()`           |
+| `Create` | `GET create` form + `POST create`                         | `show()`, `handle()` |
+| `Update` | `GET :id/edit` form + `POST :id/edit`                     | `show()`, `handle()` |
+| `Delete` | `POST :id/delete`                                         | `handle()`           |
+| `Show`   | a read-only detail screen                                 | `handle()`           |
+| `Index`  | a domain that is one screen (Profile, Setting, Dashboard) | `handle()`           |
+
+`show()` renders a form, `handle()` does the work. A controller that only reads
+has `handle()` alone. Note the split: the **route** is named `users.edit`, the
+**controller** is `User/Update` — the folder is named after the mutation, not
+after the URL.
+
+HTTP controllers sit at the root of `app/controllers/`. JSON controllers for the
+mobile/API surface go under an `Api/` domain prefix that mirrors the same shape:
+`app/controllers/Api/<Domain>/<Action>/index.ts`. Nothing else is allowed at the
+top level.
+
+The generated barrel (`#generated/controllers`) mirrors the folders with
+lowercased directory keys and a PascalCase file key, so the path is the route
+reference:
+
+| File                                       | Barrel reference                    |
+| ------------------------------------------ | ----------------------------------- |
+| `app/controllers/User/List/index.ts`       | `controllers.user.list.Index`       |
+| `app/controllers/User/Update/index.ts`     | `controllers.user.update.Index`     |
+| `app/controllers/AuditLog/List/index.ts`   | `controllers.auditLog.list.Index`   |
+| `app/controllers/Dashboard/Index/index.ts` | `controllers.dashboard.index.Index` |
+| `app/controllers/Api/Auth/Login/index.ts`  | `controllers.api.auth.login.Index`  |
 
 Take the whole `ctx` (not destructured params) in any action that writes to the
 audit log — `AuditLogger` needs it for the actor, IP and user agent.
 
 **Copy `app/controllers/User/` when adding a resource.** It is the reference
-implementation: validate → mutate → audit → flash → redirect.
+implementation: four action folders, and each `handle()` runs
+validate → mutate → audit → flash → redirect.
 
 ---
 
@@ -245,6 +272,8 @@ npm run lint
 node ace migration:run    # also regenerates database/schema.ts
 node ace db:seed          # idempotent: permissions, roles, admin user
 node scripts/convert-showcase-pages.mjs   # regenerate showcase pages
+npm run agents:check      # agent configs in sync with this file
+npm run changeset         # record a change note (see §9)
 ```
 
 Seeded admin: `ADMIN_EMAIL` / `ADMIN_PASSWORD` in `.env`
@@ -262,3 +291,42 @@ generated, overwritten by the converter, full of dummy data, and behind auth.
 Use them to copy markup into a real page. When you no longer need them, delete
 `resources/views/pages/showcase/`, `start/routes/showcase.ts`, the
 `config/showcase.ts` file and the Template Reference section of `config/menu.ts`.
+
+---
+
+## 9. Changesets — every task ships one
+
+**No work is finished without a changeset.** Not "when a rule changes", not
+"when it feels significant" — every task. If you touched the repo, you write
+one before you report done, in the same breath as `npm run typecheck`.
+
+```bash
+npm run changeset        # write the note, pick the bump
+npm run changeset:check  # fails if the branch has changes and no changeset
+npm run version          # consume .changeset/*.md -> CHANGELOG.md + package.json
+```
+
+This scaffold is a private single package — nothing is published to npm. There
+is no publish step; do not run `changeset publish`. Changesets is used for one
+thing: turning intent into `CHANGELOG.md`, so the next agent learns _what
+changed and why_ without doing archaeology through commit messages.
+
+That is also why the note is prose, not a commit subject. Write what a future
+agent needs: what the old behaviour was, what it is now, and what made the
+change necessary. `git log` already records which lines moved — the changeset is
+for the part git cannot store.
+
+The bump answers "what must a consumer of this scaffold do about it?"
+
+| Bump    | Means                                                          |
+| ------- | -------------------------------------------------------------- |
+| `major` | a rule changed such that existing code is now wrong            |
+| `minor` | new capability — a component, MCP tool, middleware, convention |
+| `patch` | a fix, a clarification, or a doc edit that breaks nothing      |
+
+A `major` changeset must end with a **Migrating:** paragraph naming the exact
+mechanical edit. If you cannot write that paragraph, the change is not ready.
+
+The only exemptions are changes that cannot affect anyone reading the repo:
+lockfile-only updates, and edits confined to `.changeset/` itself.
+`changeset:check` already encodes exactly this list — if it passes, you are done.

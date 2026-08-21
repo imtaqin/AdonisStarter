@@ -19,7 +19,10 @@
     "mcp:inspect": "npx -y @modelcontextprotocol/inspector node --import=@poppinss/ts-exec mcp/boost/server.ts",
     "agents:sync": "node scripts/sync-agent-configs.mjs",
     "agents:check": "node scripts/sync-agent-configs.mjs --check",
-    "theme:fontawesome": "node scripts/vendor-fontawesome.mjs"
+    "theme:fontawesome": "node scripts/vendor-fontawesome.mjs",
+    "changeset": "changeset",
+    "version": "changeset version",
+    "changeset:check": "node scripts/check-changeset.mjs"
   },
   "imports": {
     "#controllers/*": "./app/controllers/*.js",
@@ -45,6 +48,7 @@
     "@adonisjs/eslint-config": "^3.1.0",
     "@adonisjs/prettier-config": "^1.5.0",
     "@adonisjs/tsconfig": "^2.0.0",
+    "@changesets/cli": "^3.0.1",
     "@japa/assert": "^4.2.0",
     "@japa/browser-client": "^2.3.0",
     "@japa/plugin-adonisjs": "^5.2.0",
