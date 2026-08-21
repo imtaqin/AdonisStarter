@@ -371,3 +371,47 @@ mechanical edit. If you cannot write that paragraph, the change is not ready.
 The only exemptions are changes that cannot affect anyone reading the repo:
 lockfile-only updates, and edits confined to `.changeset/` itself.
 `changeset:check` already encodes exactly this list — if it passes, you are done.
+
+---
+
+## 10. Working from a folder of documents
+
+When you are pointed at a directory of specs, notes or markdown — "implement
+what's in `docs/spec/`" — the danger is not the code. It is that reading twenty
+files fills your context, the original task falls out of it, and you finish
+something adjacent to what was asked. Context is not durable. Follow this.
+
+**1. Index before you read.** List the folder and read only each file's title
+and headings. Build a one-line-per-file map. Do not bulk-read the directory into
+context — that is the mistake the rest of this protocol exists to prevent.
+
+**2. Write the ledger before you write any code.** One `memory_write` note,
+kind `todo`, containing:
+
+- the task in a single sentence, in the requester's own words
+- the source folder, and which files are in scope
+- a checklist: one line per unit of work, each `[ ]` / `[x]` / `[skip: why]`
+- an **Open questions** list for contradictions you hit
+
+This note — not your context window — is the source of truth for what you are
+doing. Reuse the same `slug` on every update so it stays one note.
+
+**3. Work one checklist item at a time.** Read that item's file _when you reach
+it_, implement, verify, then `memory_write` the ledger with the box ticked. If
+you are interrupted or compacted, `memory_list` recovers the whole task.
+
+**4. Reconcile, do not transcribe.** Specs describe intent; §1, §1a and §3
+describe how this codebase does things. Where a document contradicts them,
+**this repo wins** — record the conflict under Open questions and say so in
+your reply. A spec that predates a convention is not permission to break it.
+
+**5. Never silently narrow scope.** If the folder is larger than the work you
+can finish, say what you left out and why. A `[skip: ...]` line in the ledger
+is honest; a checklist quietly missing three files is not.
+
+**6. Finish per §9** — a changeset, and the ledger note deleted with
+`memory_delete` once every box is ticked. A stale `todo` note read as live work
+by the next agent is worse than no note at all.
+
+The ledger costs about thirty seconds. It is the difference between an
+interruption costing you one item and costing you the entire task.

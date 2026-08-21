@@ -145,6 +145,20 @@ export function registerProjectTools(server: McpServer) {
           branding: 'config/dashboard.ts',
         },
         permissionSlugs: slugs,
+        workingFromADocumentFolder: {
+          when: 'You are pointed at a directory of specs, notes or markdown -- "implement what is in docs/spec/".',
+          risk: 'Reading twenty files fills your context, the original task falls out of it, and you finish something adjacent to what was asked. Context is not durable; the ledger below is.',
+          protocol: [
+            '1. Index first: list the folder, read only titles and headings, build a one-line-per-file map. Never bulk-read the directory into context.',
+            '2. Before writing code, memory_write a note of kind "todo" holding: the task in one sentence in the requester words, the source folder and files in scope, a checklist of [ ] / [x] / [skip: why], and an Open questions list.',
+            '3. Work one checklist item at a time. Read that item file when you reach it, implement, verify, then memory_write the ledger with the box ticked. Reuse the same slug so it stays one note.',
+            '4. Reconcile, do not transcribe. Where a document contradicts project_conventions or AGENTS.md, this repo wins -- record the conflict under Open questions and say so in your reply.',
+            '5. Never silently narrow scope. If the folder is larger than what you can finish, say what you left out. A [skip: ...] line is honest; a checklist quietly missing files is not.',
+            '6. Finish with a changeset, then memory_delete the ledger. A stale todo note read as live work by the next agent is worse than no note.',
+          ],
+          recovery:
+            'If you were interrupted or compacted, memory_list recovers the whole task -- look for a note of kind "todo" before assuming you are starting fresh.',
+        },
         readDocsFirst: {
           rule: 'Before writing code against any framework API, look it up with the adonis-docs MCP server (detect_version, search_docs, get_doc). Do not write framework code from memory.',
           why: 'AdonisJS v7 alpha, Lucid 22, Edge 6 and VineJS all moved recently, and a wrong API here fails silently rather than raising: a mistyped Edge tag renders as literal text, a wrong Lucid decorator just never loads the relation.',
