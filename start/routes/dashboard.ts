@@ -9,6 +9,6 @@ import { middleware } from '#start/kernel'
 */
 
 router
-  .get('/', [controllers.dashboard.Index, 'handle'])
+  .get('/', [controllers.dashboard.index.Index, 'handle'])
   .as('dashboard')
   .use([middleware.auth(), middleware.noCache()])

@@ -6,7 +6,7 @@ import Role from '#models/role'
 import User from '#models/user'
 
 /**
- * Routed as `controllers.dashboard.Index`.
+ * Routed as `controllers.dashboard.index.Index`.
  *
  * Every number on this screen comes from a real query -- there is no
  * placeholder data to strip out when you build on it.

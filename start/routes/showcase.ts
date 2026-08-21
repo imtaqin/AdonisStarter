@@ -16,7 +16,7 @@ import { middleware } from '#start/kernel'
 */
 
 router
-  .get('showcase/:page', [controllers.showcase.Index, 'handle'])
+  .get('showcase/:page', [controllers.showcase.index.Index, 'handle'])
   .as('showcase')
   .where('page', /^[a-z0-9-]+$/)
   .use(middleware.auth())

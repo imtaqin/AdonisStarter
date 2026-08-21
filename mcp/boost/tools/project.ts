@@ -145,6 +145,36 @@ export function registerProjectTools(server: McpServer) {
           branding: 'config/dashboard.ts',
         },
         permissionSlugs: slugs,
+        changesets: {
+          rule: 'Every task ships a changeset. Run `npm run changeset` before reporting work done -- it belongs next to `npm run typecheck` in the definition of done, not reserved for significant changes.',
+          verify:
+            'npm run changeset:check -- fails when the diff against main has no note describing it.',
+          why: 'Private single package, nothing is published. The note exists so the next agent learns what changed and why without archaeology through commits. Do not run `changeset publish`.',
+          bump: {
+            major:
+              'a rule changed such that existing code is now wrong -- must end with a Migrating: paragraph',
+            minor: 'new capability: a component, MCP tool, middleware, convention',
+            patch: 'a fix, clarification, or doc edit that breaks nothing',
+          },
+          exempt: 'Lockfile-only changes and edits inside .changeset/ itself. Nothing else.',
+        },
+        controllerLayout: {
+          path: 'app/controllers/<Domain>/<Action>/index.ts',
+          rule: 'Always three segments. A domain with a single screen still gets an action folder named Index (Profile/Index/index.ts) -- never Profile/index.ts.',
+          domain: 'PascalCase, singular: User, Role, AuditLog, OrgUnit.',
+          actions: {
+            List: 'index/table screen -- handle()',
+            Create: 'GET create form + POST create -- show(), handle()',
+            Update: 'GET :id/edit form + POST :id/edit -- show(), handle()',
+            Delete: 'POST :id/delete -- handle()',
+            Show: 'read-only detail screen -- handle()',
+            Index: 'a domain that is one screen -- handle()',
+          },
+          note: 'The route is named users.edit but the controller folder is User/Update -- named after the mutation, not the URL.',
+          api: 'JSON controllers mirror the same shape under an Api/ prefix: app/controllers/Api/<Domain>/<Action>/index.ts. Nothing else is allowed at the top level.',
+          barrel:
+            'Path maps to #generated/controllers: User/Update/index.ts -> controllers.user.update.Index, Api/Auth/Login/index.ts -> controllers.api.auth.login.Index.',
+        },
         addAPage: [
           'app/controllers/<Domain>/<Action>/index.ts  (show() renders, handle() acts)',
           'start/routes/<domain>.ts  (named route + auth + permission middleware)',
