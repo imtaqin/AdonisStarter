@@ -1,10 +1,11 @@
 {{--
   Top bar. The class names here are load-bearing: /theme/js/defaultmenu.min.js
-  and custom-switcher.min.js hook onto `.sidemenu-toggle`, `.layout-setting`,
-  `.switcher-icon` and `.header-link`. Rename them and the theme stops working.
+  hooks onto `.sidemenu-toggle` and `.header-link`. Rename them and the theme
+  stops working.
 
-  The template's demo cart and notification dropdowns have been removed -- add
-  them back from template/HTML/src/html/partials/header.html if you need them.
+  The template's demo cart and notification dropdowns, and its theme switcher
+  gear, have been removed -- add them back from
+  template/HTML/src/html/partials/header.html if you need them.
 --}}
 <header class="app-header">
   <div class="main-header-container container-fluid">
@@ -151,17 +152,6 @@
           <a href="{{ route('auth.login.show') }}" class="btn btn-primary btn-sm">Sign in</a>
         </div>
       @end
-
-      <div class="header-element">
-        <a
-          href="#"
-          class="header-link switcher-icon"
-          data-bs-toggle="offcanvas"
-          data-bs-target="#switcher-canvas"
-        >
-          <i class="fa-solid fa-gear header-link-icon"></i>
-        </a>
-      </div>
     </div>
   </div>
 </header>

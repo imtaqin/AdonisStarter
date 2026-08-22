@@ -52,7 +52,6 @@
     <link href="/theme/libs/node-waves/waves.min.css" rel="stylesheet" />
     <link href="/theme/libs/simplebar/simplebar.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="/theme/libs/flatpickr/flatpickr.min.css" />
-    <link rel="stylesheet" href="/theme/libs/@simonwep/pickr/themes/nano.min.css" />
     <link rel="stylesheet" href="/theme/libs/choices.js/public/assets/styles/choices.min.css" />
 
     @if($slots.styles)
@@ -65,7 +64,6 @@
   </head>
 
   <body class="{{ $props.get('bodyClass', '') }}">
-    @include('partials/dashboard/switcher')
     @include('partials/dashboard/loader')
 
     <div class="page">
@@ -127,8 +125,6 @@
     <script src="/theme/js/sticky.js"></script>
     <script src="/theme/libs/simplebar/simplebar.min.js"></script>
     <script src="/theme/js/simplebar.js"></script>
-    <script src="/theme/libs/@simonwep/pickr/pickr.min.js"></script>
-    <script src="/theme/js/custom-switcher.min.js"></script>
 
     @if($slots.scripts)
       {{{ await $slots.scripts() }}}
