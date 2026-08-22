@@ -266,7 +266,6 @@ const menu: MenuNode[] = [
       { label: 'Vector Maps', url: '/showcase/vector-maps' },
     ],
   },
-  { label: 'Icons', icon: 'fa-solid fa-icons', url: '/showcase/icons' },
 ]
 
 export default menu
