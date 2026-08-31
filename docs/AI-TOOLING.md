@@ -154,10 +154,11 @@ destructive code without being asked.
 
 | Tool                            | Use it for                                                |
 | ------------------------------- | --------------------------------------------------------- |
-| `memory_list`                   | Everything remembered. Call it at the start of a session. |
+| `memory_list`                   | Everything remembered, plus any open handoff. Call it at the start of a session. |
 | `memory_read` / `memory_search` | Retrieve one note, or search all of them.                 |
 | `memory_write`                  | Record a decision, gotcha or preference.                  |
 | `memory_delete`                 | Remove a note that turned out to be wrong.                |
+| `session_handoff`               | Hand unfinished work to the next session or agent.        |
 
 **Git as context**
 
@@ -203,12 +204,47 @@ memory — it is a comment in the wrong place.
 Always write the _why_. "We use GET/POST only because the team standardised on
 it" survives; "no PUT" does not explain itself six weeks later.
 
+### Handing over unfinished work
+
+`memory_write` records what outlives a task. `session_handoff` records the task
+**still in flight** — and it is what makes one context work across agents.
+
+Every agent wired to this repo talks to the same MCP server and the same
+committed `.agent/memory/`, so a handoff written by Claude on Monday is picked up
+by Cursor on Tuesday, or by Gemini on another machine, verbatim. There is exactly
+one open handoff at a time, at `.agent/memory/session-handoff.md`.
+
+```
+session_handoff
+  task      "the goal in the requester's own words, one sentence"
+  done      ["what is finished AND how it was verified"]
+  next      ["what remains, in order — first item immediately actionable"]
+  watchOut  ["dead ends already tried, traps found"]
+  files     ["paths touched or in scope"]
+```
+
+`memory_list` then answers `resuming: true` and lifts the handoff above the note
+list, so the next session cannot scroll past it.
+
+When the work is genuinely finished:
+
+```
+session_handoff  done_all: true
+```
+
+That clears the baton. Leaving a finished handoff in place is worse than never
+writing one — the next agent reads it as live work and redoes what you completed.
+
+Write `done` as verified facts, not intentions. "Login renders, checked in the
+browser: 200, fields present, 0 broken images" is a handoff. "Fixed login" is a
+guess the next agent has to re-verify from scratch.
+
 ---
 
 ## 4. A good opening move
 
 ```
-memory_list           → what was already decided
+memory_list           → what was already decided, and whether you are resuming
 project_conventions   → the rules that break silently
 git_status            → what the working tree looks like
 ```
@@ -216,6 +252,9 @@ git_status            → what the working tree looks like
 Three calls, a few hundred tokens, and the agent is oriented. That is the whole
 point of this setup: cheaper and more reliable than reading twenty files and
 inferring.
+
+If `memory_list` answers `resuming: true`, stop and read the handoff first. You
+are continuing someone else's work, and half of it may already be done.
 
 Then, the moment you are about to write framework code, one more:
 

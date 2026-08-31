@@ -103,7 +103,6 @@ const REAL_ROUTES = {
   'index': '/',
   'sign-in': '/login',
   'sign-up': '/signup',
-  'forgot-password': '/forgot-password',
 }
 
 export function slugify(fileName) {

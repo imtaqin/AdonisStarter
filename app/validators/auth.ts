@@ -11,7 +11,3 @@ export const loginValidator = vine.create({
   password: vine.string(),
   rememberMe: vine.boolean().optional(),
 })
-
-export const forgotPasswordValidator = vine.create({
-  email: vine.string().trim().email().maxLength(254),
-})

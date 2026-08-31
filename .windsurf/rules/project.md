@@ -9,10 +9,10 @@ trigger: always_on
 Read **[AGENTS.md](./AGENTS.md)** — it is the single source of truth for this
 project and is kept deliberately short.
 
-Start with section 1, "Non-obvious rules". Four behaviours in this stack break
+Start with section 1, "Non-obvious rules". Five behaviours in this stack break
 silently if you guess at them: the generated `database/schema.ts`, Edge's
-camelCased component tag names, block tags inside HTML attributes, and `@each`
-expressions.
+camelCased component tag names, block tags inside HTML attributes, `@each`
+expressions, and wrong Font Awesome icon classes.
 
 ## Tooling
 

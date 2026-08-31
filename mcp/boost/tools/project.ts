@@ -137,12 +137,42 @@ export function registerProjectTools(server: McpServer) {
           'Edge camelCases component tag names from the file path. A wrong name renders as literal text, it does not error. Use list_components.',
           'Block tags (@if/@each) cannot appear inline inside an HTML tag; use ternary interpolation for conditional attributes.',
           '@each needs a bare identifier — hoist `x || []` into an @let first.',
+          'A wrong Font Awesome class renders as blank space with no error. Never guess one — call search_icons.',
           'This app uses GET and POST only. No PUT/PATCH/DELETE.',
         ],
+        crossSession: {
+          rule: 'This project keeps one shared memory for every agent that connects — Claude, Cursor, Gemini, Kimi, Cline, Copilot, Aider, Windsurf, opencode. It lives in .agent/memory/ and is COMMITTED, so context crosses sessions, machines and tools.',
+          onStart:
+            'memory_list first. If it answers resuming:true there is an open handoff: memory_read("session-handoff") and continue that work rather than starting over.',
+          onStop:
+            'Stopping with work unfinished? Call session_handoff with the task in the requester words, what is done AND how you verified it, what is next in order, and the dead ends already tried. What is not in the handoff did not happen.',
+          onFinish:
+            'session_handoff with done_all:true clears the baton. A stale handoff read as live work by the next agent is worse than no handoff.',
+          durable:
+            'memory_write is for what outlives the task (decisions, gotchas, preferences); session_handoff is for the task still in flight. Do not use memory_write to fake a handoff.',
+        },
+        database: {
+          rule: "The driver is selected by the DB_CONNECTION env var, never by editing config/database.ts. All five connections (sqlite, pg, mysql, mssql, libsql) are registered; the default is env.get('DB_CONNECTION', 'sqlite').",
+          toSwitch:
+            'Set DB_CONNECTION plus that driver vars (DB_HOST/PORT/USER/PASSWORD/DATABASE, or LIBSQL_URL/LIBSQL_AUTH_TOKEN) and install its package: pg, mysql2, tedious, or @libsql/client @libsql/sqlite3. SQLite needs nothing and stays the default; DB_FILENAME overrides its path.',
+          doNotFix:
+            'Two deliberate quirks live in config/database.ts: MSSQL server falls back to localhost because Lucid types it as a required string, and the libsql connection carries an `as unknown as { filename: string }` because Lucid still types it as filename while Turso wants url + authToken.',
+        },
         singleSourcesOfTruth: {
-          navigation: 'config/menu.ts',
+          navigation: 'config/menu.ts — Font Awesome classes only, never Tabler',
           permissions: 'config/permissions.ts',
-          branding: 'config/dashboard.ts',
+          branding:
+            'config/dashboard.ts — read through the brandLogos Edge global, never hardcode /theme/images/brand-logos/* paths',
+        },
+        showcaseBoundary: {
+          whatItIs:
+            'resources/views/pages/showcase/ is 98 GENERATED template pages served at /showcase/:page. Reference markup, not application code.',
+          authIsNotShowcase:
+            'pages/auth/ and pages/errors/ are hand-written against real controllers and the converter skips them on purpose. @layouts.auth is the ONLY sign-in style the app has. The theme other auth screens (forgot-password, create-password, lock-screen, cover/split-screen) exist only as raw HTML under template/HTML/src/html/ and must be ported by hand into a controller + route + view.',
+          neverLinkTo:
+            'Never point a nav entry or link at a /showcase/* auth mockup — they compete with the real /login. A dead group doing exactly that was removed.',
+          removalTouchesNine:
+            'Deleting the showcase touches nine places, listed in AGENTS.md section 8. The two most missed: config/menu.ts holds FIVE category dividers of showcase nav (not one contiguous section), and partials/dashboard/header.edge + search_modal.edge hard-link into /showcase/*.',
         },
         permissionSlugs: slugs,
         workingFromADocumentFolder: {

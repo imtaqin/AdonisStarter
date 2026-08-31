@@ -19,6 +19,16 @@ const MEMORY_DIR = fileURLToPath(new URL('.agent/memory/', APP_ROOT))
 
 const KIND = z.enum(['decision', 'gotcha', 'preference', 'todo', 'reference'])
 
+/**
+ * The one slug every agent looks for when it starts. A session that ends with
+ * unfinished work writes it; the next session -- possibly a different agent, on
+ * a different machine, days later -- reads it before assuming a clean start.
+ *
+ * Single fixed slug on purpose: a discoverable name beats a searchable one, and
+ * one open handoff is a queue, several are an argument.
+ */
+const HANDOFF_SLUG = 'session-handoff'
+
 function slugify(name: string) {
   return name
     .toLowerCase()
@@ -96,14 +106,15 @@ export function registerMemoryTools(server: McpServer) {
     {
       title: 'List project memory',
       description:
-        'Durable notes about this project: decisions, gotchas, preferences. Call this at the start of a session — it is cheap and prevents repeating work that was already settled.',
+        'Durable notes about this project: decisions, gotchas, preferences, and any unfinished work handed over by the previous session. Call this at the start of a session — it is cheap, it prevents repeating work that was already settled, and it is how you discover you are resuming rather than starting.',
       inputSchema: {
         kind: KIND.optional(),
         tag: z.string().optional(),
       },
     },
     async ({ kind, tag }) => {
-      const entries = readAll()
+      const all = readAll()
+      const entries = all
         .filter((entry) => !kind || entry.kind === kind)
         .filter((entry) => !tag || entry.tags.includes(tag))
         .map(({ slug, title, kind: entryKind, tags, updated }) => ({
@@ -114,7 +125,22 @@ export function registerMemoryTools(server: McpServer) {
           updated,
         }))
 
+      /**
+       * An open handoff is the one thing an agent must not scroll past, so it
+       * is lifted out of the list rather than left as row N of six.
+       */
+      const handoff = all.find((entry) => entry.slug === HANDOFF_SLUG)
+
       return text({
+        resuming: Boolean(handoff),
+        openHandoff: handoff
+          ? {
+              slug: handoff.slug,
+              title: handoff.title,
+              updated: handoff.updated,
+              action: `The previous session left unfinished work. Read it with memory_read("${HANDOFF_SLUG}") and continue from there instead of starting over. Call session_handoff with done:true once the work is finished.`,
+            }
+          : null,
         total: entries.length,
         hint: 'Use memory_read to get the body of one entry.',
         entries,
@@ -221,6 +247,94 @@ export function registerMemoryTools(server: McpServer) {
       fs.rmSync(file)
       writeIndex()
       return text({ slug: id, action: 'deleted' })
+    }
+  )
+
+  server.registerTool(
+    'session_handoff',
+    {
+      title: 'Hand work over to the next session',
+      description:
+        'Write the baton for whoever picks this up next — a different agent, a different machine, or you after a compaction. Call it when you stop with work unfinished, and call it again with done:true the moment the work is complete. One handoff exists at a time; writing replaces it. This is the only state that survives a session, so what is not in here did not happen.',
+      inputSchema: {
+        task: z
+          .string()
+          .optional()
+          .describe("The goal in one sentence, in the requester's own words — not your paraphrase"),
+        done: z
+          .array(z.string())
+          .optional()
+          .describe('What is finished AND verified. Say how it was verified.'),
+        next: z
+          .array(z.string())
+          .optional()
+          .describe('What remains, in order. First item should be immediately actionable.'),
+        watchOut: z
+          .array(z.string())
+          .optional()
+          .describe(
+            'Dead ends already tried, and traps found. Saves the next agent the same hour.'
+          ),
+        files: z.array(z.string()).optional().describe('Paths already touched or in scope'),
+        done_all: z
+          .boolean()
+          .optional()
+          .describe('True when the whole task is finished — clears the handoff'),
+      },
+    },
+    async ({ task, done, next, watchOut, files, done_all }) => {
+      ensureDir()
+      const file = path.join(MEMORY_DIR, `${HANDOFF_SLUG}.md`)
+
+      if (done_all) {
+        if (!fs.existsSync(file)) {
+          return text({ action: 'noop', note: 'No open handoff to clear.' })
+        }
+        fs.rmSync(file)
+        writeIndex()
+        return text({
+          action: 'cleared',
+          note: 'Handoff removed. A stale baton read as live work by the next agent is worse than no baton at all.',
+        })
+      }
+
+      if (!task) {
+        return failure(
+          'A handoff needs `task` — the goal in one sentence. Pass done_all:true instead if the work is finished.'
+        )
+      }
+
+      const section = (heading: string, items?: string[]) =>
+        items?.length ? [`## ${heading}`, '', ...items.map((i) => `- ${i}`), ''] : []
+
+      const body = [
+        `**Task:** ${task}`,
+        '',
+        ...section('Done (verified)', done),
+        ...section('Next', next),
+        ...section('Watch out', watchOut),
+        ...section('Files in scope', files),
+      ].join('\n')
+
+      const front = [
+        '---',
+        'title: Unfinished work handed to the next session',
+        'kind: todo',
+        'tags: handoff, session',
+        `updated: ${new Date().toISOString().slice(0, 10)}`,
+        '---',
+        '',
+      ].join('\n')
+
+      fs.writeFileSync(file, front + body.trim() + '\n')
+      writeIndex()
+
+      return text({
+        slug: HANDOFF_SLUG,
+        action: 'saved',
+        file: `.agent/memory/${HANDOFF_SLUG}.md`,
+        note: 'The next session sees this in memory_list before it does anything else. Commit it — a handoff that only exists on your machine is not shared context.',
+      })
     }
   )
 }

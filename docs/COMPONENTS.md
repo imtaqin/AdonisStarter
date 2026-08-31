@@ -192,10 +192,10 @@ Sizing: `fa-xs fa-sm fa-lg fa-xl fa-2x … fa-10x`, plus `fa-fw` for fixed width
 
 **Never guess an icon name.** Font Awesome renders an unknown class as empty
 space with no error. Use the `search_icons` MCP tool, which returns the exact
-string. `thin` and `sharp-*` are not vendored — see AGENTS.md §1 rule 4b.
+string. `thin` and `sharp-*` are not vendored — see AGENTS.md §1 rule 5.
 
-`config/menu.ts` and the showcase pages still use Tabler (`ti ti-*`) and the
-other theme icon sets. Both work; prefer Font Awesome for new code.
+The generated showcase pages still use Tabler (`ti ti-*`) and the other theme
+icon sets. `config/menu.ts` is Font Awesome only. Prefer Font Awesome for new code.
 
 ---
 

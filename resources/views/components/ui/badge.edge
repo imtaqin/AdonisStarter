@@ -4,7 +4,7 @@
   variant  string   primary | secondary | success | danger | warning | info | light | dark
   soft     boolean  use the theme's translucent style
   pill     boolean  fully rounded
-  icon     string   Tabler icon class
+  icon     string   Font Awesome class
 --}}
 @let(textFromSlot = await $slots.main())
 @let(label = textFromSlot.trim() ? textFromSlot : ($props.get('text') ?? ''))

@@ -1,11 +1,13 @@
 import app from '@adonisjs/core/services/app'
+import env from '#start/env'
 import { defineConfig } from '@adonisjs/lucid'
 
 const dbConfig = defineConfig({
   /**
-   * Default connection used for all queries.
+   * Default connection — driven by DB_CONNECTION env.
+   * Defaults to sqlite for zero-config local dev.
    */
-  connection: 'sqlite',
+  connection: env.get('DB_CONNECTION', 'sqlite') as string,
 
   /**
    * Pretty-print SQL debug output in development logs.
@@ -14,101 +16,100 @@ const dbConfig = defineConfig({
 
   connections: {
     /**
-     * SQLite connection (default).
+     * SQLite — zero-config default (better-sqlite3).
+     * Override file with DB_FILENAME, else tmp/db.sqlite3.
      */
     sqlite: {
       client: 'better-sqlite3',
       connection: {
-        filename: app.tmpPath('db.sqlite3'),
+        filename: env.get('DB_FILENAME') ?? app.tmpPath('db.sqlite3'),
       },
       useNullAsDefault: true,
       migrations: {
         naturalSort: true,
         paths: ['database/migrations'],
       },
-      /**
-       * Emit SQL queries to the logger in development.
-       */
       debug: app.inDev,
     },
 
     /**
-     * PostgreSQL connection.
-     * Install package to switch: npm install pg
+     * PostgreSQL — set DB_CONNECTION=pg + DB_HOST/PORT/USER/PASSWORD/DATABASE
+     * Requires: npm install pg
      */
-    // pg: {
-    //   client: 'pg',
-    //   connection: {
-    //     host: env.get('DB_HOST'),
-    //     port: env.get('DB_PORT'),
-    //     user: env.get('DB_USER'),
-    //     password: env.get('DB_PASSWORD'),
-    //     database: env.get('DB_DATABASE'),
-    //   },
-    //   migrations: {
-    //     naturalSort: true,
-    //     paths: ['database/migrations'],
-    //   },
-    //   debug: app.inDev,
-    // },
+    pg: {
+      client: 'pg',
+      connection: {
+        host: env.get('DB_HOST'),
+        port: env.get('DB_PORT'),
+        user: env.get('DB_USER'),
+        password: env.get('DB_PASSWORD'),
+        database: env.get('DB_DATABASE'),
+      },
+      migrations: {
+        naturalSort: true,
+        paths: ['database/migrations'],
+      },
+      debug: app.inDev,
+    },
 
     /**
-     * MySQL / MariaDB connection.
-     * Install package to switch: npm install mysql2
+     * MySQL / MariaDB — set DB_CONNECTION=mysql
+     * Requires: npm install mysql2
      */
-    // mysql: {
-    //   client: 'mysql2',
-    //   connection: {
-    //     host: env.get('DB_HOST'),
-    //     port: env.get('DB_PORT'),
-    //     user: env.get('DB_USER'),
-    //     password: env.get('DB_PASSWORD'),
-    //     database: env.get('DB_DATABASE'),
-    //   },
-    //   migrations: {
-    //     naturalSort: true,
-    //     paths: ['database/migrations'],
-    //   },
-    //   debug: app.inDev,
-    // },
+    mysql: {
+      client: 'mysql2',
+      connection: {
+        host: env.get('DB_HOST'),
+        port: env.get('DB_PORT'),
+        user: env.get('DB_USER'),
+        password: env.get('DB_PASSWORD'),
+        database: env.get('DB_DATABASE'),
+      },
+      migrations: {
+        naturalSort: true,
+        paths: ['database/migrations'],
+      },
+      debug: app.inDev,
+    },
 
     /**
-     * Microsoft SQL Server connection.
-     * Install package to switch: npm install tedious
+     * MSSQL — set DB_CONNECTION=mssql
+     * Requires: npm install tedious
      */
-    // mssql: {
-    //   client: 'mssql',
-    //   connection: {
-    //     server: env.get('DB_HOST'),
-    //     port: env.get('DB_PORT'),
-    //     user: env.get('DB_USER'),
-    //     password: env.get('DB_PASSWORD'),
-    //     database: env.get('DB_DATABASE'),
-    //   },
-    //   migrations: {
-    //     naturalSort: true,
-    //     paths: ['database/migrations'],
-    //   },
-    //   debug: app.inDev,
-    // },
+    mssql: {
+      client: 'mssql',
+      connection: {
+        server: env.get('DB_HOST') ?? 'localhost',
+        port: env.get('DB_PORT'),
+        user: env.get('DB_USER'),
+        password: env.get('DB_PASSWORD'),
+        database: env.get('DB_DATABASE'),
+      },
+      migrations: {
+        naturalSort: true,
+        paths: ['database/migrations'],
+      },
+      debug: app.inDev,
+    },
 
     /**
-     * libSQL (Turso) connection.
-     * Install package to switch: npm install @libsql/client
+     * libSQL / Turso — set DB_CONNECTION=libsql + LIBSQL_URL (+ LIBSQL_AUTH_TOKEN)
+     * Requires: npm install @libsql/client @libsql/sqlite3
+     * Note: Lucid types still declare `filename`; Turso runtime uses `url`.
      */
-    // libsql: {
-    //   client: 'libsql',
-    //   connection: {
-    //     url: env.get('LIBSQL_URL'),
-    //     authToken: env.get('LIBSQL_AUTH_TOKEN'),
-    //   },
-    //   useNullAsDefault: true,
-    //   migrations: {
-    //     naturalSort: true,
-    //     paths: ['database/migrations'],
-    //   },
-    //   debug: app.inDev,
-    // },
+    libsql: {
+      client: 'libsql',
+      connection: {
+        url: env.get('LIBSQL_URL'),
+        authToken: env.get('LIBSQL_AUTH_TOKEN'),
+      } as unknown as { filename: string },
+      useNullAsDefault: true,
+      migrations: {
+        naturalSort: true,
+        paths: ['database/migrations'],
+      },
+      debug: app.inDev,
+    },
   },
 })
 

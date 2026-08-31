@@ -7,7 +7,7 @@
   variant      string   render as a button of this variant instead of a plain link
   outline      boolean  with `variant`, use the outline style
   size         string   with `variant`, sm | lg
-  icon         string   Tabler icon class rendered before the text
+  icon         string   Font Awesome class rendered before the text
 --}}
 @let(linkTextFromSlot = await $slots.main())
 @let(linkText = linkTextFromSlot.trim() ? linkTextFromSlot : ($props.get('text') ?? ''))

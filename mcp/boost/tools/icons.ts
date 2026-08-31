@@ -190,8 +190,8 @@ export function registerIconTools(server: McpServer) {
           note: 'Use search_icons to get an exact class — an unknown icon renders as blank space, not an error.',
         },
         otherSets: {
-          note: 'These ship with the Imtaqin theme and are used by its own markup and by config/menu.ts. Prefer Font Awesome for new work; do not rip these out or the vendored showcase pages lose their icons.',
-          tabler: 'ti ti-*  — what config/menu.ts uses',
+          note: 'These ship with the Imtaqin theme and are used by its own markup and by the generated showcase pages. config/menu.ts is Font Awesome only. Prefer Font Awesome for new work; do not rip these out or the vendored showcase pages lose their icons.',
+          tabler: 'ti ti-*  — used by the generated showcase pages',
           remix: 'ri ri-*',
           boxicons: 'bx bx-*',
           feather: 'fe fe-*',

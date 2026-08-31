@@ -226,17 +226,6 @@ const menu: MenuNode[] = [
       { label: 'Sweet Alerts', url: '/showcase/sweet-alerts' },
     ],
   },
-  {
-    label: 'Authentication',
-    icon: 'fa-solid fa-triangle-exclamation',
-    children: [
-      { label: 'Under Construction', url: '/showcase/under-construction' },
-      { label: 'Create Password', url: '/showcase/create-password' },
-      { label: 'Lock Screen', url: '/showcase/lock-screen' },
-      { label: '404 - Error', url: '/showcase/404' },
-      { label: '500 - Error', url: '/showcase/500' },
-    ],
-  },
   { type: 'category', label: 'Tables & Charts' },
   {
     label: 'Tables',

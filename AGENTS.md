@@ -70,8 +70,9 @@ weights nothing uses. Add one to `STYLES` in `scripts/vendor-fontawesome.mjs`
 and re-run `npm run theme:fontawesome` if you need it.
 
 The theme also ships Tabler (`ti ti-*`), Remix, Boxicons, Feather, Line Awesome
-and Bootstrap Icons. `config/menu.ts` and the showcase pages depend on them —
-prefer Font Awesome for new code, but do not remove the others.
+and Bootstrap Icons. The generated showcase pages depend on them —
+`config/menu.ts` is Font Awesome only. Prefer Font Awesome for new code, but do
+not remove the other sets.
 
 ---
 
@@ -125,7 +126,7 @@ loaded, and cost far fewer tokens than a directory walk.
 Open a session with these three calls:
 
 ```
-memory_list           → decisions already made, so you don't redo them
+memory_list           → decisions already made, AND any unfinished work
 project_conventions   → the rules in §1, machine-readable
 git_status            → what the working tree looks like right now
 ```
@@ -139,8 +140,33 @@ see the developer's terminal; that tool is how you get the stack trace.
 `eval` runs code inside the booted app (the Tinker equivalent). It can write —
 do not run destructive code unless asked.
 
-Record durable findings with `memory_write`, including the _why_. Notes live in
-`.agent/memory/` and are committed.
+### One context, every agent, across sessions
+
+`.agent/memory/` is **shared and committed**. Every agent wired to this repo —
+Claude, Cursor, Gemini, Kimi, Cline, Copilot, Aider, Windsurf, opencode — reads
+and writes the same notes through the same MCP server, so context crosses tools,
+machines and days. Memory that only exists in one chat history is not context.
+
+Two kinds of memory, do not mix them:
+
+| Tool              | Holds                          | Lifetime                    |
+| ----------------- | ------------------------------ | --------------------------- |
+| `memory_write`    | decisions, gotchas, preferences | outlives the task, with the _why_ |
+| `session_handoff` | the task still in flight        | until the work is finished  |
+
+**Starting.** `memory_list` answers `resuming: true` when the previous session
+left work unfinished. Read that handoff and continue it — do not start over and
+do not redo what it lists as verified.
+
+**Stopping mid-task.** Call `session_handoff` with the goal in the requester's
+own words, what is done _and how you verified it_, what is next in order, and the
+dead ends already tried. What is not in the handoff did not happen.
+
+**Finishing.** `session_handoff` with `done_all: true` clears the baton. A stale
+handoff read as live work by the next agent is worse than no handoff at all.
+
+There is exactly one open handoff at a time (`.agent/memory/session-handoff.md`).
+One baton is a queue; several are an argument.
 
 Full reference, and setup for every other agent (Claude, Crush, Kimi, Cursor,
 Gemini, Copilot, Windsurf, Cline, Aider, opencode):
@@ -173,8 +199,9 @@ resources/views/
   components/      Edge components (see docs/COMPONENTS.md)
   layouts/         via components/layouts/{dashboard,auth,blank}.edge
   pages/           one folder per resource
+  pages/auth/  pages/errors/   hand-written, never generated — see §8
   pages/showcase/  GENERATED reference markup — do not edit
-  partials/dashboard/  shell: header, sidebar, footer, switcher, flash
+  partials/dashboard/  shell: header, sidebar, footer, flash, loader, search_modal
 scripts/
   convert-showcase-pages.mjs   regenerates pages/showcase + config/showcase.ts
 start/
@@ -329,9 +356,36 @@ an account that already exists.
 catalogue of the theme's markup. They are **reference, not application code**:
 generated, overwritten by the converter, full of dummy data, and behind auth.
 
-Use them to copy markup into a real page. When you no longer need them, delete
-`resources/views/pages/showcase/`, `start/routes/showcase.ts`, the
-`config/showcase.ts` file and the Template Reference section of `config/menu.ts`.
+Use them to copy markup into a real page.
+
+**Auth and error screens are NOT showcase pages.** `pages/auth/*.edge` and
+`pages/errors/*.edge` are hand-written against real controllers and the
+converter skips them on purpose (`scripts/theme_transform.mjs` `STANDALONE_PAGES`).
+`@layouts.auth` is the only sign-in style the app has; the theme's other auth
+screens (forgot-password, create-password, lock-screen, cover/split-screen) exist
+only as raw vendor HTML in `template/HTML/src/html/` and must be ported by hand
+into a real controller + route + view if you want them. Never wire a nav entry or
+a link to a `/showcase/*` auth mockup — they compete with the real `/login`.
+
+### Removing the showcase
+
+Deleting it touches **nine** places, not four. Miss one and you ship dead links:
+
+1. `resources/views/pages/showcase/`
+2. `start/routes/showcase.ts`
+3. `config/showcase.ts` and `app/controllers/Showcase/`
+4. `scripts/convert-showcase-pages.mjs` and `scripts/theme_transform.mjs`
+5. `config/menu.ts` — everything from the `Template Reference` divider to the end
+   of the array. That is **five** category dividers (`Template Reference`,
+   `General`, `Pages and Forms`, `Web Apps`, `Tables & Charts`, `Maps & Icons`),
+   not one contiguous section.
+6. `resources/views/partials/dashboard/header.edge` — the `/showcase/profile` and
+   `/showcase/settings` links in the profile dropdown
+7. `resources/views/partials/dashboard/search_modal.edge` — the
+   `/showcase/notifications`, `/showcase/alerts` and `/showcase/mail` links
+8. `config/shield.ts` — the `'unsafe-inline'` CSP allowance exists only for the
+   showcase's inline handlers; switch to nonces once it is gone
+9. `template/` — the vendor source, if you no longer need to regenerate
 
 ---
 
