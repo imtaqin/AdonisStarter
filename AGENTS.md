@@ -143,7 +143,7 @@ do not run destructive code unless asked.
 ### One context, every agent, across sessions
 
 `.agent/memory/` is **shared and committed**. Every agent wired to this repo —
-Claude, Cursor, Gemini, Kimi, Cline, Copilot, Crush, opencode, Codex, Antigravity — reads
+Claude, Cursor, Gemini, Kimi, Cline, Copilot, Crush, opencode, Codex, Antigravity, Hermes, OpenClaw — reads
 and writes the same notes through the same MCP server, so context crosses tools,
 machines and days. Memory that only exists in one chat history is not context.
 

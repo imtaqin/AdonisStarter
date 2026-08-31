@@ -13,8 +13,8 @@
 | Adding support for a new agent means adding one entry to AGENTS or MCP_TARGETS
 |
 | Reference: https://agents.md — AGENTS.md is read natively by Codex, Cursor,
-| Copilot, Gemini CLI, Antigravity, Crush, Cline and Kimi Code. The rest need a
-| pointer file or a config key, which is what this generates.
+| Copilot, Gemini CLI, Antigravity, Crush, Cline, Kimi Code, Hermes and OpenClaw.
+| The rest need a pointer file or a config key, which is what this generates.
 */
 import fs from 'node:fs'
 import path from 'node:path'
@@ -160,6 +160,7 @@ const POINTER_BODY = (tool) =>
     '',
   ].join('\n')
 const CONTEXT_TARGETS = [
+  { label: 'Hermes', file: '.hermes.md', body: () => POINTER_BODY('Hermes') },
   { label: 'Claude Code', file: 'CLAUDE.md', body: () => POINTER_BODY('CLAUDE.md') },
   { label: 'Gemini CLI', file: 'GEMINI.md', body: () => POINTER_BODY('GEMINI.md') },
   { label: 'Crush', file: 'CRUSH.md', body: () => POINTER_BODY('CRUSH.md') },

@@ -19,7 +19,7 @@ edit `AGENTS.md` (or the script) and re-run.
 
 | Agent                            | Context file                      | MCP config                                     |
 | -------------------------------- | --------------------------------- | ---------------------------------------------- |
-| Codex, Antigravity, Factory, Ona, Devin, Warp | `AGENTS.md` (native) | —                                         |
+| Codex, Antigravity, Hermes, OpenClaw, Factory, Ona, Devin, Warp | `AGENTS.md` (native) | — |
 | Claude Code                      | `CLAUDE.md`                       | `.mcp.json`                                    |
 | Cursor                           | `.cursor/rules/project.mdc`       | `.cursor/mcp.json`                             |
 | Crush                            | `CRUSH.md`                        | `.crush.json` (key is `mcp`, not `mcpServers`) |
