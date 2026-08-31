@@ -19,17 +19,16 @@ edit `AGENTS.md` (or the script) and re-run.
 
 | Agent                            | Context file                      | MCP config                                     |
 | -------------------------------- | --------------------------------- | ---------------------------------------------- |
-| Codex, Factory, Ona, Devin, Warp | `AGENTS.md` (native)              | —                                              |
+| Codex, Antigravity, Factory, Ona, Devin, Warp | `AGENTS.md` (native) | —                                         |
 | Claude Code                      | `CLAUDE.md`                       | `.mcp.json`                                    |
 | Cursor                           | `.cursor/rules/project.mdc`       | `.cursor/mcp.json`                             |
 | Crush                            | `CRUSH.md`                        | `.crush.json` (key is `mcp`, not `mcpServers`) |
 | Kimi Code                        | `.kimi-code/AGENTS.md`            | `.kimi-code/mcp.json`                          |
 | Gemini CLI                       | `GEMINI.md`                       | `.gemini/settings.json`                        |
 | GitHub Copilot                   | `.github/copilot-instructions.md` | `.vscode/mcp.json`                             |
-| Windsurf                         | `.windsurf/rules/project.md`      | —                                              |
 | Cline                            | `.clinerules`                     | —                                              |
-| Aider                            | `CONVENTIONS.md`                  | —                                              |
 | opencode                         | `AGENTS.md` (native)              | `opencode.json`                                |
+| Oh My Pi / Pi                    | `AGENTS.md` (native)              | —                                              |
 
 To support another agent, add one entry to `CONTEXT_TARGETS` or `MCP_TARGETS`
 in the script. No new prose gets written.

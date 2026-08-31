@@ -11,12 +11,10 @@
 |   node scripts/sync-agent-configs.mjs --check   (CI: fail if out of date)
 |
 | Adding support for a new agent means adding one entry to AGENTS or MCP_TARGETS
-| below -- not writing another markdown file by hand.
 |
 | Reference: https://agents.md — AGENTS.md is read natively by Codex, Cursor,
-| Copilot's coding agent, Windsurf, Warp, Devin, Factory, Ona and Kimi Code.
-| The rest need a pointer file or a config key, which is what this generates.
-|
+| Copilot, Gemini CLI, Antigravity, Crush, Cline and Kimi Code. The rest need a
+| pointer file or a config key, which is what this generates.
 */
 import fs from 'node:fs'
 import path from 'node:path'
@@ -161,13 +159,11 @@ const POINTER_BODY = (tool) =>
     'See [docs/AI-TOOLING.md](./docs/AI-TOOLING.md) for setup.',
     '',
   ].join('\n')
-
 const CONTEXT_TARGETS = [
   { label: 'Claude Code', file: 'CLAUDE.md', body: () => POINTER_BODY('CLAUDE.md') },
   { label: 'Gemini CLI', file: 'GEMINI.md', body: () => POINTER_BODY('GEMINI.md') },
   { label: 'Crush', file: 'CRUSH.md', body: () => POINTER_BODY('CRUSH.md') },
   { label: 'Kimi Code', file: '.kimi-code/AGENTS.md', body: () => POINTER_BODY('Kimi Code') },
-  { label: 'Aider', file: 'CONVENTIONS.md', body: () => POINTER_BODY('Aider conventions') },
   { label: 'Cline', file: '.clinerules', body: () => POINTER_BODY('Cline') },
   {
     label: 'GitHub Copilot',
@@ -177,8 +173,6 @@ const CONTEXT_TARGETS = [
   {
     label: 'Cursor',
     file: '.cursor/rules/project.mdc',
-    // Cursor project rules are MDC: YAML frontmatter then markdown.
-    // alwaysApply keeps it in context for every request.
     body: () =>
       [
         '---',
@@ -188,13 +182,6 @@ const CONTEXT_TARGETS = [
         '',
         POINTER_BODY('Cursor'),
       ].join('\n'),
-  },
-  {
-    label: 'Windsurf',
-    file: '.windsurf/rules/project.md',
-    // Windsurf caps workspace rules at 12k characters, which a pointer is
-    // nowhere near.
-    body: () => ['---', 'trigger: always_on', '---', '', POINTER_BODY('Windsurf')].join('\n'),
   },
 ]
 

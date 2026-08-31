@@ -143,7 +143,7 @@ do not run destructive code unless asked.
 ### One context, every agent, across sessions
 
 `.agent/memory/` is **shared and committed**. Every agent wired to this repo —
-Claude, Cursor, Gemini, Kimi, Cline, Copilot, Aider, Windsurf, opencode — reads
+Claude, Cursor, Gemini, Kimi, Cline, Copilot, Crush, opencode, Codex, Antigravity — reads
 and writes the same notes through the same MCP server, so context crosses tools,
 machines and days. Memory that only exists in one chat history is not context.
 
@@ -168,8 +168,8 @@ handoff read as live work by the next agent is worse than no handoff at all.
 There is exactly one open handoff at a time (`.agent/memory/session-handoff.md`).
 One baton is a queue; several are an argument.
 
-Full reference, and setup for every other agent (Claude, Crush, Kimi, Cursor,
-Gemini, Copilot, Windsurf, Cline, Aider, opencode):
+Full reference, and setup for every other agent (Claude, Kimi, Cursor,
+Gemini, Copilot, Cline, Crush, opencode):
 **[docs/AI-TOOLING.md](./docs/AI-TOOLING.md)**.
 
 Agent config files are generated — edit this file, then `npm run agents:sync`.
