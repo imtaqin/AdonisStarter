@@ -64,11 +64,11 @@ npm run agents:check    # fail if any are stale
 
 Every generated config wires up three MCP servers:
 
-| Server         | What it gives an agent                                             |
-| -------------- | ------------------------------------------------------------------ |
-| `adonis-boost` | routes, schema, components, recent errors, memory and git context  |
-| `adonis-docs`  | the official AdonisJS, Lucid, Edge and VineJS docs                 |
-| `playwright`   | a real browser to verify that pages render                         |
+| Server         | What it gives an agent                                            |
+| -------------- | ----------------------------------------------------------------- |
+| `adonis-boost` | routes, schema, components, recent errors, memory and git context |
+| `adonis-docs`  | the official AdonisJS, Lucid, Edge and VineJS docs                |
+| `playwright`   | a real browser to verify that pages render                        |
 
 The full tooling guide is [docs/AI-TOOLING.md](./docs/AI-TOOLING.md).
 
