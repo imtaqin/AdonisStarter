@@ -14,6 +14,7 @@ import dashboardConfig from '#config/dashboard'
 
 edge.global('appName', dashboardConfig.appName)
 edge.global('brandLogos', dashboardConfig.logos)
+edge.global('credit', dashboardConfig.credit)
 
 /**
  * Formats a Luxon DateTime (or null) for display in tables and detail screens.

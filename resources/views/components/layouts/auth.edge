@@ -77,6 +77,13 @@
           @if($slots.footer)
             <div class="text-center mt-4">{{{ await $slots.footer() }}}</div>
           @end
+
+          <p class="text-center text-muted fs-12 mt-3 mb-0">
+            Crafted by
+            <a href="{{ credit.url }}" class="text-primary" target="_blank" rel="noopener">
+              {{ credit.name }}
+            </a>
+          </p>
         </div>
       </div>
     </div>

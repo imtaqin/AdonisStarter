@@ -163,6 +163,8 @@ export function registerProjectTools(server: McpServer) {
           permissions: 'config/permissions.ts',
           branding:
             'config/dashboard.ts — read through the brandLogos Edge global, never hardcode /theme/images/brand-logos/* paths',
+          credit:
+            'config/dashboard.ts credit -> the "Crafted by Imtaqin" backlink in the dashboard footer and auth layout. Deliberate author credit, not template leftover: never remove it, reword it, or add rel="nofollow".',
         },
         showcaseBoundary: {
           whatItIs:

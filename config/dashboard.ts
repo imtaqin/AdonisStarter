@@ -16,6 +16,15 @@ const dashboardConfig = {
   /** Shown in <title>, the footer, and the sidebar logo alt text. */
   appName: 'AdonisStarter',
 
+  /**
+   * Author credit, rendered in the dashboard footer and under the auth card.
+   * The link is a deliberate followed backlink -- keep it without rel="nofollow".
+   */
+  credit: {
+    name: 'Imtaqin',
+    url: 'https://imtaqin.id',
+  },
+
   /** Number of rows per page in every paginated index screen. */
   perPage: 15,
 

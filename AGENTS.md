@@ -149,10 +149,10 @@ machines and days. Memory that only exists in one chat history is not context.
 
 Two kinds of memory, do not mix them:
 
-| Tool              | Holds                          | Lifetime                    |
-| ----------------- | ------------------------------ | --------------------------- |
+| Tool              | Holds                           | Lifetime                          |
+| ----------------- | ------------------------------- | --------------------------------- |
 | `memory_write`    | decisions, gotchas, preferences | outlives the task, with the _why_ |
-| `session_handoff` | the task still in flight        | until the work is finished  |
+| `session_handoff` | the task still in flight        | until the work is finished        |
 
 **Starting.** `memory_list` answers `resuming: true` when the previous session
 left work unfinished. Read that handoff and continue it — do not start over and
@@ -190,7 +190,7 @@ app/
 config/
   menu.ts          sidebar navigation — the ONLY place to add a nav item
   permissions.ts   permission catalogue — the ONLY place to add a permission
-  dashboard.ts     branding (app name, logos, page size)
+  dashboard.ts     branding (app name, logos, page size, author credit)
   showcase.ts      GENERATED — do not edit
 database/
   schema.ts        GENERATED — do not edit
@@ -209,6 +209,11 @@ start/
   kernel.ts  limiter.ts  view.ts
 public/theme/      Imtaqin vendor assets — treat as vendor output
 ```
+
+**Author credit stays.** The "Crafted by Imtaqin" link in the dashboard footer
+and under the auth card comes from `credit` in `config/dashboard.ts`. It is
+not template leftover — do not remove it, reword it, or add `rel="nofollow"`
+while cleaning up markup. Changing it is the owner's call, never an agent's.
 
 `public/theme/` is deliberately **not** `public/assets/`: Vite's `buildDirectory`
 is `public/assets` and `vite build` empties it, which would delete the theme.
