@@ -43,6 +43,57 @@
     @end
   @end
 
+  @ui.card({ title: 'Layout', class: 'mt-3' })
+    @slot('header')
+      <div>
+        <div class="card-title">Layout</div>
+        <span class="text-muted fs-12">
+          Velzon shells only — the Imtaqin shell ignores these. Values come from
+          the template's own customiser.
+        </span>
+      </div>
+    @end
+
+    @if(active.family !== 'Velzon')
+      @alert.root({ variant: 'info', dismissible: false, icon: 'fa-solid fa-circle-info' })
+        @alert.description()
+          You are on the Imtaqin theme, so these settings change nothing until
+          you pick a Velzon style above.
+        @end
+      @end
+    @end
+
+    @form({ route: 'themes.update', method: 'POST' })
+      <div class="row g-3">
+        @each(setting in layoutSettings)
+          <div class="col-xl-3 col-md-4 col-sm-6">
+            <label class="form-label fs-12 fw-semibold" for="layout-{{ setting.key }}">
+              {{ setting.label }}
+            </label>
+            <select
+              class="form-select form-select-sm"
+              id="layout-{{ setting.key }}"
+              name="{{ setting.key }}"
+            >
+              @each(value in setting.values)
+                <option value="{{ value }}" {{ layout[setting.key] === value ? 'selected' : '' }}>
+                  {{ value }}
+                </option>
+              @end
+            </select>
+            @if(setting.description)
+              <span class="text-muted fs-10">{{ setting.description }}</span>
+            @end
+          </div>
+        @end
+      </div>
+
+      <div class="mt-3">
+        @!button({ type: 'submit', text: 'Apply layout' })
+      </div>
+    @end
+  @end
+
   @ui.card({ title: 'How this works', class: 'mt-3' })
     <p class="fs-12 text-muted mb-2">
       The choice is stored on your user row and resolved on every request against

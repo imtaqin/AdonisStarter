@@ -1,0 +1,61 @@
+@layouts.dashboard({ title: 'Velzon catalogue', subtitle: 'Template Reference' })
+  @ui.card()
+    @slot('header')
+      <div>
+        <div class="card-title">{{ matched }} of {{ total }} pages</div>
+        <span class="text-muted fs-12">
+          Converted Velzon pages, rendered in the Velzon shell regardless of your
+          current theme. Reference markup — not application code.
+        </span>
+      </div>
+    @end
+    @slot('actions')
+      <form method="GET" action="/velzon" class="d-flex align-items-center gap-2">
+        <div class="input-group input-group-sm" style="width: 220px">
+          <input
+            type="search"
+            class="form-control"
+            name="search"
+            value="{{ filters.search }}"
+            placeholder="Search pages…"
+            aria-label="Search pages"
+          />
+          <button class="btn btn-primary" type="submit">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </div>
+      </form>
+    @end
+
+    @if(groups.length === 0)
+      @!ui.empty({
+        title: 'No pages found',
+        description: 'Try a shorter word — the search covers slugs and titles.',
+        icon: 'fa-solid fa-magnifying-glass',
+      })
+    @else
+      @each(group in groups)
+        <p class="fw-semibold fs-13 text-uppercase text-muted mt-3 mb-2">
+          {{ group.name }}
+          <span class="text-muted fw-normal">({{ group.pages.length }})</span>
+        </p>
+        <div class="row g-2">
+          @each(page in group.pages)
+            <div class="col-xl-3 col-lg-4 col-md-6">
+              <a
+                href="{{ route('velzon.show', { page: page.slug }) }}"
+                class="btn btn-light w-100 text-start d-flex align-items-center gap-2 border"
+              >
+                <i class="fa-solid fa-file-code text-muted"></i>
+                <span class="text-truncate">
+                  {{ page.title }}
+                  <span class="d-block text-muted fs-10 text-truncate">{{ page.slug }}</span>
+                </span>
+              </a>
+            </div>
+          @end
+        </div>
+      @end
+    @end
+  @end
+@end

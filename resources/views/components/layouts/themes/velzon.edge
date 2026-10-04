@@ -5,6 +5,11 @@
   slots as components/layouts/themes/imtaqin.edge -- see that file for the
   contract.
 
+  The generated Velzon catalogue pages call this shell directly rather than via
+  the dispatcher, so they always look like Velzon whatever theme the viewer has
+  picked. That is why every optional slot is guarded: the dispatcher always
+  defines them, a page calling this shell directly does not.
+
   Two asset roots, and the split is deliberate:
     {{ theme.assets }}  the two CSS files that differ per Velzon variant
     /theme-velzon/shared  the libs, fonts, images and JS all nine variants share
@@ -19,15 +24,13 @@
 @let(crumbs = $props.get('breadcrumbs', subtitle ? [{ label: subtitle }] : []))
 
 <!DOCTYPE html>
-<html
-  lang="en"
-  data-layout="vertical"
-  data-topbar="light"
-  data-sidebar="dark"
-  data-sidebar-size="lg"
-  data-sidebar-image="none"
-  data-preloader="disable"
->
+{{--
+  The data-* attributes come from the viewer's layout options, already validated
+  against config/themes.ts. Velzon's layout.js reads them before paint and
+  rebuilds the menu, which is how horizontal and twocolumn work without any
+  extra markup.
+--}}
+<html lang="en" data-preloader="disable" {{{ layoutAttrs }}}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -54,7 +57,9 @@
     --}}
     <link href="/theme/fontawesome/css/fontawesome.min.css" rel="stylesheet" />
 
-    {{{ await $slots.styles() }}}
+    @if($slots.styles)
+      {{{ await $slots.styles() }}}
+    @end
 
     {{-- Project overrides load last so they win over the theme. --}}
     @vite(['resources/css/dashboard.css'])
@@ -96,7 +101,9 @@
                         </ol>
                       @end
 
-                      {{{ await $slots.pageActions() }}}
+                      @if($slots.pageActions)
+                        {{{ await $slots.pageActions() }}}
+                      @end
                     </div>
                   </div>
                 </div>
@@ -134,7 +141,9 @@
       from /theme-velzon/shared/libs instead.
     --}}
 
-    {{{ await $slots.scripts() }}}
+    @if($slots.scripts)
+      {{{ await $slots.scripts() }}}
+    @end
 
     <script src="/theme-velzon/shared/js/app.js"></script>
     @vite(['resources/js/dashboard.js'])

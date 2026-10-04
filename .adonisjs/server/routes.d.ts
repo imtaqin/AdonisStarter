@@ -7,6 +7,8 @@ export type ScannedRoutes = {
     'dashboard': { paramsTuple?: []; params?: {} }
     'showcase': { paramsTuple: [ParamValue]; params: {'page': ParamValue} }
     'icons.index': { paramsTuple?: []; params?: {} }
+    'velzon.index': { paramsTuple?: []; params?: {} }
+    'velzon.show': { paramsTuple: [ParamValue]; params: {'page': ParamValue} }
     'audit_logs.index': { paramsTuple?: []; params?: {} }
     'auth.login.show': { paramsTuple?: []; params?: {} }
     'auth.login.store': { paramsTuple?: []; params?: {} }
@@ -32,6 +34,8 @@ export type ScannedRoutes = {
     'dashboard': { paramsTuple?: []; params?: {} }
     'showcase': { paramsTuple: [ParamValue]; params: {'page': ParamValue} }
     'icons.index': { paramsTuple?: []; params?: {} }
+    'velzon.index': { paramsTuple?: []; params?: {} }
+    'velzon.show': { paramsTuple: [ParamValue]; params: {'page': ParamValue} }
     'audit_logs.index': { paramsTuple?: []; params?: {} }
     'auth.login.show': { paramsTuple?: []; params?: {} }
     'auth.register.show': { paramsTuple?: []; params?: {} }
@@ -47,6 +51,8 @@ export type ScannedRoutes = {
     'dashboard': { paramsTuple?: []; params?: {} }
     'showcase': { paramsTuple: [ParamValue]; params: {'page': ParamValue} }
     'icons.index': { paramsTuple?: []; params?: {} }
+    'velzon.index': { paramsTuple?: []; params?: {} }
+    'velzon.show': { paramsTuple: [ParamValue]; params: {'page': ParamValue} }
     'audit_logs.index': { paramsTuple?: []; params?: {} }
     'auth.login.show': { paramsTuple?: []; params?: {} }
     'auth.register.show': { paramsTuple?: []; params?: {} }

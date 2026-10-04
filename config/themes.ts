@@ -145,3 +145,131 @@ export function themesByFamily(): {
 
   return [...groups].map(([family, themes]) => ({ family, themes }))
 }
+
+/*
+|--------------------------------------------------------------------------
+| Velzon layout options
+|--------------------------------------------------------------------------
+|
+| Velzon drives its whole layout from `data-*` attributes on <html>: the four
+| layout modes, the sidebar and topbar colours, dark mode. Its own layout.js
+| reads them before paint and rebuilds the menu accordingly -- horizontal and
+| twocolumn need no extra markup, which is why all of this costs nothing but a
+| few attributes.
+|
+| Keys and values below were read out of the template's own customiser markup,
+| not invented. They apply to the Velzon shells; the Imtaqin shell ignores them.
+|
+*/
+
+export type LayoutSetting = {
+  /** The attribute rendered on <html>. */
+  attr: string
+  label: string
+  /** Allowed values, first one is the default. */
+  values: readonly string[]
+  description?: string
+}
+
+export const LAYOUT_SETTINGS = {
+  layout: {
+    attr: 'data-layout',
+    label: 'Layout',
+    values: ['vertical', 'horizontal', 'twocolumn', 'semibox'],
+    description: 'Where the navigation lives.',
+  },
+  mode: {
+    attr: 'data-bs-theme',
+    label: 'Mode',
+    values: ['light', 'dark'],
+  },
+  sidebar: {
+    attr: 'data-sidebar',
+    label: 'Sidebar colour',
+    values: ['dark', 'light', 'gradient', 'gradient-2', 'gradient-3', 'gradient-4'],
+  },
+  topbar: {
+    attr: 'data-topbar',
+    label: 'Topbar colour',
+    values: ['light', 'dark'],
+  },
+  sidebarSize: {
+    attr: 'data-sidebar-size',
+    label: 'Sidebar size',
+    values: ['lg', 'md', 'sm', 'sm-hover'],
+  },
+  width: {
+    attr: 'data-layout-width',
+    label: 'Width',
+    values: ['fluid', 'boxed'],
+  },
+  position: {
+    attr: 'data-layout-position',
+    label: 'Position',
+    values: ['fixed', 'scrollable'],
+  },
+  style: {
+    attr: 'data-layout-style',
+    label: 'Style',
+    values: ['default', 'detached'],
+  },
+  sidebarImage: {
+    attr: 'data-sidebar-image',
+    label: 'Sidebar image',
+    values: ['none', 'img-1', 'img-2', 'img-3', 'img-4'],
+  },
+} as const satisfies Record<string, LayoutSetting>
+
+export type LayoutSettingKey = keyof typeof LAYOUT_SETTINGS
+
+export const LAYOUT_SETTING_KEYS = Object.keys(LAYOUT_SETTINGS) as LayoutSettingKey[]
+
+export type LayoutOptions = Record<LayoutSettingKey, string>
+
+export function defaultLayoutOptions(): LayoutOptions {
+  return Object.fromEntries(
+    LAYOUT_SETTING_KEYS.map((key) => [key, LAYOUT_SETTINGS[key].values[0]])
+  ) as LayoutOptions
+}
+
+/**
+ * Resolves a stored JSON blob to a complete, valid set of options.
+ *
+ * Every value is checked against its allowlist because these end up as
+ * attribute values on <html>; anything unknown silently falls back to the
+ * default rather than being echoed into the document.
+ */
+export function resolveLayoutOptions(raw: unknown): LayoutOptions {
+  const options = defaultLayoutOptions()
+
+  let parsed: unknown = raw
+  if (typeof raw === 'string' && raw.trim()) {
+    try {
+      parsed = JSON.parse(raw)
+    } catch {
+      /* A corrupt column is not worth a 500; the defaults are a fine answer. */
+      return options
+    }
+  }
+
+  if (!parsed || typeof parsed !== 'object') return options
+
+  for (const key of LAYOUT_SETTING_KEYS) {
+    const value = (parsed as Record<string, unknown>)[key]
+    if (
+      typeof value === 'string' &&
+      (LAYOUT_SETTINGS[key].values as readonly string[]).includes(value)
+    ) {
+      options[key] = value
+    }
+  }
+
+  return options
+}
+
+/** The resolved options as the attribute string the Velzon shells render. */
+export function layoutAttributes(options: LayoutOptions): string {
+  return LAYOUT_SETTING_KEYS.map((key) => `${LAYOUT_SETTINGS[key].attr}="${options[key]}"`).join(
+    ' '
+  )
+}

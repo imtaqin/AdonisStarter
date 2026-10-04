@@ -25,7 +25,8 @@
     "changeset": "changeset",
     "version": "changeset version",
     "changeset:check": "node scripts/check-changeset.mjs",
-    "theme:velzon": "node scripts/vendor-velzon.mjs"
+    "theme:velzon": "node scripts/vendor-velzon.mjs",
+    "theme:velzon-pages": "node scripts/convert-velzon-pages.mjs"
   },
   "imports": {
     "#controllers/*": "./app/controllers/*.js",

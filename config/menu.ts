@@ -47,6 +47,7 @@ const menu: MenuNode[] = [
   { label: 'Dashboard', icon: 'fa-solid fa-gauge-high', route: 'dashboard' },
   { label: 'Icons', icon: 'fa-solid fa-icons', route: 'icons.index' },
   { label: 'Appearance', icon: 'fa-solid fa-palette', route: 'themes.show' },
+  { label: 'Velzon catalogue', icon: 'fa-solid fa-swatchbook', route: 'velzon.index' },
 
   { type: 'category', label: 'Administration' },
   {

@@ -68,4 +68,12 @@ export const controllers = {
       Index: () => import('#controllers/User/Update/index'),
     },
   },
+  velzon: {
+    list: {
+      Index: () => import('#controllers/Velzon/List/index'),
+    },
+    show: {
+      Index: () => import('#controllers/Velzon/Show/index'),
+    },
+  },
 }

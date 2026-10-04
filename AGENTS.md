@@ -193,6 +193,7 @@ config/
   dashboard.ts     branding (app name, logos, page size, author credit)
   themes.ts        theme allowlist — the ONLY place to add a theme
   showcase.ts      GENERATED — do not edit
+  velzon_showcase.ts GENERATED — do not edit
 database/
   schema.ts        GENERATED — do not edit
   migrations/  seeders/
@@ -226,6 +227,19 @@ The nine Velzon variants share one asset tree under `public/theme-velzon/shared`
 and differ only in `css/app.min.css` and `css/bootstrap.min.css` per variant.
 `scripts/vendor-velzon.mjs` enforces that split — read its header before
 touching Velzon assets, and never copy a whole variant tree in.
+
+Velzon's four layout modes (vertical, horizontal, twocolumn, semibox) and its
+colour options are `data-*` attributes on `<html>`, not separate markup, so they
+cost nothing but the attribute. The allowed values live in `LAYOUT_SETTINGS` in
+`config/themes.ts` and were read out of the template's own customiser — do not
+invent values. They are validated on write and again on read, because they are
+interpolated into the tag.
+
+`resources/views/pages/velzon/` is **GENERATED** by
+`scripts/convert-velzon-pages.mjs` — 167 converted template pages served at
+`/velzon/:page`, allowlisted by `config/velzon_showcase.ts`. Edit the script,
+never the output. These pages call the Velzon shell directly rather than the
+dispatcher, so they look like Velzon whatever theme the viewer picked.
 
 **Author credit stays.** The "Crafted by Imtaqin" link in the dashboard footer
 and under the auth card comes from `credit` in `config/dashboard.ts`. It is
@@ -365,6 +379,7 @@ node scripts/convert-showcase-pages.mjs   # regenerate showcase pages
 npm run agents:check      # agent configs in sync with this file
 npm run changeset         # record a change note (see §9)
 npm run theme:velzon      # re-vendor Velzon from the extracted template
+npm run theme:velzon-pages # regenerate the 167 Velzon catalogue pages
 ```
 
 Seeded admin: `ADMIN_EMAIL` / `ADMIN_PASSWORD` in `.env`

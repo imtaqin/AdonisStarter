@@ -1,7 +1,7 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import type { NextFn } from '@adonisjs/core/types/http'
 import MenuService from '#services/menu_service'
-import { resolveTheme } from '#config/themes'
+import { layoutAttributes, resolveLayoutOptions, resolveTheme } from '#config/themes'
 import PermissionsService, { UserAbilities } from '#services/permissions_service'
 
 /**
@@ -36,6 +36,13 @@ export default class ShareViewDataMiddleware {
          * an arbitrary path into the layout's asset URLs.
          */
         theme: resolveTheme(user?.theme),
+        /**
+         * Velzon drives its layout from data-* attributes on <html>. Both the
+         * resolved map (for the picker) and the rendered attribute string (for
+         * the shell) are shared, so no template has to build the string itself.
+         */
+        layoutOptions: resolveLayoutOptions(user?.themeOptions),
+        layoutAttrs: layoutAttributes(resolveLayoutOptions(user?.themeOptions)),
       })
     }
 
