@@ -1,0 +1,76 @@
+{{--
+  Recursive sidebar renderer for the Velzon shell.
+
+  Consumes the same ResolvedNode tree as components/sidebar/items.edge -- built
+  once per request by MenuService -- and emits Velzon's markup instead of
+  Imtaqin's. One menu definition, two shells.
+
+  Props
+    items  ResolvedNode[]  nodes to render
+    level  number          submenu depth; 0 is the top-level #navbar-nav
+
+  Velzon drives submenus with Bootstrap's collapse plugin, so every group needs
+  an id that is unique in the document. `path` makes one from the node labels,
+  because labels repeat across depths ("List" under Users and under Roles).
+--}}
+@let(level = $props.get('level', 0))
+@let(path = $props.get('path', 'menu'))
+
+@each((node, index) in $props.get('items', []))
+  @let(nodeId = `${path}-${index}`)
+
+  @if(node.type === 'category')
+    <li class="menu-title"><span>{{ node.label }}</span></li>
+  @elseif(node.children && node.children.length)
+    <li class="nav-item">
+      {{--
+        Conditional attributes go through ternary interpolation: a block @if
+        cannot appear inline inside a tag without failing to compile.
+      --}}
+      <a
+        class="nav-link menu-link {{ node.open ? '' : 'collapsed' }}"
+        href="#{{ nodeId }}"
+        data-bs-toggle="collapse"
+        role="button"
+        aria-expanded="{{ node.open ? 'true' : 'false' }}"
+        aria-controls="{{ nodeId }}"
+      >
+        @if(node.icon)
+          <i class="{{ node.icon }}"></i>
+        @end
+        <span>{{ node.label }}</span>
+      </a>
+      <div class="collapse menu-dropdown {{ node.open ? 'show' : '' }}" id="{{ nodeId }}">
+        <ul class="nav nav-sm flex-column">
+          @!velzon.menu({ items: node.children, level: level + 1, path: nodeId })
+        </ul>
+      </div>
+    </li>
+  @else
+    <li class="nav-item">
+      @if(node.href)
+        <a href="{{ node.href }}" class="nav-link {{ node.active ? 'active' : '' }}">
+          @if(node.icon && level === 0)
+            <i class="{{ node.icon }}"></i>
+          @end
+          <span>
+            {{ node.label }}
+            @if(node.badge)
+              <span class="badge bg-{{ node.badge.variant || 'primary' }} ms-1">
+                {{ node.badge.label }}
+              </span>
+            @end
+          </span>
+        </a>
+      @else
+        {{-- Route not registered yet: render inert rather than linking nowhere. --}}
+        <span class="nav-link opacity-50" title="Route not registered">
+          @if(node.icon && level === 0)
+            <i class="{{ node.icon }}"></i>
+          @end
+          <span>{{ node.label }}</span>
+        </span>
+      @end
+    </li>
+  @end
+@end

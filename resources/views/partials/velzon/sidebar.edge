@@ -1,0 +1,47 @@
+{{--
+  Velzon sidebar. Class names are theme API: app.js and layout.js bind to
+  `.app-menu`, `#scrollbar`, `#navbar-nav` and `.navbar-brand-box`. Renaming
+  them stops the collapse and scroll behaviour working.
+
+  The nav itself comes from config/menu.ts via MenuService -- never hardcode
+  entries here.
+--}}
+<div class="app-menu navbar-menu">
+  <div class="navbar-brand-box">
+    <a href="{{ route('dashboard') }}" class="logo logo-dark">
+      <span class="logo-sm">
+        <img src="{{ brandLogos.toggle }}" alt="{{ appName }}" height="22" />
+      </span>
+      <span class="logo-lg">
+        <img src="{{ brandLogos.desktop }}" alt="{{ appName }}" height="24" />
+      </span>
+    </a>
+    <a href="{{ route('dashboard') }}" class="logo logo-light">
+      <span class="logo-sm">
+        <img src="{{ brandLogos.toggleWhite }}" alt="{{ appName }}" height="22" />
+      </span>
+      <span class="logo-lg">
+        <img src="{{ brandLogos.desktopWhite }}" alt="{{ appName }}" height="24" />
+      </span>
+    </a>
+    <button
+      type="button"
+      class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover"
+      id="vertical-hover"
+      aria-label="Pin sidebar"
+    >
+      <i class="fa-solid fa-circle-dot"></i>
+    </button>
+  </div>
+
+  <div id="scrollbar">
+    <div class="container-fluid">
+      <div id="two-column-menu"></div>
+      <ul class="navbar-nav" id="navbar-nav">
+        @!velzon.menu({ items: menu, level: 0, path: 'velzon-menu' })
+      </ul>
+    </div>
+  </div>
+
+  <div class="sidebar-background"></div>
+</div>

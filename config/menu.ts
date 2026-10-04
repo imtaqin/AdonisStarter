@@ -46,6 +46,7 @@ const menu: MenuNode[] = [
   { type: 'category', label: 'Main' },
   { label: 'Dashboard', icon: 'fa-solid fa-gauge-high', route: 'dashboard' },
   { label: 'Icons', icon: 'fa-solid fa-icons', route: 'icons.index' },
+  { label: 'Appearance', icon: 'fa-solid fa-palette', route: 'themes.show' },
 
   { type: 'category', label: 'Administration' },
   {

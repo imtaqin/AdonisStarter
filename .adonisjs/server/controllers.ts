@@ -49,6 +49,11 @@ export const controllers = {
       Index: () => import('#controllers/Showcase/Index/index'),
     },
   },
+  theme: {
+    index: {
+      Index: () => import('#controllers/Theme/Index/index'),
+    },
+  },
   user: {
     create: {
       Index: () => import('#controllers/User/Create/index'),

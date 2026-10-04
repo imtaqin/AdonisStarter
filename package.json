@@ -24,7 +24,8 @@
     "theme:fontawesome": "node scripts/vendor-fontawesome.mjs",
     "changeset": "changeset",
     "version": "changeset version",
-    "changeset:check": "node scripts/check-changeset.mjs"
+    "changeset:check": "node scripts/check-changeset.mjs",
+    "theme:velzon": "node scripts/vendor-velzon.mjs"
   },
   "imports": {
     "#controllers/*": "./app/controllers/*.js",

@@ -191,6 +191,7 @@ config/
   menu.ts          sidebar navigation — the ONLY place to add a nav item
   permissions.ts   permission catalogue — the ONLY place to add a permission
   dashboard.ts     branding (app name, logos, page size, author credit)
+  themes.ts        theme allowlist — the ONLY place to add a theme
   showcase.ts      GENERATED — do not edit
 database/
   schema.ts        GENERATED — do not edit
@@ -209,6 +210,22 @@ start/
   kernel.ts  limiter.ts  view.ts
 public/theme/      Imtaqin vendor assets — treat as vendor output
 ```
+
+**Themes.** The shell renders in one of ten admin styles. Pages never know
+which: they write `@layouts.dashboard({ title })`, and
+`components/layouts/dashboard.edge` forwards props and slots to the shell named
+by `config/themes.ts`. Shells live in `components/layouts/themes/`; a new one
+must accept every prop and slot that `themes/imtaqin.edge` documents.
+
+`config/themes.ts` is an **allowlist**, not a lookup table. The active key comes
+from a user row, so it is untrusted: `resolveTheme()` validates it on read and
+`updateThemeValidator` on write, because the value lands inside `<link href>`.
+Never interpolate a raw theme key into a path.
+
+The nine Velzon variants share one asset tree under `public/theme-velzon/shared`
+and differ only in `css/app.min.css` and `css/bootstrap.min.css` per variant.
+`scripts/vendor-velzon.mjs` enforces that split — read its header before
+touching Velzon assets, and never copy a whole variant tree in.
 
 **Author credit stays.** The "Crafted by Imtaqin" link in the dashboard footer
 and under the auth card comes from `credit` in `config/dashboard.ts`. It is
@@ -347,6 +364,7 @@ node ace db:seed          # idempotent: permissions, roles, admin user
 node scripts/convert-showcase-pages.mjs   # regenerate showcase pages
 npm run agents:check      # agent configs in sync with this file
 npm run changeset         # record a change note (see §9)
+npm run theme:velzon      # re-vendor Velzon from the extracted template
 ```
 
 Seeded admin: `ADMIN_EMAIL` / `ADMIN_PASSWORD` in `.env`

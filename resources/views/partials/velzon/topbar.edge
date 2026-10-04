@@ -1,0 +1,109 @@
+{{--
+  Velzon top bar. Class names are theme API: app.js binds the sidebar toggle to
+  `#topnav-hamburger-icon` and the full-screen button to `#page-header-user-dropdown`
+  siblings. Keep the ids.
+
+  The template's demo cart, notifications and language switcher are not included
+  -- take them from the Velzon source if you need them.
+--}}
+<header id="page-topbar">
+  <div class="layout-width">
+    <div class="navbar-header">
+      <div class="d-flex">
+        <div class="navbar-brand-box horizontal-logo">
+          <a href="{{ route('dashboard') }}" class="logo logo-dark">
+            <span class="logo-lg">
+              <img src="{{ brandLogos.desktop }}" alt="{{ appName }}" height="24" />
+            </span>
+          </a>
+        </div>
+
+        <button
+          type="button"
+          class="btn btn-sm px-3 fs-16 header-item vertical-menu-btn topnav-hamburger"
+          id="topnav-hamburger-icon"
+          aria-label="Toggle menu"
+        >
+          <span class="hamburger-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </button>
+      </div>
+
+      <div class="d-flex align-items-center">
+        {{--
+          app.js binds a click handler to `.light-dark-mode` unconditionally and
+          throws when it is absent, taking the rest of its init down with it. The
+          button is genuinely useful, so it is here rather than stubbed.
+        --}}
+        <div class="ms-1 header-item d-none d-sm-flex">
+          <button
+            type="button"
+            class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle light-dark-mode"
+            aria-label="Toggle light and dark mode"
+          >
+            <i class="fa-solid fa-moon fs-18"></i>
+          </button>
+        </div>
+
+        @if(auth.user)
+          <div class="dropdown ms-sm-3 header-item topbar-user">
+            <button
+              type="button"
+              class="btn"
+              id="page-header-user-dropdown"
+              data-bs-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <span class="d-flex align-items-center">
+                @if(auth.user.avatar)
+                  <img
+                    class="rounded-circle header-profile-user"
+                    src="{{ auth.user.avatar }}"
+                    alt="{{ auth.user.displayName }}"
+                  />
+                @else
+                  <span
+                    class="avatar-xs d-inline-flex align-items-center justify-content-center rounded-circle bg-primary text-white fs-12"
+                  >
+                    {{ auth.user.initials }}
+                  </span>
+                @end
+                <span class="text-start ms-xl-2">
+                  <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">
+                    {{ auth.user.displayName }}
+                  </span>
+                </span>
+              </span>
+            </button>
+            <div class="dropdown-menu dropdown-menu-end">
+              <h6 class="dropdown-header">{{ auth.user.email }}</h6>
+              <a class="dropdown-item" href="{{ route('themes.show') }}">
+                <i class="fa-solid fa-palette align-middle me-1"></i>
+                Appearance
+              </a>
+              @if(can('users.view'))
+                <a class="dropdown-item" href="{{ route('users.index') }}">
+                  <i class="fa-solid fa-users align-middle me-1"></i>
+                  Users
+                </a>
+              @end
+              <div class="dropdown-divider"></div>
+              @form({ route: 'auth.logout', method: 'POST' })
+                <button type="submit" class="dropdown-item text-danger">
+                  <i class="fa-solid fa-arrow-right-from-bracket align-middle me-1"></i>
+                  Sign out
+                </button>
+              @end
+            </div>
+          </div>
+        @else
+          <a href="{{ route('auth.login.show') }}" class="btn btn-primary btn-sm ms-3">Sign in</a>
+        @end
+      </div>
+    </div>
+  </div>
+</header>

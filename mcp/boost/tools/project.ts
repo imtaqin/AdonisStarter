@@ -165,6 +165,8 @@ export function registerProjectTools(server: McpServer) {
             'config/dashboard.ts — read through the brandLogos Edge global, never hardcode /theme/images/brand-logos/* paths',
           credit:
             'config/dashboard.ts credit -> the "Crafted by Imtaqin" backlink in the dashboard footer and auth layout. Deliberate author credit, not template leftover: never remove it, reword it, or add rel="nofollow".',
+          themes:
+            'config/themes.ts -- the ALLOWLIST of dashboard themes. Pages always use @layouts.dashboard; components/layouts/dashboard.edge forwards to the shell named there. A theme key comes from a user row and ends up in <link href>, so it is validated on write (updateThemeValidator) and on read (resolveTheme). Never interpolate a raw key into a path. The nine Velzon variants share public/theme-velzon/shared and differ only in two CSS files -- see scripts/vendor-velzon.mjs.',
         },
         showcaseBoundary: {
           whatItIs:

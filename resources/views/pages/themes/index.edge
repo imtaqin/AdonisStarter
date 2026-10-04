@@ -1,0 +1,60 @@
+@layouts.dashboard({ title: 'Appearance', subtitle: 'Settings' })
+  @ui.card({ title: 'Dashboard theme' })
+    @slot('header')
+      <div>
+        <div class="card-title">Dashboard theme</div>
+        <span class="text-muted fs-12">
+          Applies to your account only. Everyone else keeps their own choice.
+        </span>
+      </div>
+    @end
+
+    @each(group in families)
+      <p class="fw-semibold fs-13 text-uppercase text-muted mt-2 mb-2">{{ group.family }}</p>
+      <div class="row g-3 mb-3">
+        @each(entry in group.themes)
+          <div class="col-xl-3 col-md-4 col-sm-6">
+            {{--
+              One form per card: a theme is applied by submitting, so there is
+              no separate Save button to forget to press. @form emits the CSRF
+              field, which is why this is not a bare <form>.
+            --}}
+            @form({ route: 'themes.update', method: 'POST' })
+              <input type="hidden" name="theme" value="{{ entry.key }}" />
+              <button
+                type="submit"
+                class="btn w-100 h-100 text-start p-3 border {{ entry.key === active.key ? 'border-primary bg-primary-subtle' : 'btn-light' }}"
+                {{ entry.key === active.key ? 'aria-current=true' : '' }}
+              >
+                <span class="d-flex align-items-center justify-content-between mb-1">
+                  <span class="fw-semibold">{{ entry.label }}</span>
+                  @if(entry.key === active.key)
+                    @!ui.badge({ text: 'Active', variant: 'primary' })
+                  @elseif(entry.key === defaultTheme)
+                    @!ui.badge({ text: 'Default', variant: 'secondary', soft: true })
+                  @end
+                </span>
+                <span class="d-block text-muted fs-11">{{ entry.description }}</span>
+              </button>
+            @end
+          </div>
+        @end
+      </div>
+    @end
+  @end
+
+  @ui.card({ title: 'How this works', class: 'mt-3' })
+    <p class="fs-12 text-muted mb-2">
+      The choice is stored on your user row and resolved on every request against
+      the allowlist in
+      <code>config/themes.ts</code>. A theme that is removed from that file falls
+      back to the default instead of breaking your pages.
+    </p>
+    <p class="fs-12 text-muted mb-0">
+      The nine Velzon variants share one asset tree and differ only in two CSS
+      files, so switching between them downloads about 600KB rather than a whole
+      theme. See
+      <code>scripts/vendor-velzon.mjs</code>.
+    </p>
+  @end
+@end

@@ -106,7 +106,7 @@ export class RoleSchema extends BaseModel {
 }
 
 export class UserSchema extends BaseModel {
-  static $columns = ['avatar', 'createdAt', 'email', 'fullName', 'id', 'isActive', 'lastLoginAt', 'password', 'updatedAt'] as const
+  static $columns = ['avatar', 'createdAt', 'email', 'fullName', 'id', 'isActive', 'lastLoginAt', 'password', 'theme', 'updatedAt'] as const
   $columns = UserSchema.$columns
   @column()
   declare avatar: string | null
@@ -124,6 +124,8 @@ export class UserSchema extends BaseModel {
   declare lastLoginAt: DateTime | null
   @column({ serializeAs: null })
   declare password: string
+  @column()
+  declare theme: string | null
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
 }

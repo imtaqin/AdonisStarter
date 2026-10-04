@@ -1,0 +1,142 @@
+{{--
+  The Velzon dashboard shell.
+
+  Rendered through components/layouts/dashboard.edge. Accepts the same props and
+  slots as components/layouts/themes/imtaqin.edge -- see that file for the
+  contract.
+
+  Two asset roots, and the split is deliberate:
+    {{ theme.assets }}  the two CSS files that differ per Velzon variant
+    /theme-velzon/shared  the libs, fonts, images and JS all nine variants share
+
+  See scripts/vendor-velzon.mjs: the nine variants ship as nine 128MB trees that
+  are byte-identical apart from app.min.css and bootstrap.min.css.
+--}}
+
+@let(pageTitle = $props.get('title', 'Dashboard'))
+@let(subtitle = $props.get('subtitle', ''))
+@let(showPageHeader = $props.get('pageHeader', true))
+@let(crumbs = $props.get('breadcrumbs', subtitle ? [{ label: subtitle }] : []))
+
+<!DOCTYPE html>
+<html
+  lang="en"
+  data-layout="vertical"
+  data-topbar="light"
+  data-sidebar="dark"
+  data-sidebar-size="lg"
+  data-sidebar-image="none"
+  data-preloader="disable"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ pageTitle }} &middot; {{ appName }}</title>
+
+    <link rel="icon" href="/theme-velzon/shared/images/favicon.ico" type="image/x-icon" />
+
+    {{--
+      layout.js must run before the stylesheets, exactly as the template ships
+      it: it reads the data-* attributes above and writes the matching classes
+      before first paint. Moving it lower causes a flash of the wrong sidebar.
+    --}}
+    <script src="/theme-velzon/shared/js/layout.js"></script>
+
+    <link href="{{ theme.assets }}/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/theme-velzon/shared/css/icons.min.css" rel="stylesheet" />
+    <link href="{{ theme.assets }}/css/app.min.css" rel="stylesheet" />
+    <link href="/theme-velzon/shared/css/custom.min.css" rel="stylesheet" />
+
+    {{--
+      Font Awesome is not part of the Velzon bundle, but config/menu.ts stores
+      Font Awesome classes, so the menu would render blank without it. It is
+      vendored once under /theme and shared by every theme.
+    --}}
+    <link href="/theme/fontawesome/css/fontawesome.min.css" rel="stylesheet" />
+
+    {{{ await $slots.styles() }}}
+
+    {{-- Project overrides load last so they win over the theme. --}}
+    @vite(['resources/css/dashboard.css'])
+    @stack('dumper')
+  </head>
+
+  <body class="{{ $props.get('bodyClass', '') }}">
+    <div id="layout-wrapper">
+      @include('partials/velzon/topbar')
+      @include('partials/velzon/sidebar')
+
+      {{-- Closes the sidebar when tapped on small screens; app.js binds it. --}}
+      <div class="vertical-overlay"></div>
+
+      <div class="main-content">
+        <div class="page-content">
+          <div class="container-fluid">
+            @if(showPageHeader)
+              <div class="row">
+                <div class="col-12">
+                  <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                    <h4 class="mb-sm-0">{{ pageTitle }}</h4>
+
+                    <div class="d-flex align-items-center gap-2">
+                      @if(crumbs.length)
+                        <ol class="breadcrumb m-0">
+                          @each(crumb in crumbs)
+                            <li class="breadcrumb-item">
+                              @if(crumb.href)
+                                <a href="{{ crumb.href }}">{{ crumb.label }}</a>
+                              @else
+                                {{ crumb.label }}
+                              @end
+                            </li>
+                          @end
+                          <li class="breadcrumb-item active" aria-current="page">
+                            {{ pageTitle }}
+                          </li>
+                        </ol>
+                      @end
+
+                      {{{ await $slots.pageActions() }}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            @end
+
+            @include('partials/dashboard/flash')
+
+            {{{ await $slots.main() }}}
+          </div>
+        </div>
+
+        @include('partials/velzon/footer')
+      </div>
+    </div>
+
+    <button
+      onclick="topFunction()"
+      class="btn btn-danger btn-icon"
+      id="back-to-top"
+      aria-label="Back to top"
+    >
+      <i class="fa-solid fa-chevron-up"></i>
+    </button>
+
+    <script src="/theme-velzon/shared/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/theme-velzon/shared/libs/simplebar/simplebar.min.js"></script>
+    <script src="/theme-velzon/shared/libs/node-waves/waves.min.js"></script>
+    <script src="/theme-velzon/shared/libs/feather-icons/feather.min.js"></script>
+    {{--
+      The template's plugins.js is deliberately not loaded: it pulls toastify
+      from jsdelivr at runtime, which the Content Security Policy blocks, and it
+      resolves other asset URLs relative to the current path (so a page under
+      /settings asks for /settings/assets/...). Load what you need directly
+      from /theme-velzon/shared/libs instead.
+    --}}
+
+    {{{ await $slots.scripts() }}}
+
+    <script src="/theme-velzon/shared/js/app.js"></script>
+    @vite(['resources/js/dashboard.js'])
+  </body>
+</html>

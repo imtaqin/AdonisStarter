@@ -4,6 +4,7 @@ build
 
 # Vendor output, not our source
 public/theme
+public/theme-velzon
 template
 
 # Generated: rewritten by scripts/convert-showcase-pages.mjs
